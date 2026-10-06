@@ -24,6 +24,7 @@ def register(mcp: FastMCP) -> None:
         page: int = 1,
         page_size: int = 10,
         sort_by: str | None = None,
+        kind: str | None = None,
     ) -> dict[str, Any]:
         """Search the Digital Public Library of America for items held by US libraries, archives and museums.
 
@@ -44,11 +45,12 @@ def register(mcp: FastMCP) -> None:
             page: Page number from 1.
             page_size: Results per page (1 to 100).
             sort_by: A DPLA field such as sourceResource.date.begin.
+            kind: text, image, map, audio or video. Maps are images with the subject "Maps".
         """
         return await dpla.search(
             q=q, title=title, creator=creator, subject=subject, place_state=place_state, date_after=date_after,
             date_before=date_before, type=type, provider=provider, data_provider=data_provider, page=page,
-            page_size=page_size, sort_by=sort_by,
+            page_size=page_size, sort_by=sort_by, kind=kind,
         )  # fmt: skip
 
     @mcp.tool()

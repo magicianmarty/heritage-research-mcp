@@ -6,6 +6,7 @@ import asyncio
 from typing import Any
 
 from .. import config
+from .. import kinds as K
 from ..compat import FastMCP
 from ..download import download_file
 from ..errors import HeritageError
@@ -19,20 +20,22 @@ from ..usage import usage
 
 
 async def _search_one(
-    name: str, query: str, limit: int, date_from: int | None, date_to: int | None
+    name: str, query: str, limit: int, date_from: int | None, date_to: int | None, kind: str | None
 ) -> dict[str, Any]:
     after = str(date_from) if date_from is not None else None
     before = str(date_to) if date_to is not None else None
     if name == "internet_archive":
-        return await ia_src.search(query, year_from=date_from, year_to=date_to, rows=limit)
+        return await ia_src.search(query, year_from=date_from, year_to=date_to, rows=limit, kind=kind)
     if name == "commons":
-        return await commons_src.search(query, limit=limit)
+        return await commons_src.search(query, limit=limit, kind=kind)
     if name == "dpla":
-        return await dpla_src.search(q=query, date_after=after, date_before=before, page_size=limit)
+        return await dpla_src.search(
+            q=query, date_after=after, date_before=before, page_size=limit, kind=kind
+        )
     if name == "nara":
-        return await nara_src.search(q=query, start_date=after, end_date=before, limit=limit)
+        return await nara_src.search(q=query, start_date=after, end_date=before, limit=limit, kind=kind)
     if name == "smithsonian":
-        return await si_src.search(query, rows=limit)
+        return await si_src.search(query, rows=limit, kind=kind)
     raise HeritageError(f"unknown source {name!r}; valid sources are {sorted(SOURCES)}")
 
 
@@ -95,6 +98,7 @@ def register(mcp: FastMCP) -> None:
         date_from: int | None = None,
         date_to: int | None = None,
         fulltext: bool = False,
+        kind: str | None = None,
     ) -> dict[str, Any]:
         """Search several archives at once and return normalised records grouped by source.
 
@@ -111,7 +115,13 @@ def register(mcp: FastMCP) -> None:
             date_to: Latest year, applied the same way.
             fulltext: Also search the text inside Internet Archive books (an experimental endpoint). Returned
                 under `fulltext`; this is the way to find a name or place inside a memoir or official report.
+            kind: Only this kind of material: text (books, reports, manuscripts), image (photographs, prints),
+                map, audio or video. Each archive is asked in its own vocabulary, and `kind_applied` in each
+                result says how. Maps are the least uniform: Commons matches on the word "map" in the title and
+                the Internet Archive on its map subjects and collections, so expect some misses and some noise.
+                Every record also carries a best-effort `kind`.
         """
+        wanted_kind = K.check(kind)
         limit = max(1, min(25, limit))
         wanted = sources or [name for name in SOURCES if is_configured(name)]
         unknown = [name for name in wanted if name not in SOURCES]
@@ -119,7 +129,9 @@ def register(mcp: FastMCP) -> None:
             raise HeritageError(f"unknown source(s) {unknown}; valid sources are {sorted(SOURCES)}")
         skipped = {name: "no API key; see list_sources" for name in wanted if not is_configured(name)}
         runnable = [name for name in wanted if name not in skipped]
-        jobs: list[Any] = [_search_one(name, query, limit, date_from, date_to) for name in runnable]
+        jobs: list[Any] = [
+            _search_one(name, query, limit, date_from, date_to, wanted_kind) for name in runnable
+        ]
         if fulltext:
             jobs.append(ia_src.fulltext_search(query, hits=limit))
         done = await asyncio.gather(*jobs, return_exceptions=True)
@@ -130,7 +142,9 @@ def register(mcp: FastMCP) -> None:
             if isinstance(outcome, BaseException):
                 errors[name] = str(outcome)
                 continue
-            results[name] = {k: v for k, v in outcome.items() if k in {"total", "records", "attribution"}}
+            results[name] = {
+                k: v for k, v in outcome.items() if k in {"total", "records", "attribution", "kind_applied"}
+            }
         if fulltext:
             outcome = done[-1]
             if isinstance(outcome, BaseException):
@@ -140,6 +154,8 @@ def register(mcp: FastMCP) -> None:
         notes: list[str] = []
         if date_from is not None or date_to is not None:
             notes.append("Date filters apply to internet_archive, dpla and nara only.")
+        if wanted_kind:
+            notes.append(f"kind={wanted_kind}: see kind_applied under each source for how it was asked.")
         return {
             "query": query,
             "results": results,
@@ -160,7 +176,6 @@ def register(mcp: FastMCP) -> None:
         """
         return {"record": await get_record_dict(source, record_id)}
 
-    @mcp.tool()
     async def download_media(
         source: str,
         record_id: str,
@@ -215,3 +230,6 @@ def register(mcp: FastMCP) -> None:
                 "before publishing or redistributing it."
             )
         return result
+
+    if not config.downloads_disabled():
+        mcp.tool()(download_media)

@@ -118,3 +118,12 @@ async def test_category_members(api) -> None:
 async def test_bad_filetype_is_refused() -> None:
     with pytest.raises(HeritageError):
         await commons.search("x", filetype="exe")
+
+
+async def test_commons_housekeeping_categories_are_not_subjects(api) -> None:
+    categories = "Old maps of Fairfax County, Virginia|Images uploaded by Fæ|PD-old-100-expired|Template Unknown (author)|CC-PD-Mark|Maps in the Library of Congress"
+    api.get(API).mock(
+        return_value=httpx.Response(200, json={"query": {"pages": [page(Categories=categories)]}})
+    )
+    record = (await commons.file_info("x"))["record"]
+    assert record["subjects"] == ["Old maps of Fairfax County, Virginia", "Maps in the Library of Congress"]

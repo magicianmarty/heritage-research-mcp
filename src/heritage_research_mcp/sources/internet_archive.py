@@ -7,10 +7,11 @@ from collections import OrderedDict
 from typing import Any
 from urllib.parse import quote
 
+from .. import kinds as K
 from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
-from ..models import Media, MediaKind, Record, Rights
+from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_int, as_str, as_year, clamp, strs, truncate, uniq
 
 NAME = "internet_archive"
@@ -28,6 +29,14 @@ _SKIP_FILE = re.compile(
     r"_chocr\.html\.gz|_hocr\.html|_hocr_pageindex\.json\.gz|_hocr_searchtext\.txt\.gz|"
     r"_page_numbers\.json|_djvu\.xml|_reviews\.json|_itemimage\.jpg)$"
 )
+_KIND_CLAUSE = {
+    "text": "mediatype:(texts)",
+    "image": "mediatype:(image)",
+    "audio": "mediatype:(audio)",
+    "video": "mediatype:(movies)",
+    "map": "(subject:(maps) OR collection:(maps*) OR collection:(david-rumsey-map-collection))",
+}
+_MEDIATYPE_KIND: dict[str, Kind] = {"texts": "text", "image": "image", "audio": "audio", "movies": "video"}
 _text_cache: OrderedDict[str, tuple[str, str]] = OrderedDict()
 
 
@@ -59,6 +68,14 @@ def _rights_for(meta: dict[str, Any], year: int | None, mediatype: str | None) -
     return R.unknown("The Internet Archive states no rights for this item.")
 
 
+def _kind_of(mediatype: str | None, subjects: list[str], collections: list[str]) -> Kind | None:
+    if K.has_map_subject(subjects) or any(
+        c == "david-rumsey-map-collection" or c.startswith("maps") for c in collections
+    ):
+        return "map"
+    return _MEDIATYPE_KIND.get(mediatype or "")
+
+
 def _kind(name: str, fmt: str | None) -> MediaKind:
     lowered = name.lower()
     if lowered.endswith(".pdf"):
@@ -82,6 +99,8 @@ def _record(meta: dict[str, Any], media: list[Media] | None = None) -> Record:
     mediatype = as_str(meta.get("mediatype"))
     date = as_str(meta.get("date"))
     description = " ".join(strs(meta.get("description")))
+    subjects = uniq(strs(meta.get("subject")))[:15]
+    collections = strs(meta.get("collection"))
     return Record(
         source=NAME,
         id=identifier,
@@ -89,8 +108,9 @@ def _record(meta: dict[str, Any], media: list[Media] | None = None) -> Record:
         creators=strs(meta.get("creator")),
         date=date[:10] if date else (str(year) if year else None),
         description=truncate(re.sub(r"<[^>]+>", " ", description), 1200),
-        subjects=uniq(strs(meta.get("subject")))[:15],
+        subjects=subjects,
         type=mediatype,
+        kind=_kind_of(mediatype, subjects, collections),
         holder="Internet Archive",
         landing_url=_details_url(identifier),
         rights=_rights_for(meta, year, mediatype),
@@ -109,11 +129,15 @@ async def search(
     rows: int = 10,
     page: int = 1,
     sort: str | None = None,
+    kind: str | None = None,
 ) -> dict[str, Any]:
     """Search item metadata (title, creator, subject, description). Not the text inside books."""
+    wanted = K.check(kind)
     clauses = [f"({query})"]
     if mediatype:
         clauses.append(f"mediatype:({mediatype})")
+    if wanted and (wanted == "map" or not mediatype):
+        clauses.append(_KIND_CLAUSE[wanted])
     if year_from is not None or year_to is not None:
         clauses.append(
             f"year:[{year_from if year_from is not None else '*'} TO {year_to if year_to is not None else '*'}]"
@@ -131,12 +155,17 @@ async def search(
     data = await http.get_json(NAME, f"{BASE}/advancedsearch.php", params=params)
     block = data.get("response") or {}
     docs = [d for d in block.get("docs", []) if isinstance(d, dict) and d.get("identifier")]
-    return {
+    out: dict[str, Any] = {
         "total": block.get("numFound"),
         "page": page,
         "rows": rows,
         "records": [_record(d).to_dict() for d in docs],
     }
+    if wanted:
+        out["kind_applied"] = _KIND_CLAUSE[wanted] + (
+            " (an explicit mediatype was also given)" if mediatype and wanted != "map" else ""
+        )
+    return out
 
 
 def _clean_snippet(text: str) -> str:

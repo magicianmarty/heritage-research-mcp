@@ -25,6 +25,7 @@ def register(mcp: FastMCP) -> None:
         include_extracted_text: bool = False,
         limit: int = 10,
         page: int = 1,
+        kind: str | None = None,
     ) -> dict[str, Any]:
         """Search the US National Archives Catalog. Needs NARA_API_KEY (10,000 queries a month by default).
 
@@ -46,12 +47,14 @@ def register(mcp: FastMCP) -> None:
             include_extracted_text: Include OCR text in the results where NARA has it.
             limit: Results per page (1 to 100).
             page: Page number from 1.
+            kind: text, image, map, audio or video, mapped to NARA's type of materials (unverified until a key
+                has been used against the live service).
         """
         return await nara.search(
             q=q, title=title, start_date=start_date, end_date=end_date, available_online=available_online,
             type_of_materials=type_of_materials, level=level, record_group=record_group,
             ancestor_na_id=ancestor_na_id, geographic=geographic, creators=creators,
-            include_extracted_text=include_extracted_text, limit=limit, page=page,
+            include_extracted_text=include_extracted_text, limit=limit, page=page, kind=kind,
         )  # fmt: skip
 
     @mcp.tool()

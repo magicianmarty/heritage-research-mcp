@@ -6,10 +6,11 @@ import re
 from typing import Any
 
 from .. import config
+from .. import kinds as K
 from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
-from ..models import Media, MediaKind, Record, Rights
+from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_int, as_str, as_year, clamp, listify, strs, truncate, uniq
 
 NAME = "smithsonian"
@@ -22,6 +23,13 @@ def _params(**extra: Any) -> dict[str, Any]:
     return {"api_key": config.require_key(NAME), **{k: v for k, v in extra.items() if v is not None}}
 
 
+_KIND_CLAUSE = {
+    "map": 'object_type:"Maps"',
+    "image": 'online_media_type:"Images"',
+    "audio": 'online_media_type:"Sound recordings"',
+    "video": 'online_media_type:"Video recordings"',
+    "text": '(online_media_type:"Full text documents" OR online_media_type:"Scanned books" OR object_type:"Books" OR object_type:"Manuscripts")',
+}
 _CREATOR_LABELS = (
     "author", "artist", "maker", "created by", "editor", "photographer", "recording artist",
     "composer", "designer", "illustrator", "engraver", "attribution", "publisher",
@@ -114,6 +122,17 @@ def _media(descriptive: dict[str, Any]) -> list[Media]:
     return out
 
 
+def _kind_of(row: dict[str, Any], object_types: list[str], media: list[Media]) -> Kind | None:
+    if K.has_map_subject(object_types):
+        return "map"
+    for item in media:
+        if item.kind in ("image", "audio", "video"):
+            return item.kind
+    if any(t.lower() in {"books", "manuscripts", "pamphlets", "periodicals"} for t in object_types):
+        return "text"
+    return "text" if as_str(row.get("unitCode")) == "SIL" and not media else None
+
+
 def _rights(descriptive: dict[str, Any], media: list[Media]) -> Rights:
     metadata = as_str((descriptive.get("metadata_usage") or {}).get("access"))
     licences = [m.license for m in media if m.license]
@@ -168,6 +187,7 @@ def _record(row: dict[str, Any]) -> Record | None:
         subjects=uniq(topics + people + strs(structured.get("topic")))[:15],
         places=uniq([text for _, text in _entries(free.get("place"))] + strs(structured.get("place")))[:10],
         type=(kinds or [as_str(row.get("type"))])[0],
+        kind=_kind_of(row, kinds, media),
         holder=as_str(descriptive.get("data_source")) or as_str(row.get("unitCode")),
         landing_url=landing,
         rights=_rights(descriptive, media),
@@ -191,9 +211,13 @@ async def search(
     type: str | None = None,  # noqa: A002 - mirrors the EDAN parameter
     row_group: str | None = None,
     category: str | None = None,
+    kind: str | None = None,
 ) -> dict[str, Any]:
     if category and category not in CATEGORIES:
         raise HeritageError(f"category must be one of {sorted(CATEGORIES)}")
+    wanted = K.check(kind)
+    if wanted:
+        q = f"({q}) AND {_KIND_CLAUSE[wanted]}"
     extra = {"q": q, "rows": clamp(rows, 1, 100), "start": max(0, start), "sort": _token("sort", sort)}
     if category:
         url = f"{BASE}/category/{category}/search"
@@ -205,12 +229,15 @@ async def search(
     records = [
         r.to_dict() for r in (_record(r) for r in listify(block.get("rows")) if isinstance(r, dict)) if r
     ]
-    return {
+    out: dict[str, Any] = {
         "total": block.get("rowCount"),
         "start": extra["start"],
         "rows": extra["rows"],
         "records": records,
     }
+    if wanted:
+        out["kind_applied"] = _KIND_CLAUSE[wanted]
+    return out
 
 
 async def get_content(content_id: str) -> dict[str, Any]:

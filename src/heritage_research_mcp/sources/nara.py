@@ -10,16 +10,24 @@ import re
 from typing import Any
 
 from .. import config
+from .. import kinds as K
 from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
-from ..models import Media, MediaKind, Record, Rights
+from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_int, as_str, clamp, listify, strs, truncate, uniq
 
 NAME = "nara"
 ROOT = "https://catalog.archives.gov/api"
 ATTRIBUTION = "This product uses the National Archives Catalog API but is not endorsed or certified by the National Archives."
 _DATE = re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
+_KIND_MATERIALS = {
+    "text": "Textual Records",
+    "image": "Photographs and other Graphic Materials",
+    "map": "Maps and Charts",
+    "audio": "Sound Recordings",
+    "video": "Moving Images",
+}
 _NOTE = (
     "US federal records are often public domain, but donated or third-party material can carry restrictions. "
     "Read the record's own use restriction."
@@ -95,6 +103,22 @@ def _kind(name: str, label: str) -> MediaKind:
     return "other"
 
 
+def _kind_of(rec: dict[str, Any], media: list[Media]) -> Kind | None:
+    probe = " ".join(strs(rec.get("generalRecordsTypes")) + strs(rec.get("typeOfMaterials"))).lower()
+    for needle, found in (
+        ("map", "map"), ("photograph", "image"), ("graphic", "image"), ("textual", "text"),
+        ("moving image", "video"), ("sound", "audio"),
+    ):  # fmt: skip
+        if needle in probe:
+            return found  # type: ignore[return-value]
+    for item in media:
+        if item.kind in ("image", "audio", "video"):
+            return item.kind
+        if item.kind in ("pdf", "text"):
+            return "text"
+    return None
+
+
 def _rights(rec: dict[str, Any]) -> Rights:
     use = rec.get("useRestriction")
     status = as_str(use.get("status")) if isinstance(use, dict) else as_str(use)
@@ -154,6 +178,7 @@ def _record(hit: Any) -> Record | None:
         description=truncate(as_str(rec.get("scopeAndContentNote")), 1200),
         subjects=uniq(strs(rec.get("subjects")))[:15],
         type=as_str(rec.get("levelOfDescription")) or as_str(listify(rec.get("generalRecordsTypes"))),
+        kind=_kind_of(rec, media),
         holder=holder or "US National Archives",
         landing_url=f"https://catalog.archives.gov/id/{na_id}",
         rights=_rights(rec),
@@ -190,7 +215,13 @@ async def search(
     include_extracted_text: bool = False,
     limit: int = 10,
     page: int = 1,
+    kind: str | None = None,
 ) -> dict[str, Any]:
+    wanted = K.check(kind)
+    applied = None
+    if wanted and not type_of_materials:
+        type_of_materials = _KIND_MATERIALS[wanted]
+        applied = f"typeOfMaterials={type_of_materials!r} (NARA's documented vocabulary; not yet verified with a key)"
     given = {
         "title": title, "typeOfMaterials": type_of_materials, "levelOfDescription": level,
         "recordGroupNumber": record_group, "geographicReference": geographic, "creators": creators,
@@ -215,13 +246,16 @@ async def search(
         NAME, f"{ROOT}/{config.nara_api_version()}/records/search", params=params, headers=_headers()
     )
     records = [r.to_dict() for r in (_record(h) for h in _hits(data)) if r]
-    return {
+    out: dict[str, Any] = {
         "total": _total(data),
         "page": params["page"],
         "limit": params["limit"],
         "records": records,
         "attribution": ATTRIBUTION,
     }
+    if wanted:
+        out["kind_applied"] = applied or "(the explicit type_of_materials decides)"
+    return out
 
 
 async def get_record(na_id: int) -> dict[str, Any]:

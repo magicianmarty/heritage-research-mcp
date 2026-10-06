@@ -10,15 +10,18 @@ from ..sources import commons
 
 def register(mcp: FastMCP) -> None:
     @mcp.tool()
-    async def commons_search(query: str, limit: int = 10, filetype: str | None = None) -> dict[str, Any]:
+    async def commons_search(
+        query: str, limit: int = 10, filetype: str | None = None, kind: str | None = None
+    ) -> dict[str, Any]:
         """Search Wikimedia Commons files. Each record includes the licence read from the file's metadata.
 
         Args:
             query: Search words.
             limit: Results to return (1 to 50).
             filetype: bitmap, drawing, audio, video, office or multimedia.
+            kind: text, image, map, audio or video. Maps are found by the word "map" in the file title.
         """
-        return await commons.search(query, limit=limit, filetype=filetype)
+        return await commons.search(query, limit=limit, filetype=filetype, kind=kind)
 
     @mcp.tool()
     async def commons_file_info(title: str) -> dict[str, Any]:

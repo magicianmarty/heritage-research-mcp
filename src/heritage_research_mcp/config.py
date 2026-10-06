@@ -110,3 +110,8 @@ def nara_monthly_limit() -> int:
 def nara_api_version() -> str:
     version = os.environ.get("NARA_API_VERSION", "v2").strip().lower()
     return version if version in {"v2", "v3"} else "v2"
+
+
+def downloads_disabled() -> bool:
+    """Hosted deployments cannot hand a downloaded file to anyone, so they can switch the tool off."""
+    return os.environ.get("HERITAGE_MCP_DISABLE_DOWNLOADS", "").strip().lower() in {"1", "true", "yes", "on"}

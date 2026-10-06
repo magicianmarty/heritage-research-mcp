@@ -24,6 +24,8 @@ Adapters are plain async functions returning dicts, so they are testable without
 
 **Rights are a first-class field, and "unknown" is never "free".** Each adapter reads whatever its archive states (a licence URL, a rightsstatements.org URI, a category, free text) and maps it with the same table in `rights.py`. The only inference is a publication-year rule for US texts, and it is labelled `date-heuristic`. Conservative readings win: where DPLA's own category is more generous than the record's rights URI, the URI decides.
 
+**Type filtering is translation, not a promise.** `kind` (text, image, map, audio, video) is converted into each archive's own vocabulary, and every result says how (`kind_applied`). Maps are the weak case: Commons, DPLA and the Smithsonian catalogue them well, the Internet Archive has no map type, so the filter there is a subject-and-collection match. Records also carry a best-effort `kind`, derived from whatever the archive provides (a media type, a "Maps" heading, "Cartographic material"). Explicit per-archive filters always win over `kind`.
+
 **Degrade, don't fail.** A keyless install works for two sources. A missing key is a clear, actionable message on that source only, and `search` carries on with the rest and reports `errors` and `skipped` per source.
 
 **Keys live in files by default.** Two providers take the key as a query parameter, so URLs are secrets. The HTTP client's own request logging prints full URLs, so it is switched to WARNING and filtered. Tests assert that a key never appears in results, errors or logs.

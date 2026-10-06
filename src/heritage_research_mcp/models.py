@@ -10,6 +10,7 @@ Reuse = Literal[
     "free", "attribution", "share_alike", "non_commercial", "no_derivatives", "restricted", "unknown"
 ]
 MediaKind = Literal["image", "text", "pdf", "audio", "video", "archive", "data", "other"]
+Kind = Literal["text", "image", "map", "audio", "video"]
 
 
 class Rights(BaseModel):
@@ -51,6 +52,7 @@ class Record(BaseModel):
     subjects: list[str] = Field(default_factory=list)
     places: list[str] = Field(default_factory=list)
     type: str | None = None
+    kind: Kind | None = None
     holder: str | None = None
     landing_url: str | None = None
     rights: Rights = Field(default_factory=Rights)

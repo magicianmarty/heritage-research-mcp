@@ -19,6 +19,7 @@ def register(mcp: FastMCP) -> None:
         rows: int = 10,
         page: int = 1,
         sort: str | None = None,
+        kind: str | None = None,
     ) -> dict[str, Any]:
         """Search Internet Archive item metadata (title, author, subject, description). Not the text inside books.
 
@@ -34,6 +35,8 @@ def register(mcp: FastMCP) -> None:
             rows: Results per page (1 to 100).
             page: Page number from 1.
             sort: For example "downloads desc" or "date asc".
+            kind: text, image, map, audio or video, translated into Internet Archive terms (maps are matched on
+                the "maps" subject and the map collections, so results are noisy).
         """
         return await ia.search(
             query,
@@ -44,6 +47,7 @@ def register(mcp: FastMCP) -> None:
             rows=rows,
             page=page,
             sort=sort,
+            kind=kind,
         )
 
     @mcp.tool()

@@ -18,6 +18,7 @@ def register(mcp: FastMCP) -> None:
         type: str | None = None,
         row_group: str | None = None,
         category: str | None = None,
+        kind: str | None = None,
     ) -> dict[str, Any]:
         """Search Smithsonian Open Access records. Needs SMITHSONIAN_API_KEY.
 
@@ -32,9 +33,17 @@ def register(mcp: FastMCP) -> None:
             type: EDAN record type, e.g. edanmdm.
             row_group: objects or archives.
             category: Search within art_design, history_culture or science_technology instead.
+            kind: text, image, map, audio or video, added to the query as object_type or online_media_type.
         """
         return await si.search(
-            q, rows=rows, start=start, sort=sort, type=type, row_group=row_group, category=category
+            q,
+            rows=rows,
+            start=start,
+            sort=sort,
+            type=type,
+            row_group=row_group,
+            category=category,
+            kind=kind,
         )
 
     @mcp.tool()
@@ -44,7 +53,7 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     async def si_terms(category: str, starts_with: str | None = None, limit: int = 200) -> dict[str, Any]:
-        """List the vocabulary for a search field: culture, data_source, date, object_type, online_media_type,
+        """List the vocabulary for a search field: culture, data_source, date, online_media_type,
         place, topic or unit_code. Useful for building fielded queries. Needs SMITHSONIAN_API_KEY."""
         return await si.terms(category, starts_with=starts_with, limit=limit)
 

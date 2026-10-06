@@ -130,3 +130,11 @@ async def test_user_agent_identifies_the_project(api) -> None:
 )
 def test_redact(raw: str, expected: str) -> None:
     assert redact(raw) == expected
+
+
+async def test_a_firewall_page_is_reported_in_words_not_html(api) -> None:
+    page = "<html><head><title>Request Rejected</title><style>body{color:red}</style></head><body>blocked</body></html>"
+    api.get(URL).mock(return_value=httpx.Response(403, text=page))
+    with pytest.raises(SourceHTTPError) as caught:
+        await http.get_json("smithsonian", URL)
+    assert "web firewall" in str(caught.value) and "<" not in str(caught.value)

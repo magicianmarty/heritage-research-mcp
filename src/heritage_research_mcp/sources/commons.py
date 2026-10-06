@@ -2,18 +2,27 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
+from .. import kinds as K
 from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
-from ..models import Media, MediaKind, Record, Rights
+from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_int, as_str, clamp, strip_html, truncate, uniq
 
 NAME = "commons"
 API = "https://commons.wikimedia.org/w/api.php"
 FILETYPES = {"bitmap", "drawing", "audio", "video", "office", "multimedia"}
 
+_KIND_TERMS = {
+    "text": "filetype:office",
+    "image": "filetype:bitmap",
+    "map": "intitle:map filetype:bitmap",
+    "audio": "filetype:audio",
+    "video": "filetype:video",
+}
 _PARAMS = {
     "action": "query",
     "format": "json",
@@ -37,6 +46,23 @@ def _kind(mime: str | None) -> MediaKind:
         return "pdf"
     major = mime.split("/")[0]
     return major if major in ("image", "audio", "video") else "other"  # type: ignore[return-value]
+
+
+_HOUSEKEEPING = re.compile(
+    r"(?i)(uploaded by|^pd-|^cc-|\btemplate\b|^files? (from|with|needing)|^media (needing|with)|^pages? (with|using)"
+    r"|^self-published|\blicen[cs]e\b|^(images|photos|pictures) (from|by|with|needing)|\bwikidata\b|\bbot\b)"
+)
+
+
+def _kind_of(mime: str | None, title: str, categories: list[str]) -> Kind | None:
+    if K.title_says_map(title) or K.has_map_subject(categories):
+        return "map"
+    major = (mime or "").split("/")[0]
+    if major in ("image", "audio", "video"):
+        return major  # type: ignore[return-value]
+    if mime in ("application/pdf", "image/vnd.djvu"):
+        return "text"
+    return None
 
 
 def _rights(ext: dict[str, Any], page_url: str | None) -> Rights:
@@ -75,7 +101,7 @@ def _record(page: dict[str, Any]) -> Record | None:
     title = as_str(page.get("title")) or ""
     stem = title.removeprefix("File:").rsplit(".", 1)[0]
     page_url = as_str(info.get("descriptionurl")) or as_str(page.get("canonicalurl"))
-    categories = [c for c in (_ext(ext, "Categories") or "").split("|") if c]
+    categories = [c for c in (_ext(ext, "Categories") or "").split("|") if c and not _HOUSEKEEPING.search(c)]
     mime = as_str(info.get("mime"))
     original = as_str(info.get("url"))
     media = (
@@ -103,6 +129,7 @@ def _record(page: dict[str, Any]) -> Record | None:
         description=truncate(_ext(ext, "ImageDescription"), 1200),
         subjects=uniq(categories)[:15],
         type=mime,
+        kind=_kind_of(mime, stem, categories),
         holder=truncate(_ext(ext, "Credit"), 200),
         landing_url=page_url,
         rights=_rights(ext, page_url),
@@ -116,10 +143,16 @@ def _records(data: dict[str, Any]) -> list[dict[str, Any]]:
     return [r.to_dict() for r in (_record(p) for p in pages) if r]
 
 
-async def search(query: str, *, limit: int = 10, filetype: str | None = None) -> dict[str, Any]:
+async def search(
+    query: str, *, limit: int = 10, filetype: str | None = None, kind: str | None = None
+) -> dict[str, Any]:
     if filetype and filetype not in FILETYPES:
         raise HeritageError(f"filetype must be one of {sorted(FILETYPES)}")
-    term = f"{query} filetype:{filetype}" if filetype else query
+    wanted = K.check(kind)
+    extra = ""
+    if wanted:
+        extra = _KIND_TERMS[wanted] if not filetype else ("intitle:map" if wanted == "map" else "")
+    term = " ".join(part for part in (query, extra, f"filetype:{filetype}" if filetype else "") if part)
     params = {
         **_PARAMS,
         "generator": "search",
@@ -129,7 +162,10 @@ async def search(query: str, *, limit: int = 10, filetype: str | None = None) ->
     }
     data = await http.get_json(NAME, API, params=params)
     records = _records(data)
-    return {"returned": len(records), "records": records, "more": "continue" in data}
+    out: dict[str, Any] = {"returned": len(records), "records": records, "more": "continue" in data}
+    if wanted:
+        out["kind_applied"] = extra or "(the explicit filetype decides)"
+    return out
 
 
 async def file_info(title: str) -> dict[str, Any]:

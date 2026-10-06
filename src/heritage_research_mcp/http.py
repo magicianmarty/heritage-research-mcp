@@ -61,9 +61,15 @@ class Resp:
         return self.content.decode("utf-8", errors="replace")
 
 
+_HTML_NOISE = re.compile(r"(?is)<(style|script)[^>]*>.*?</\1>|<[^>]+>")
+
+
 def _snippet(content: bytes) -> str:
-    text = content[:300].decode("utf-8", errors="replace")
-    return redact(" ".join(text.split()))
+    text = _HTML_NOISE.sub(" ", content[:4000].decode("utf-8", errors="replace"))
+    text = " ".join(text.split())
+    if "request rejected" in text.lower():
+        return "blocked by the provider's web firewall (this request shape is refused)"
+    return redact(text[:300])
 
 
 def _retry_after(headers: httpx.Headers) -> float | None:

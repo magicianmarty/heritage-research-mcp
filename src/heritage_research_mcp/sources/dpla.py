@@ -6,10 +6,11 @@ import re
 from typing import Any
 
 from .. import config
+from .. import kinds as K
 from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
-from ..models import Media, MediaKind, Record, Rights
+from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_str, clamp, listify, strs, truncate, uniq
 
 NAME = "dpla"
@@ -28,6 +29,8 @@ _FILTERS = {
 }
 
 
+_KIND_TYPE = {"text": "text", "image": "image", "map": "image", "audio": "sound", "video": "moving image"}
+_TYPE_KIND: dict[str, Kind] = {"text": "text", "image": "image", "sound": "audio", "moving image": "video"}
 _NOTICE = re.compile(
     r"copyright laws? protect|protected by (?:u\.s\. )?copyright|all rights reserved|may not be (?:downloaded|reproduced|copied)",
     re.I,
@@ -74,6 +77,13 @@ def _rights(doc: dict[str, Any]) -> Rights:
     return found.model_copy(update=update)
 
 
+def _kind_of(source: dict[str, Any], subjects: list[str]) -> Kind | None:
+    formats = strs(source.get("format"))
+    if K.has_map_subject(subjects) or K.has_map_subject(formats):
+        return "map"
+    return _TYPE_KIND.get((as_str(source.get("type")) or "").lower())
+
+
 def _media(doc: dict[str, Any]) -> list[Media]:
     media: list[Media] = []
     for url in strs(doc.get("mediaMaster")):
@@ -94,6 +104,7 @@ def _record(doc: dict[str, Any]) -> Record | None:
     source = doc.get("sourceResource") or {}
     media = _media(doc)
     holder = as_str(doc.get("dataProvider"))
+    subjects = uniq(strs(source.get("subject")))[:15]
     return Record(
         source=NAME,
         id=identifier,
@@ -101,9 +112,10 @@ def _record(doc: dict[str, Any]) -> Record | None:
         creators=strs(source.get("creator")),
         date=as_str(source.get("date")),
         description=truncate(" ".join(strs(source.get("description"))), 1200),
-        subjects=uniq(strs(source.get("subject")))[:15],
+        subjects=subjects,
         places=uniq(strs(source.get("spatial")))[:10],
         type=as_str(source.get("type")),
+        kind=_kind_of(source, subjects),
         holder=holder,
         landing_url=as_str(doc.get("isShownAt")),
         rights=_rights(doc),
@@ -127,7 +139,17 @@ async def search(
     page: int = 1,
     page_size: int = 10,
     sort_by: str | None = None,
+    kind: str | None = None,
 ) -> dict[str, Any]:
+    wanted = K.check(kind)
+    applied: list[str] = []
+    if wanted:
+        if not type:
+            type = _KIND_TYPE[wanted]
+            applied.append(f"sourceResource.type={type}")
+        if wanted == "map" and not subject:
+            subject = "Maps"
+            applied.append("sourceResource.subject.name=Maps")
     given = {
         "title": title, "creator": creator, "subject": subject, "place_state": place_state,
         "date_after": date_after, "date_before": date_before, "type": type,
@@ -150,12 +172,15 @@ async def search(
     data = await http.get_json(NAME, f"{BASE}/items", params=params)
     docs = [d for d in listify(data.get("docs")) if isinstance(d, dict)]
     records = [r.to_dict() for r in (_record(d) for d in docs) if r]
-    return {
+    out: dict[str, Any] = {
         "total": data.get("count"),
         "page": params["page"],
         "page_size": params["page_size"],
         "records": records,
     }
+    if wanted:
+        out["kind_applied"] = " and ".join(applied) or "(explicit filters decide)"
+    return out
 
 
 async def get_item(item_id: str) -> dict[str, Any]:
