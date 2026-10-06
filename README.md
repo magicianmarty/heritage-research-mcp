@@ -100,7 +100,9 @@ claude mcp add heritage-research -- uvx --from git+https://github.com/magicianma
 
 Pin a release for reproducible installs: `git+https://github.com/magicianmarty/heritage-research-mcp@v0.1.0`.
 
-**Hosted agent platforms.** Any platform that runs stdio MCP servers can run it. Use the same `uvx` command, pass the keys as environment variables from the platform's secret store, and set `HERITAGE_MCP_DISABLE_DOWNLOADS=1` (a hosted agent cannot read files the server downloads, so `download_media` is switched off and the text-returning tools do the work).
+**Hosted agent platforms.** Any platform that runs stdio MCP servers can run it. Use the same `uvx` command, pass the keys as environment variables from the platform's secret store, and set `HERITAGE_MCP_DISABLE_DOWNLOADS=1` (a hosted agent cannot read files the server downloads, so `download_media` is switched off and the text-returning tools do the work). To get files onto a machine you control, run the command-line downloader there (below) and let the agent call it through whatever shell access the platform gives it.
+
+**Download from a shell.** `heritage-research-mcp download <source> <record_id> [--kind image|pdf|text|audio|video|archive] [--media-index N] [--max-mb N] [--overwrite]` runs the same checked downloader as `download_media` (https only, public addresses, size limit, provenance sidecar) and prints the result as JSON, including the file `path`. It exits 1 with `{"error": ...}` when it fails. `HERITAGE_MCP_DISABLE_DOWNLOADS` only removes the MCP tool; the command always works.
 
 **From source**
 

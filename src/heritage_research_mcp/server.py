@@ -47,6 +47,10 @@ def main() -> None:
         from .doctor import run
 
         raise SystemExit(run(live="--live" in args[1:]))
+    if args and args[0] == "download":
+        from .cli import run as download
+
+        raise SystemExit(download(args[1:]))
     mcp.run()
 
 

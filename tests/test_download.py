@@ -161,6 +161,17 @@ def test_filenames_come_from_the_path_or_a_query_hint(url: str, expected: str) -
     assert download.filename_for(url) == expected
 
 
+def test_a_long_name_is_shortened_without_losing_its_extension() -> None:
+    title = "A map of Fairfax County, and parts of Loudoun and Prince William Counties, Va., and the District of Columbia"
+    name = download.filename_for(f"https://upload.example.org/x/{title.replace(' ', '_')}_LOC_2002627423.jpg")
+    assert len(name) <= 120 and name.endswith(".jpg") and name.startswith("A_map_of_Fairfax_County")
+    assert download.filename_for("https://files.example.org/" + "a" * 200) == "a" * 120
+    assert (
+        download.filename_for("https://files.example.org/" + "a" * 200 + ".verylongsuffix")
+        == (("a" * 200 + ".verylongsuffix")[:120])
+    )
+
+
 async def test_an_extension_is_added_from_the_mime_type_and_the_cache_still_finds_it(api) -> None:
     url = "https://files.example.org/ids/download?id=NMAH-1_screen"
     route = api.get(url).mock(

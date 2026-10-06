@@ -40,8 +40,13 @@ def filename_for(url: str) -> str:
     segment = unquote(Path(unquote(parts.path)).name)
     hints = {k.lower(): v for k, v in parse_qs(parts.query).items() if v}
     hint = next((hints[k][0] for k in ("id", "file", "filename", "name") if k in hints), None)
-    chosen = segment if ("." in segment or not hint) else hint
-    return safe_part(chosen or "file", 120)
+    chosen = safe_part((segment if ("." in segment or not hint) else hint) or "file", 10_000)
+    if len(chosen) <= 120:
+        return chosen
+    stem, dot, extension = chosen.rpartition(".")
+    if dot and 1 <= len(extension) <= 5 and extension.isalnum():
+        return stem[: 119 - len(extension)].strip("._") + "." + extension
+    return chosen[:120]
 
 
 def _cached(folder: Path, name: str) -> Path | None:

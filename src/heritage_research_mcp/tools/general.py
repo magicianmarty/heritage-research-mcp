@@ -55,6 +55,48 @@ async def get_record_dict(source: str, record_id: str) -> dict[str, Any]:
     raise HeritageError(f"unknown source {source!r}; valid sources are {sorted(SOURCES)}")
 
 
+async def download_from_record(
+    source: str,
+    record_id: str,
+    media_index: int = 0,
+    media_kind: str | None = None,
+    overwrite: bool = False,
+    max_mb: int | None = None,
+) -> dict[str, Any]:
+    record = await get_record_dict(source, record_id)
+    media = record.get("media") or []
+    if not media:
+        raise HeritageError("this record has no downloadable media")
+    if media_kind:
+        matches = [m for m in media if m.get("kind") == media_kind]
+        if not matches:
+            raise HeritageError(
+                f"no media of kind {media_kind!r}; kinds present: {sorted({m.get('kind') for m in media})}"
+            )
+        chosen = matches[0]
+    else:
+        if not 0 <= media_index < len(media):
+            raise HeritageError(f"media_index must be between 0 and {len(media) - 1}")
+        chosen = media[media_index]
+    result = await download_file(
+        source=source,
+        record_id=str(record["id"]),
+        url=chosen["url"],
+        title=record.get("title"),
+        landing_url=record.get("landing_url"),
+        mime=chosen.get("mime"),
+        rights=record.get("rights"),
+        max_bytes=max_mb * 1024 * 1024 if max_mb else None,
+        overwrite=overwrite,
+    )
+    if (record.get("rights") or {}).get("reuse") != "free":
+        result["rights_warning"] = (
+            "The holder did not mark this item free to reuse. Use it as reference and check the landing page "
+            "before publishing or redistributing it."
+        )
+    return result
+
+
 def register(mcp: FastMCP) -> None:
     @mcp.tool()
     async def list_sources() -> dict[str, Any]:
@@ -198,38 +240,7 @@ def register(mcp: FastMCP) -> None:
             overwrite: Fetch again even if the file is already cached.
             max_mb: Refuse files larger than this (default 250, or HERITAGE_MCP_MAX_DOWNLOAD_MB).
         """
-        record = await get_record_dict(source, record_id)
-        media = record.get("media") or []
-        if not media:
-            raise HeritageError("this record has no downloadable media")
-        if media_kind:
-            matches = [m for m in media if m.get("kind") == media_kind]
-            if not matches:
-                raise HeritageError(
-                    f"no media of kind {media_kind!r}; kinds present: {sorted({m.get('kind') for m in media})}"
-                )
-            chosen = matches[0]
-        else:
-            if not 0 <= media_index < len(media):
-                raise HeritageError(f"media_index must be between 0 and {len(media) - 1}")
-            chosen = media[media_index]
-        result = await download_file(
-            source=source,
-            record_id=str(record["id"]),
-            url=chosen["url"],
-            title=record.get("title"),
-            landing_url=record.get("landing_url"),
-            mime=chosen.get("mime"),
-            rights=record.get("rights"),
-            max_bytes=max_mb * 1024 * 1024 if max_mb else None,
-            overwrite=overwrite,
-        )
-        if (record.get("rights") or {}).get("reuse") != "free":
-            result["rights_warning"] = (
-                "The holder did not mark this item free to reuse. Use it as reference and check the landing page "
-                "before publishing or redistributing it."
-            )
-        return result
+        return await download_from_record(source, record_id, media_index, media_kind, overwrite, max_mb)
 
     if not config.downloads_disabled():
         mcp.tool()(download_media)
