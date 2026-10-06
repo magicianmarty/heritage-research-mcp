@@ -171,7 +171,7 @@ async def search(
         params["sort_by"] = sort_by
     data = await http.get_json(NAME, f"{BASE}/items", params=params)
     docs = [d for d in listify(data.get("docs")) if isinstance(d, dict)]
-    records = [r.to_dict() for r in (_record(d) for d in docs) if r]
+    records = [r.to_dict(brief=True) for r in (_record(d) for d in docs) if r]
     out: dict[str, Any] = {
         "total": data.get("count"),
         "page": params["page"],

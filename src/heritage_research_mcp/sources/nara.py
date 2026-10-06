@@ -245,7 +245,7 @@ async def search(
     data = await http.get_json(
         NAME, f"{ROOT}/{config.nara_api_version()}/records/search", params=params, headers=_headers()
     )
-    records = [r.to_dict() for r in (_record(h) for h in _hits(data)) if r]
+    records = [r.to_dict(brief=True) for r in (_record(h) for h in _hits(data)) if r]
     out: dict[str, Any] = {
         "total": _total(data),
         "page": params["page"],
@@ -272,7 +272,7 @@ async def children(parent_na_id: int, *, limit: int = 20, page: int = 1) -> dict
     data = await http.get_json(
         NAME, f"{ROOT}/v2/records/parentNaId/{int(parent_na_id)}", params=params, headers=_headers()
     )
-    records = [r.to_dict() for r in (_record(h) for h in _hits(data)) if r]
+    records = [r.to_dict(brief=True) for r in (_record(h) for h in _hits(data)) if r]
     return {"parent": parent_na_id, "total": _total(data), "records": records, "attribution": ATTRIBUTION}
 
 

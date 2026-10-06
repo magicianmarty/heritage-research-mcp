@@ -227,7 +227,9 @@ async def search(
     data = await http.get_json(NAME, url, params=_params(**extra))
     block = data.get("response") or {}
     records = [
-        r.to_dict() for r in (_record(r) for r in listify(block.get("rows")) if isinstance(r, dict)) if r
+        r.to_dict(brief=True)
+        for r in (_record(r) for r in listify(block.get("rows")) if isinstance(r, dict))
+        if r
     ]
     out: dict[str, Any] = {
         "total": block.get("rowCount"),

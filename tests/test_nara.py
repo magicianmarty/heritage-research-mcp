@@ -67,10 +67,16 @@ async def test_records_are_normalised(api, set_key) -> None:
     assert report["holder"] == "National Archives at Washington, DC"
     assert report["media"][0]["kind"] == "image" and report["media"][0]["bytes"] == 2400000
     assert report["extra"]["has_extracted_text"] is True
-    assert report["extra"]["ancestors"][0]["level"] == "recordGroup"
     assert report["rights"]["reuse"] == "unknown" and report["rights"]["statement"] == "Undetermined"
     assert rmap["date"] == "1864-01-01" and rmap["media"][0]["kind"] == "pdf"
     assert rmap["rights"]["reuse"] == "free" and "unrestricted" in rmap["rights"]["label"].lower()
+
+
+async def test_a_single_record_keeps_its_ancestry_and_full_detail(api, set_key) -> None:
+    set_key("nara")
+    api.get(f"{V2}/records/search").mock(return_value=httpx.Response(200, json=load("nara_search.json")))
+    record = (await nara.get_record(12345))["record"]
+    assert record["extra"]["ancestors"][0]["level"] == "recordGroup"
 
 
 async def test_restricted_records_say_so(api, set_key) -> None:

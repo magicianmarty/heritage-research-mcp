@@ -41,7 +41,8 @@ async def test_search_normalises_real_results(api) -> None:
     assert first["id"].startswith("File:Col. John Singleton Mosby")
     assert first["rights"]["reuse"] == "free" and first["rights"]["label"] == "Public domain"
     assert first["media"][0]["width"] == 8153 and first["media"][0]["bytes"] == 3680164
-    assert first["media"][0]["thumbnail_url"].startswith("https://thumb.wikimedia.org/")
+    assert "thumbnail_url" not in first["media"][0]
+    assert "utm_" not in first["media"][0]["url"]
     assert first["landing_url"].startswith("https://commons.wikimedia.org/wiki/File:")
 
 

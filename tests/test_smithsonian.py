@@ -124,8 +124,11 @@ async def test_real_library_record_separates_authors_from_subjects(api, set_key)
 
 async def test_real_museum_object_lists_downloadable_files_best_first(api, set_key) -> None:
     set_key("smithsonian")
-    api.get(f"{BASE}/search").mock(return_value=httpx.Response(200, json=load("si_live_media.json")))
-    flag = (await si.search("flag"))["records"][0]
+    row = load("si_live_media.json")["response"]["rows"][0]
+    api.get(f"{BASE}/content/{row['id']}").mock(
+        return_value=httpx.Response(200, json={"status": 200, "response": row})
+    )
+    flag = (await si.get_content(row["id"]))["record"]
     labels = [m["label"] for m in flag["media"]]
     assert "High-resolution JPEG" in labels[0] and "High-resolution TIFF" in labels[-1]
     assert flag["media"][0]["width"] == 3000 and flag["media"][0]["height"] == 2047
@@ -135,6 +138,14 @@ async def test_real_museum_object_lists_downloadable_files_best_first(api, set_k
     assert flag["description"].startswith("Wool bunting")
     assert flag["landing_url"].startswith("https://n2t.net/ark:/65665/")
     assert flag["rights"]["label"] == "CC0 (media and metadata)"
+
+
+async def test_search_lists_only_the_first_two_files(api, set_key) -> None:
+    set_key("smithsonian")
+    api.get(f"{BASE}/search").mock(return_value=httpx.Response(200, json=load("si_live_media.json")))
+    flag = (await si.search("flag"))["records"][0]
+    assert len(flag["media"]) == 2 and "High-resolution JPEG" in flag["media"][0]["label"]
+    assert all("thumbnail_url" not in m for m in flag["media"])
 
 
 def row(**freetext: object) -> dict:

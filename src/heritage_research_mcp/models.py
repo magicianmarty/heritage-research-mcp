@@ -59,8 +59,34 @@ class Record(BaseModel):
     media: list[Media] = Field(default_factory=list)
     extra: dict[str, Any] = Field(default_factory=dict)
 
-    def to_dict(self) -> dict[str, Any]:
-        return compact(self.model_dump(mode="json"))
+    def to_dict(self, brief: bool = False) -> dict[str, Any]:
+        """The full record, or the compact form used in search results.
+
+        Brief keeps what is needed to choose a result (title, date, rights, one or two files) and drops what
+        costs tokens without helping the choice: long descriptions, thumbnails, trailing subjects. The get_*
+        tools return the full record.
+        """
+        data = self.model_dump(mode="json")
+        if brief:
+            data["description"] = _clip(data.get("description"), BRIEF_DESCRIPTION)
+            data["subjects"] = data["subjects"][:BRIEF_SUBJECTS]
+            data["media"] = [
+                {k: v for k, v in m.items() if k != "thumbnail_url"} for m in data["media"][:BRIEF_MEDIA]
+            ]
+            data["extra"] = {k: v for k, v in data["extra"].items() if k in BRIEF_EXTRA}
+        return compact(data)
+
+
+BRIEF_DESCRIPTION = 300
+BRIEF_SUBJECTS = 6
+BRIEF_MEDIA = 2
+BRIEF_EXTRA = {"url_id", "has_extracted_text"}
+
+
+def _clip(text: str | None, limit: int) -> str | None:
+    if not text or len(text) <= limit:
+        return text
+    return text[: limit - 1].rstrip() + "…"
 
 
 def compact(value: Any) -> Any:

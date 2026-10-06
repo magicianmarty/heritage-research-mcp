@@ -6,6 +6,7 @@ import html
 import re
 from collections.abc import Iterable
 from typing import Any
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 _TAG = re.compile(r"<[^>]+>")
 _SPACE = re.compile(r"\s+")
@@ -74,6 +75,17 @@ def strip_html(value: Any) -> str | None:
         return None
     text = html.unescape(_TAG.sub(" ", text))
     return _SPACE.sub(" ", text).strip() or None
+
+
+def clean_url(url: str | None) -> str | None:
+    """Drop utm_* tracking parameters, which Wikimedia appends to every file URL."""
+    if not url or "utm_" not in url.lower():
+        return url
+    parts = urlsplit(url)
+    kept = [
+        (k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if not k.lower().startswith("utm_")
+    ]
+    return urlunsplit(parts._replace(query=urlencode(kept)))
 
 
 def truncate(text: str | None, limit: int) -> str | None:

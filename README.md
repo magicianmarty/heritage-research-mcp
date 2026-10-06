@@ -73,6 +73,8 @@ And `ia_fulltext_search` finds a name inside a scanned book, with the page and a
 
 A source that needs a key is skipped, with a message saying where to get one, until the key is set. The Internet Archive and Commons work immediately.
 
+Search results are compact (a short description, the first two files, no thumbnails) so that many can be read cheaply; `get_record` and the `*_get_*` and `*_file_info` tools return the full record.
+
 ## Install
 
 You need [uv](https://docs.astral.sh/uv/) (or any Python 3.11+ environment).

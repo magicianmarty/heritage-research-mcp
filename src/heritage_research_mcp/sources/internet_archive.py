@@ -159,7 +159,7 @@ async def search(
         "total": block.get("numFound"),
         "page": page,
         "rows": rows,
-        "records": [_record(d).to_dict() for d in docs],
+        "records": [_record(d).to_dict(brief=True) for d in docs],
     }
     if wanted:
         out["kind_applied"] = _KIND_CLAUSE[wanted] + (

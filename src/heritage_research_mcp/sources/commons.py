@@ -10,7 +10,7 @@ from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
 from ..models import Kind, Media, MediaKind, Record, Rights
-from ..util import as_int, as_str, clamp, strip_html, truncate, uniq
+from ..util import as_int, as_str, clamp, clean_url, strip_html, truncate, uniq
 
 NAME = "commons"
 API = "https://commons.wikimedia.org/w/api.php"
@@ -103,7 +103,7 @@ def _record(page: dict[str, Any]) -> Record | None:
     page_url = as_str(info.get("descriptionurl")) or as_str(page.get("canonicalurl"))
     categories = [c for c in (_ext(ext, "Categories") or "").split("|") if c and not _HOUSEKEEPING.search(c)]
     mime = as_str(info.get("mime"))
-    original = as_str(info.get("url"))
+    original = clean_url(as_str(info.get("url")))
     media = (
         [
             Media(
@@ -114,7 +114,7 @@ def _record(page: dict[str, Any]) -> Record | None:
                 width=as_int(info.get("width")),
                 height=as_int(info.get("height")),
                 label="original",
-                thumbnail_url=as_str(info.get("thumburl")),
+                thumbnail_url=clean_url(as_str(info.get("thumburl"))),
             )
         ]
         if original
@@ -137,10 +137,10 @@ def _record(page: dict[str, Any]) -> Record | None:
     )
 
 
-def _records(data: dict[str, Any]) -> list[dict[str, Any]]:
+def _records(data: dict[str, Any], brief: bool = False) -> list[dict[str, Any]]:
     pages = (data.get("query") or {}).get("pages") or []
     pages = sorted((p for p in pages if isinstance(p, dict)), key=lambda p: p.get("index", 0))
-    return [r.to_dict() for r in (_record(p) for p in pages) if r]
+    return [r.to_dict(brief=brief) for r in (_record(p) for p in pages) if r]
 
 
 async def search(
@@ -161,7 +161,7 @@ async def search(
         "gsrlimit": str(clamp(limit, 1, 50)),
     }
     data = await http.get_json(NAME, API, params=params)
-    records = _records(data)
+    records = _records(data, brief=True)
     out: dict[str, Any] = {"returned": len(records), "records": records, "more": "continue" in data}
     if wanted:
         out["kind_applied"] = extra or "(the explicit filetype decides)"
@@ -187,7 +187,7 @@ async def category_members(category: str, *, limit: int = 20, filetype: str | No
         "gcmlimit": str(clamp(limit, 1, 50)),
     }
     data = await http.get_json(NAME, API, params=params)
-    records = _records(data)
+    records = _records(data, brief=True)
     if filetype:
         wanted = {"bitmap": "image", "drawing": "image", "audio": "audio", "video": "video"}.get(filetype)
         if wanted:
