@@ -104,3 +104,81 @@ async def test_the_key_never_appears_in_results(api, set_key) -> None:
     key = set_key("smithsonian", "very-secret-key")
     api.get(f"{BASE}/search").mock(return_value=httpx.Response(200, json=load("si_search.json")))
     assert key not in str(await si.search("saber"))
+
+
+async def test_real_library_record_separates_authors_from_subjects(api, set_key) -> None:
+    set_key("smithsonian")
+    api.get(f"{BASE}/search").mock(return_value=httpx.Response(200, json=load("si_live_search.json")))
+    out = await si.search("custer")
+    book = out["records"][0]
+    assert book["title"].startswith("Clashes of cavalry")
+    assert book["creators"] == ["Hatch, Thom 1946-"]
+    assert any(s.startswith("Custer, George A.") for s in book["subjects"])
+    assert book["date"] == "2001" and book["type"] == "Biography"
+    assert book["holder"] == "Smithsonian Libraries" and book["landing_url"].startswith(
+        "https://siris-libraries"
+    )
+    assert book["rights"]["reuse"] == "free" and book["rights"]["label"] == "CC0 (metadata only)"
+    assert "media" not in book
+
+
+async def test_real_museum_object_lists_downloadable_files_best_first(api, set_key) -> None:
+    set_key("smithsonian")
+    api.get(f"{BASE}/search").mock(return_value=httpx.Response(200, json=load("si_live_media.json")))
+    flag = (await si.search("flag"))["records"][0]
+    labels = [m["label"] for m in flag["media"]]
+    assert "High-resolution JPEG" in labels[0] and "High-resolution TIFF" in labels[-1]
+    assert flag["media"][0]["width"] == 3000 and flag["media"][0]["height"] == 2047
+    assert flag["media"][0]["url"].endswith(".jpg") and flag["media"][0]["license"] == "CC0"
+    assert "Thumbnail" not in " ".join(labels)
+    assert "Currently not on view" not in flag["description"]
+    assert flag["description"].startswith("Wool bunting")
+    assert flag["landing_url"].startswith("https://n2t.net/ark:/65665/")
+    assert flag["rights"]["label"] == "CC0 (media and metadata)"
+
+
+def row(**freetext: object) -> dict:
+    return {"id": "r1", "title": "T", "content": {"descriptiveNonRepeating": {}, "freetext": freetext}}
+
+
+def test_names_are_split_by_their_role() -> None:
+    record = si._record(
+        row(
+            name=[
+                {"label": "Maker", "content": "Ames Manufacturing"},
+                {"label": "Sitter", "content": "A General"},
+                {"label": "Subject of", "content": "A Battle"},
+                {"label": "Artist", "content": "Brady Studio"},
+                {"label": "associated person", "content": "A Donor"},
+            ]
+        )
+    )
+    assert record is not None
+    assert record.creators == ["Ames Manufacturing", "Brady Studio"]
+    assert {"A General", "A Battle", "A Donor"} <= set(record.subjects)
+
+
+def test_dates_prefer_a_real_year_over_a_period_label() -> None:
+    labels = [{"label": "Date", "content": "Civil War era"}, {"label": "date made", "content": "ca. 1863"}]
+    record = si._record(row(date=labels))
+    assert record is not None and record.date == "ca. 1863"
+    assert si._record(row(date=[{"label": "Date", "content": "undated"}])).date == "undated"  # type: ignore[union-attr]
+
+
+def test_gallery_location_is_not_a_description() -> None:
+    notes = [
+        {"label": "Location", "content": "Currently not on view"},
+        {"label": "Summary", "content": "A saber."},
+    ]
+    record = si._record(row(notes=notes))
+    assert record is not None and record.description == "A saber."
+
+
+def test_non_image_media_without_resources_falls_back_to_the_delivery_url() -> None:
+    descriptive = {
+        "online_media": {
+            "media": [{"type": "Audio", "content": "https://ids.si.edu/a.mp3", "usage": {"access": "CC0"}}]
+        }
+    }
+    media = si._media(descriptive)
+    assert [(m.kind, m.url) for m in media] == [("audio", "https://ids.si.edu/a.mp3")]

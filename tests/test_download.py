@@ -143,3 +143,32 @@ async def test_http_errors_are_reported(api) -> None:
     api.get(URL).mock(return_value=httpx.Response(404))
     with pytest.raises(SourceHTTPError):
         await download.download_file(source="commons", record_id="r", url=URL)
+
+
+@pytest.mark.parametrize(
+    ("url", "expected"),
+    [
+        ("https://ids.si.edu/ids/download?id=NMAH-AHB2010q05514-000001.jpg", "NMAH-AHB2010q05514-000001.jpg"),
+        ("https://ids.si.edu/ids/download?id=NMAH-1_screen", "NMAH-1_screen"),
+        ("https://files.example.org/a/File%20Name,1.jpg", "File_Name_1.jpg"),
+        ("https://files.example.org/a/page.jpg?id=ignored.png", "page.jpg"),
+        ("https://files.example.org/a/b", "b"),
+        ("https://files.example.org/", "file"),
+        ("https://files.example.org/x?name=report.pdf", "report.pdf"),
+    ],
+)
+def test_filenames_come_from_the_path_or_a_query_hint(url: str, expected: str) -> None:
+    assert download.filename_for(url) == expected
+
+
+async def test_an_extension_is_added_from_the_mime_type_and_the_cache_still_finds_it(api) -> None:
+    url = "https://files.example.org/ids/download?id=NMAH-1_screen"
+    route = api.get(url).mock(
+        return_value=httpx.Response(200, content=BODY, headers={"content-type": "image/jpeg"})
+    )
+    first = await download.download_file(source="smithsonian", record_id="r", url=url)
+    assert Path(first["path"]).name in {"NMAH-1_screen.jpg", "NMAH-1_screen.jpeg"}
+    assert Path(first["path"]).read_bytes() == BODY
+    assert Path(first["path"] + ".provenance.json").exists()
+    again = await download.download_file(source="smithsonian", record_id="r", url=url)
+    assert again["cached"] is True and again["path"] == first["path"] and route.call_count == 1

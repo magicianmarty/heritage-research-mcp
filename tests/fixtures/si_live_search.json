@@ -1,0 +1,672 @@
+{
+ "status": 200,
+ "responseCode": 1,
+ "response": {
+  "rows": [
+   {
+    "id": "ld1-1646149545906-1646149698452-2",
+    "title": "Clashes of cavalry : the Civil War careers of George Armstrong Custer and Jeb Stuart / Thom Hatch",
+    "unitCode": "SIL",
+    "type": "edanmdm",
+    "url": "edanmdm:siris_sil_678163",
+    "content": {
+     "freetext": {
+      "date": [
+       {
+        "label": "Date",
+        "content": "2001"
+       },
+       {
+        "label": "Date",
+        "content": "C2001"
+       },
+       {
+        "label": "Date",
+        "content": "Civil War, 1861-1865"
+       }
+      ],
+      "name": [
+       {
+        "label": "Author",
+        "content": "Hatch, Thom 1946-"
+       },
+       {
+        "label": "Subject",
+        "content": "Custer, George A. (George Armstrong) 1839-1876"
+       },
+       {
+        "label": "Subject",
+        "content": "Stuart, Jeb 1833-1864"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army"
+       },
+       {
+        "label": "Subject",
+        "content": "Confederate States of America Army"
+       }
+      ],
+      "place": [
+       {
+        "label": "Place",
+        "content": "United States"
+       },
+       {
+        "label": "Place",
+        "content": "Confederate States of America"
+       }
+      ],
+      "topic": [
+       {
+        "label": "Topic",
+        "content": "Generals"
+       },
+       {
+        "label": "Topic",
+        "content": "History"
+       },
+       {
+        "label": "Topic",
+        "content": "Cavalry operations"
+       },
+       {
+        "label": "Topic",
+        "content": "Campaigns"
+       }
+      ],
+      "dataSource": [
+       {
+        "label": "Data Source",
+        "content": "Smithsonian Libraries"
+       }
+      ],
+      "identifier": [
+       {
+        "label": "Call number",
+        "content": "CT275.C99 H38 2001"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Type",
+        "content": "Biography"
+       }
+      ],
+      "physicalDescription": [
+       {
+        "label": "Physical description",
+        "content": "xii, 291 p. : ill., maps ; 24 cm"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "date": [
+       "2000s",
+       "1860s"
+      ],
+      "name": [
+       "Hatch, Thom",
+       "United States",
+       "Custer, George A.",
+       "Confederate States of America",
+       "Stuart, Jeb"
+      ],
+      "place": [
+       "United States",
+       "Confederate States of America"
+      ],
+      "topic": [
+       "Cavalry operations",
+       "Generals",
+       "Campaigns",
+       "History"
+      ],
+      "language": [
+       "English language"
+      ],
+      "geoLocation": [
+       {
+        "L1": {
+         "type": "Continent",
+         "content": "North America"
+        },
+        "L2": {
+         "type": "Country",
+         "content": "United States of America"
+        }
+       }
+      ],
+      "object_type": [
+       "Biographies"
+      ]
+     },
+     "descriptiveNonRepeating": {
+      "title": {
+       "label": "Title",
+       "content": "Clashes of cavalry : the Civil War careers of George Armstrong Custer and Jeb Stuart / Thom Hatch"
+      },
+      "record_ID": "siris_sil_678163",
+      "unit_code": "SIL",
+      "title_sort": "CLASHES OF CAVALRY : THE CIVIL WAR CAREERS OF GEORGE ARMSTRONG CUSTER AND JEB STUART THOM HATCH",
+      "data_source": "Smithsonian Libraries",
+      "record_link": "https://siris-libraries.si.edu/ipac20/ipac.jsp?&profile=liball&source=~!silibraries&uri=full=3100001~!678163~!0#focus",
+      "metadata_usage": {
+       "text": "",
+       "access": "CC0"
+      }
+     }
+    },
+    "hash": "c0093e3713324cbb4f04aced39455f70e48c1611",
+    "docSignature": "98a5c2296d8dced91669c0c4d8717d19",
+    "timestamp": "1498154317",
+    "lastTimeUpdated": "1661962613",
+    "version": "0"
+   },
+   {
+    "id": "ld1-1646149545906-1646149965716-0",
+    "title": "Don Troiani's Civil War cavalry & artillery / art by Don Troiani ; text by Earl J. Coates, Michael J. McAfee, and Don Troiani",
+    "unitCode": "SIL",
+    "type": "edanmdm",
+    "url": "edanmdm:siris_sil_840595",
+    "content": {
+     "freetext": {
+      "date": [
+       {
+        "label": "Date",
+        "content": "2006"
+       },
+       {
+        "label": "Date",
+        "content": "Civil War, 1861-1865"
+       },
+       {
+        "label": "Date",
+        "content": "19th century"
+       }
+      ],
+      "name": [
+       {
+        "label": "Author",
+        "content": "Troiani, Don"
+       },
+       {
+        "label": "Author",
+        "content": "Coates, Earl J"
+       },
+       {
+        "label": "Author",
+        "content": "McAfee, Michael J"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Cavalry History"
+       },
+       {
+        "label": "Subject",
+        "content": "Confederate States of America Army Cavalry"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Cavalry Uniforms History"
+       },
+       {
+        "label": "Subject",
+        "content": "Confederate States of America Army Cavalry Uniforms"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Artillery Uniforms History"
+       },
+       {
+        "label": "Subject",
+        "content": "Confederate States of America Army Artillery Uniforms"
+       }
+      ],
+      "notes": [
+       {
+        "label": "Notes",
+        "content": "Reprints a section of the author's Don Troiani's regiments and uniforms of the Civil War. Mechanicsburg, PA : Stackpole Books, c2002."
+       }
+      ],
+      "place": [
+       {
+        "label": "Place",
+        "content": "United States"
+       },
+       {
+        "label": "Place",
+        "content": "Confederate States of America"
+       }
+      ],
+      "title": [
+       {
+        "label": "Title",
+        "content": "Don Troiani's Civil War cavalry and artillery"
+       },
+       {
+        "label": "Title",
+        "content": "Civil War cavalry and artillery"
+       }
+      ],
+      "topic": [
+       {
+        "label": "Topic",
+        "content": "Soldiers--History"
+       },
+       {
+        "label": "Topic",
+        "content": "Soldiers"
+       },
+       {
+        "label": "Topic",
+        "content": "History"
+       },
+       {
+        "label": "Topic",
+        "content": "Regimental histories"
+       }
+      ],
+      "dataSource": [
+       {
+        "label": "Data Source",
+        "content": "Smithsonian Libraries"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Type",
+        "content": "Pictorial works"
+       }
+      ],
+      "physicalDescription": [
+       {
+        "label": "Physical description",
+        "content": "iv, 57 p. : col. ill. ; 31 cm"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "date": [
+       "1800s",
+       "1810s",
+       "1820s",
+       "2000s",
+       "1830s",
+       "1880s",
+       "1890s",
+       "1840s",
+       "1850s",
+       "1860s",
+       "1870s"
+      ],
+      "name": [
+       "McAfee, Michael J",
+       "United States",
+       "Troiani, Don",
+       "Coates, Earl J",
+       "Confederate States of America"
+      ],
+      "place": [
+       "United States",
+       "Confederate States of America"
+      ],
+      "topic": [
+       "Soldiers",
+       "Regimental histories",
+       "History"
+      ],
+      "language": [
+       "English language"
+      ],
+      "geoLocation": [
+       {
+        "L1": {
+         "type": "Continent",
+         "content": "North America"
+        },
+        "L2": {
+         "type": "Country",
+         "content": "United States of America"
+        }
+       }
+      ],
+      "object_type": [
+       "Pictorial works"
+      ]
+     },
+     "descriptiveNonRepeating": {
+      "title": {
+       "label": "Title",
+       "content": "Don Troiani's Civil War cavalry & artillery / art by Don Troiani ; text by Earl J. Coates, Michael J. McAfee, and Don Troiani"
+      },
+      "record_ID": "siris_sil_840595",
+      "unit_code": "SIL",
+      "title_sort": "DON TROIANIS CIVIL WAR CAVALRY ARTILLERY ART BY DON TROIANI TEXT BY EARL J COATES MICHAEL J MCAFEE AND DON TROIANI",
+      "data_source": "Smithsonian Libraries",
+      "record_link": "https://siris-libraries.si.edu/ipac20/ipac.jsp?&profile=liball&source=~!silibraries&uri=full=3100001~!840595~!0#focus",
+      "metadata_usage": {
+       "text": "",
+       "access": "CC0"
+      }
+     }
+    },
+    "hash": "fc782404a59ca4e52dd93c09edb6bb00cfe8b89e",
+    "docSignature": "5eef0eef2008691dc471e3b2d1a37683",
+    "timestamp": "1498154449",
+    "lastTimeUpdated": "1661964272",
+    "version": "0"
+   },
+   {
+    "id": "ld1-1646149545906-1646149612929-1",
+    "title": "Civil War cavalry & artillery sabers : a study of United States cavalry and artillery sabers, 1833-1865, including the influential prewar decades / by John H. Thillmann",
+    "unitCode": "SIL",
+    "type": "edanmdm",
+    "url": "edanmdm:siris_sil_684711",
+    "content": {
+     "freetext": {
+      "date": [
+       {
+        "label": "Date",
+        "content": "2001"
+       },
+       {
+        "label": "Date",
+        "content": "C2001"
+       },
+       {
+        "label": "Date",
+        "content": "19th century"
+       },
+       {
+        "label": "Date",
+        "content": "Civil War, 1861-1865"
+       }
+      ],
+      "name": [
+       {
+        "label": "Author",
+        "content": "Thillmann, John H"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Equipment History"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Cavalry History"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Artillery History"
+       }
+      ],
+      "place": [
+       {
+        "label": "Place",
+        "content": "United States"
+       }
+      ],
+      "title": [
+       {
+        "label": "Title",
+        "content": "Civil War cavalry and artillery sabers"
+       }
+      ],
+      "topic": [
+       {
+        "label": "Topic",
+        "content": "Sabers--History"
+       },
+       {
+        "label": "Topic",
+        "content": "History"
+       },
+       {
+        "label": "Topic",
+        "content": "Equipment and supplies"
+       }
+      ],
+      "dataSource": [
+       {
+        "label": "Data Source",
+        "content": "Smithsonian Libraries"
+       }
+      ],
+      "identifier": [
+       {
+        "label": "Call number",
+        "content": "U856.U6 T45 2001"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Type",
+        "content": "Books"
+       }
+      ],
+      "physicalDescription": [
+       {
+        "label": "Physical description",
+        "content": "519 p. : ill. (some col.), maps ; 29 cm"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "date": [
+       "1800s",
+       "1810s",
+       "1820s",
+       "2000s",
+       "1830s",
+       "1880s",
+       "1890s",
+       "1840s",
+       "1850s",
+       "1860s",
+       "1870s"
+      ],
+      "name": [
+       "Thillmann, John H",
+       "United States"
+      ],
+      "place": [
+       "United States"
+      ],
+      "topic": [
+       "Equipment",
+       "Sabers",
+       "History"
+      ],
+      "language": [
+       "English language"
+      ],
+      "geoLocation": [
+       {
+        "L1": {
+         "type": "Continent",
+         "content": "North America"
+        },
+        "L2": {
+         "type": "Country",
+         "content": "United States of America"
+        }
+       }
+      ],
+      "object_type": [
+       "Books"
+      ]
+     },
+     "descriptiveNonRepeating": {
+      "title": {
+       "label": "Title",
+       "content": "Civil War cavalry & artillery sabers : a study of United States cavalry and artillery sabers, 1833-1865, including the influential prewar decades / by John H. Thillmann"
+      },
+      "record_ID": "siris_sil_684711",
+      "unit_code": "SIL",
+      "title_sort": "CIVIL WAR CAVALRY ARTILLERY SABERS : A STUDY OF UNITED STATES CAVALRY AND ARTILLERY SABERS 18331865 INCLUDING THE INFLUENTIAL PREWAR DECADES BY JOHN H THILLMANN",
+      "data_source": "Smithsonian Libraries",
+      "record_link": "https://siris-libraries.si.edu/ipac20/ipac.jsp?&profile=liball&source=~!silibraries&uri=full=3100001~!684711~!0#focus",
+      "metadata_usage": {
+       "text": "",
+       "access": "CC0"
+      }
+     }
+    },
+    "hash": "c9337c770abe64ac1563a04cb48961d5cec561c4",
+    "docSignature": "fba03a4e788b8359249c9ea5d8e759e9",
+    "timestamp": "1498154317",
+    "lastTimeUpdated": "1661962723",
+    "version": "0"
+   },
+   {
+    "id": "ld1-1646149545906-1646150921211-2",
+    "title": "The Union cavalry in the Civil War / Stephen Z. Starr",
+    "unitCode": "SIL",
+    "type": "edanmdm",
+    "url": "edanmdm:siris_sil_115406",
+    "content": {
+     "freetext": {
+      "date": [
+       {
+        "label": "Date",
+        "content": "1979"
+       },
+       {
+        "label": "Date",
+        "content": "1985"
+       },
+       {
+        "label": "Date",
+        "content": "C1979-c1985"
+       },
+       {
+        "label": "Date",
+        "content": "Civil War, 1861-1865"
+       }
+      ],
+      "name": [
+       {
+        "label": "Author",
+        "content": "Starr, Stephen Z"
+       },
+       {
+        "label": "Subject",
+        "content": "United States Army Cavalry History"
+       }
+      ],
+      "notes": [
+       {
+        "label": "Notes",
+        "content": "\"Louisiana paperback edition, 2007\""
+       },
+       {
+        "label": "Contents",
+        "content": "v. 1. From Fort Sumter to Gettysburg, 1861-1863.--v. 2. The war in the East, from Gettysburg to Appomattox, 1863-1865.--v. 3. The war in the West, 1861-1865"
+       }
+      ],
+      "place": [
+       {
+        "label": "Place",
+        "content": "United States"
+       }
+      ],
+      "topic": [
+       {
+        "label": "Topic",
+        "content": "History"
+       },
+       {
+        "label": "Topic",
+        "content": "Campaigns"
+       }
+      ],
+      "dataSource": [
+       {
+        "label": "Data Source",
+        "content": "Smithsonian Libraries"
+       }
+      ],
+      "identifier": [
+       {
+        "label": "Call number",
+        "content": "E492.5.S7X"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Type",
+        "content": "Books"
+       }
+      ],
+      "physicalDescription": [
+       {
+        "label": "Physical description",
+        "content": "3 v. : ill. ; 24 cm"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "date": [
+       "1980s",
+       "1860s",
+       "1970s"
+      ],
+      "name": [
+       "United States",
+       "Starr, Stephen Z"
+      ],
+      "place": [
+       "United States"
+      ],
+      "topic": [
+       "Campaigns",
+       "History"
+      ],
+      "language": [
+       "English language"
+      ],
+      "geoLocation": [
+       {
+        "L1": {
+         "type": "Continent",
+         "content": "North America"
+        },
+        "L2": {
+         "type": "Country",
+         "content": "United States of America"
+        }
+       }
+      ],
+      "object_type": [
+       "Books"
+      ]
+     },
+     "descriptiveNonRepeating": {
+      "title": {
+       "label": "Title",
+       "content": "The Union cavalry in the Civil War / Stephen Z. Starr"
+      },
+      "record_ID": "siris_sil_115406",
+      "unit_code": "SIL",
+      "title_sort": "UNION CAVALRY IN THE CIVIL WAR STEPHEN Z STARR",
+      "data_source": "Smithsonian Libraries",
+      "record_link": "https://siris-libraries.si.edu/ipac20/ipac.jsp?&profile=liball&source=~!silibraries&uri=full=3100001~!115406~!0#focus",
+      "metadata_usage": {
+       "text": "",
+       "access": "CC0"
+      }
+     }
+    },
+    "hash": "94380512e7958131ce4b5f17c150b1c487d192b5",
+    "docSignature": "276d93c8adba5507cc01a31db018dff0",
+    "timestamp": "1498153952",
+    "lastTimeUpdated": "1661962459",
+    "version": "0"
+   }
+  ],
+  "facets": {},
+  "rowCount": 276,
+  "message": "content found"
+ }
+}

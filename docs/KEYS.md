@@ -56,7 +56,7 @@ Self-service, through api.data.gov.
 1. Open <https://api.data.gov/signup/>, enter your name and email, and say what you will use it for.
 2. api.data.gov issues the key after you submit the form. Store it as above.
 
-The key goes in the `api_key` query parameter. Limits are set by api.data.gov per key, and the remaining allowance appears in `usage_report` once the server has seen a response. (api.data.gov's shared `DEMO_KEY` allows only a very small number of requests and is shared, so it is not enough to be useful.)
+The key goes in the `api_key` query parameter. Limits are set by api.data.gov per key (1,000 requests were allowed when tested), and the remaining allowance appears in `usage_report` once the server has seen a response. (api.data.gov's shared `DEMO_KEY` allows only a very small number of requests and is shared, so it is not enough to be useful.)
 
 Records marked CC0 can be reused freely. Others say "Usage conditions apply", which the server reports as `restricted`.
 

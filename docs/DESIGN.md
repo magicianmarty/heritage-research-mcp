@@ -36,7 +36,7 @@ Adapters are plain async functions returning dicts, so they are testable without
 
 ## Testing
 
-Everything runs offline against `respx` mocks. The `ia_*` and `commons_*` fixtures and `dpla_live.json` are trimmed real responses. `dpla_items.json`, `nara_search.json`, `si_search.json` and `si_terms.json` are hand-written from the providers' documented shapes and should be replaced by real captures once a key is available. `heritage-research-mcp doctor --live` and the `Live smoke` workflow check the real services.
+Everything runs offline against `respx` mocks. The `ia_*`, `commons_*`, `dpla_live` and `si_live_*` fixtures are trimmed real responses, and they have caught real mismatches (Smithsonian mixes authors and subjects in one list; DPLA carries its own rights category). `dpla_items.json`, `nara_search.json`, `si_search.json` and `si_terms.json` are hand-written from the providers' documented shapes; `nara_search.json` should be replaced by a real capture once a NARA key is available. `heritage-research-mcp doctor --live` and the `Live smoke` workflow check the real services.
 
 ## Ideas not built
 

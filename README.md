@@ -99,7 +99,7 @@ Archives state rights in many vocabularies: Creative Commons URLs, rightsstateme
 
 ## Status
 
-Verified against the live services on 6 October 2026: the Internet Archive, Wikimedia Commons and DPLA. The NARA and Smithsonian adapters follow those providers' published API specifications and are tested against fixtures of the documented response shapes; they have not yet been exercised with a real key. If you find a response shape that differs, please open an issue. The `Live smoke` workflow re-checks every configured source weekly.
+Verified against the live services on 6 October 2026: the Internet Archive, Wikimedia Commons, DPLA and Smithsonian Open Access. The NARA adapter follows that provider's published API specification and is tested against fixtures of the documented response shapes; it has not yet been exercised with a real key. If you find a response shape that differs, please open an issue. The `Live smoke` workflow re-checks every configured source weekly.
 
 ## Development
 

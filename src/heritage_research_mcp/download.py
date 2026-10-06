@@ -8,15 +8,17 @@ from __future__ import annotations
 
 import asyncio
 import datetime as dt
+import glob
 import hashlib
 import ipaddress
 import json
+import mimetypes
 import os
 import re
 import socket
 from pathlib import Path
 from typing import Any
-from urllib.parse import unquote, urljoin, urlsplit
+from urllib.parse import parse_qs, unquote, urljoin, urlsplit
 
 import httpx
 
@@ -30,6 +32,27 @@ _SAFE = re.compile(r"[^A-Za-z0-9._-]+")
 
 def safe_part(text: str, limit: int = 80) -> str:
     return _SAFE.sub("_", text).strip("._")[:limit] or "item"
+
+
+def filename_for(url: str) -> str:
+    """A readable cache name. Some archives put the real name in the query: .../download?id=ABC-001.jpg."""
+    parts = urlsplit(url)
+    segment = unquote(Path(unquote(parts.path)).name)
+    hints = {k.lower(): v for k, v in parse_qs(parts.query).items() if v}
+    hint = next((hints[k][0] for k in ("id", "file", "filename", "name") if k in hints), None)
+    chosen = segment if ("." in segment or not hint) else hint
+    return safe_part(chosen or "file", 120)
+
+
+def _cached(folder: Path, name: str) -> Path | None:
+    """The file already downloaded under this name, which may have gained an extension from its MIME type."""
+    found = [folder / name, *folder.glob(glob.escape(name) + ".*")]
+    for candidate in found:
+        if candidate.name.endswith((".provenance.json", ".part")) or not candidate.is_file():
+            continue
+        if candidate.with_name(candidate.name + ".provenance.json").exists():
+            return candidate
+    return None
 
 
 async def resolve(host: str) -> list[str]:
@@ -84,13 +107,13 @@ async def download_file(
     overwrite: bool = False,
 ) -> dict[str, Any]:
     limit = max_bytes or config.max_download_bytes()
-    name = safe_part(Path(unquote(urlsplit(url).path)).name or "file", 120)
+    name = filename_for(url)
     folder = config.cache_dir() / safe_part(source) / safe_part(record_id, 120)
     dest = folder / name
-    sidecar = dest.with_name(dest.name + ".provenance.json")
-    if dest.exists() and sidecar.exists() and not overwrite:
-        info = json.loads(sidecar.read_text(encoding="utf-8"))
-        return {**info, "path": str(dest), "cached": True}
+    existing = _cached(folder, name)
+    if existing is not None and not overwrite:
+        sidecar = existing.with_name(existing.name + ".provenance.json")
+        return {**json.loads(sidecar.read_text(encoding="utf-8")), "path": str(existing), "cached": True}
 
     headers = {"User-Agent": config.user_agent(), "Accept": "*/*"}
     current = url
@@ -134,6 +157,12 @@ async def download_file(
         else:
             raise SourceHTTPError(source, None, "too many redirects")
 
+    final = dest
+    extension = mimetypes.guess_extension(served_mime) if served_mime and not dest.suffix else None
+    if extension:
+        final = dest.with_name(dest.name + extension)
+        os.replace(dest, final)
+
     info = {
         "source": source,
         "record_id": record_id,
@@ -148,5 +177,7 @@ async def download_file(
         "rights": rights,
         "tool": f"heritage-research-mcp {__version__}",
     }
-    sidecar.write_text(json.dumps(info, indent=2, sort_keys=True), encoding="utf-8")
-    return {**info, "path": str(dest), "cached": False}
+    final.with_name(final.name + ".provenance.json").write_text(
+        json.dumps(info, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    return {**info, "path": str(final), "cached": False}

@@ -1,0 +1,187 @@
+{
+ "status": 200,
+ "responseCode": 1,
+ "response": {
+  "rows": [
+   {
+    "id": "ld1-1643398912743-1643398964427-0",
+    "title": "Designating Flag, 1st Brigade, 3rd Division, Cavalry Corps, Army of the Potomac",
+    "unitCode": "NMAH",
+    "type": "edanmdm",
+    "url": "edanmdm:nmah_1377301",
+    "content": {
+     "freetext": {
+      "notes": [
+       {
+        "label": "Description",
+        "content": "Wool bunting pennant flag. White field with a blue cotton applique of two crossed swords in the center of the flag. White cotton hoist with no grommets. Machine stitching; flat-felled panel seams. The inscription on the hoist reads \"1st Brg 3rd Div. Cavalry. Corps Army of Potomac.\""
+       },
+       {
+        "label": "Location",
+        "content": "Currently not on view"
+       }
+      ],
+      "topic": [
+       {
+        "label": "Subject",
+        "content": "Flags"
+       },
+       {
+        "label": "Subject",
+        "content": "Civil War"
+       },
+       {
+        "label": "related event",
+        "content": "Civil War"
+       }
+      ],
+      "setName": [
+       {
+        "label": "See more items in",
+        "content": "Military and Society: Armed Forces History, Military"
+       },
+       {
+        "label": "See more items in",
+        "content": "Civil War"
+       },
+       {
+        "label": "See more items in",
+        "content": "Military"
+       },
+       {
+        "label": "See more items in",
+        "content": "Flags"
+       },
+       {
+        "label": "See more items in",
+        "content": "Designating Flags"
+       }
+      ],
+      "dataSource": [
+       {
+        "label": "Data Source",
+        "content": "National Museum of American History"
+       }
+      ],
+      "identifier": [
+       {
+        "label": "ID Number",
+        "content": "AF.25229P"
+       },
+       {
+        "label": "catalog number",
+        "content": "25229P"
+       },
+       {
+        "label": "accession number",
+        "content": "64127"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Object Name",
+        "content": "flag, designating"
+       }
+      ],
+      "physicalDescription": [
+       {
+        "label": "Physical Description",
+        "content": "wool (overall material)"
+       },
+       {
+        "label": "Physical Description",
+        "content": "cotton (heading and applique material)"
+       },
+       {
+        "label": "Measurements",
+        "content": "overall: 66 3/4 in x 52 1/8 in; 169.545 cm x 132.3975 cm"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "date": [
+       "1861-1885"
+      ],
+      "topic": [
+       "Civil War, 1861-1865",
+       "Designating Flags",
+       "American Civil War (1861-1865)",
+       "Flags",
+       "Military"
+      ],
+      "object_type": [
+       "Flags"
+      ],
+      "online_media_type": [
+       "Images"
+      ]
+     },
+     "descriptiveNonRepeating": {
+      "guid": "https://n2t.net/ark:/65665/ng49ca746ac-e493-704b-e053-15f76fa0b4fa",
+      "title": {
+       "label": "Title",
+       "content": "Designating Flag, 1st Brigade, 3rd Division, Cavalry Corps, Army of the Potomac"
+      },
+      "record_ID": "nmah_1377301",
+      "unit_code": "NMAH",
+      "title_sort": "DESIGNATING FLAG, 1ST BRIGADE, 3RD DIVISION, CAVALRY CORPS, ARMY OF THE POTOMAC",
+      "data_source": "National Museum of American History",
+      "online_media": {
+       "media": [
+        {
+         "id": "media:NMAH-AHB2010q05514-000001",
+         "guid": "https://n2t.net/ark:/65665/bq99ca746b6-5b3f-704b-e053-15f76fa0b4fa",
+         "type": "Images",
+         "idsId": "NMAH-AHB2010q05514-000001",
+         "usage": {
+          "access": "CC0"
+         },
+         "caption": "1st Brigade, 3rd Division, Cavalry Corps, Army of the Potomac",
+         "content": "https://ids.si.edu/ids/deliveryService?id=NMAH-AHB2010q05514-000001",
+         "thumbnail": "https://ids.si.edu/ids/deliveryService?id=NMAH-AHB2010q05514-000001&max=150",
+         "altTextAccessibility": "",
+         "extDescrAccessibility": "",
+         "resources": [
+          {
+           "label": "High-resolution TIFF",
+           "url": "https://ids.si.edu/ids/download?id=NMAH-AHB2010q05514-000001.tif",
+           "width": 3000,
+           "height": 2047,
+           "dimensions": "3000x2047"
+          },
+          {
+           "label": "High-resolution JPEG",
+           "url": "https://ids.si.edu/ids/download?id=NMAH-AHB2010q05514-000001.jpg",
+           "width": 3000,
+           "height": 2047,
+           "dimensions": "3000x2047"
+          },
+          {
+           "label": "Screen Image",
+           "url": "https://ids.si.edu/ids/download?id=NMAH-AHB2010q05514-000001_screen"
+          },
+          {
+           "label": "Thumbnail Image",
+           "url": "https://ids.si.edu/ids/download?id=NMAH-AHB2010q05514-000001_thumb"
+          }
+         ]
+        }
+       ],
+       "mediaCount": 1
+      },
+      "metadata_usage": {
+       "access": "CC0"
+      }
+     }
+    },
+    "hash": "305d6d1168bdde3794c3477c0c7b0c99aba07b51",
+    "docSignature": "2d17715ba1ffa9df64274d72a73e55bc",
+    "timestamp": "1663783025",
+    "lastTimeUpdated": "1769608384",
+    "version": "1769598164"
+   }
+  ],
+  "rowCount": 1,
+  "message": "content found"
+ }
+}

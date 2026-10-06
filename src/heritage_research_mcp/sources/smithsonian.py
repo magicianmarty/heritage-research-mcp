@@ -10,7 +10,7 @@ from .. import rights as R
 from ..errors import HeritageError, NotFound
 from ..http import http
 from ..models import Media, MediaKind, Record, Rights
-from ..util import as_str, clamp, listify, strs, truncate, uniq
+from ..util import as_int, as_str, as_year, clamp, listify, strs, truncate, uniq
 
 NAME = "smithsonian"
 BASE = "https://api.si.edu/openaccess/api/v1.0"
@@ -22,9 +22,36 @@ def _params(**extra: Any) -> dict[str, Any]:
     return {"api_key": config.require_key(NAME), **{k: v for k, v in extra.items() if v is not None}}
 
 
-def _contents(value: Any) -> list[str]:
-    """Strings from EDAN's [{label, content}] lists."""
-    return uniq(s for s in (as_str(v) for v in listify(value)) if s)
+_CREATOR_LABELS = (
+    "author", "artist", "maker", "created by", "editor", "photographer", "recording artist",
+    "composer", "designer", "illustrator", "engraver", "attribution", "publisher",
+)  # fmt: skip
+_DATE_LABELS = {"date", "date made", "year"}
+_SKIPPED_NOTES = {"location", "citation"}
+
+
+def _entries(value: Any) -> list[tuple[str, str]]:
+    """(lower-cased label, text) pairs from EDAN's [{label, content}] lists."""
+    out: list[tuple[str, str]] = []
+    for item in listify(value):
+        if isinstance(item, dict):
+            text = as_str(item.get("content"))
+            label = (as_str(item.get("label")) or "").lower()
+        else:
+            text, label = as_str(item), ""
+        if text:
+            out.append((label, text))
+    return out
+
+
+def _is_creator(label: str) -> bool:
+    return any(label.startswith(known) for known in _CREATOR_LABELS)
+
+
+def _date(entries: list[tuple[str, str]]) -> str | None:
+    preferred = [text for label, text in entries if label in _DATE_LABELS and as_year(text)]
+    anywhere = [text for _, text in entries if as_year(text)]
+    return (preferred or anywhere or [text for _, text in entries] or [None])[0]
 
 
 def _kind(kind: str | None) -> MediaKind:
@@ -40,25 +67,50 @@ def _kind(kind: str | None) -> MediaKind:
     return "other"
 
 
+def _resource_rank(label: str) -> int:
+    low = label.lower()
+    if "high-resolution" in low and "jpeg" in low:
+        return 0
+    if low.startswith("screen"):
+        return 1
+    if "high-resolution" in low:
+        return 2
+    return 3
+
+
 def _media(descriptive: dict[str, Any]) -> list[Media]:
     block = descriptive.get("online_media") or {}
     out: list[Media] = []
     for item in listify(block.get("media")):
         if not isinstance(item, dict):
             continue
-        url = as_str(item.get("content"))
-        if not url:
-            continue
-        usage = item.get("usage") or {}
-        out.append(
-            Media(
-                kind=_kind(as_str(item.get("type"))),
-                url=url,
-                label=as_str(item.get("caption")) or as_str(item.get("type")),
-                thumbnail_url=as_str(item.get("thumbnail")),
-                license=as_str(usage.get("access")) if isinstance(usage, dict) else None,
+        usage = item.get("usage")
+        licence = as_str(usage.get("access")) if isinstance(usage, dict) else None
+        caption = as_str(item.get("caption")) or as_str(item.get("type")) or "media"
+        thumbnail = as_str(item.get("thumbnail"))
+        kind = _kind(as_str(item.get("type")))
+        resources = [
+            r for r in listify(item.get("resources")) if isinstance(r, dict) and as_str(r.get("url"))
+        ]
+        if kind == "image":
+            resources = [r for r in resources if _resource_rank(as_str(r.get("label")) or "") < 3]
+        resources.sort(key=lambda r: _resource_rank(as_str(r.get("label")) or ""))
+        for resource in resources:
+            label = as_str(resource.get("label")) or "file"
+            out.append(
+                Media(
+                    kind=kind,
+                    url=str(as_str(resource.get("url"))),
+                    width=as_int(resource.get("width")),
+                    height=as_int(resource.get("height")),
+                    label=f"{truncate(caption, 80)}: {label}",
+                    thumbnail_url=thumbnail,
+                    license=licence,
+                )
             )
-        )
+        content = as_str(item.get("content"))
+        if not resources and content:
+            out.append(Media(kind=kind, url=content, label=caption, thumbnail_url=thumbnail, license=licence))
     return out
 
 
@@ -96,24 +148,31 @@ def _record(row: dict[str, Any]) -> Record | None:
     structured = content.get("indexedStructured") or {}
     media = _media(descriptive)
     entry = as_str(row.get("url"))
-    landing = as_str(descriptive.get("record_link")) or (
-        f"https://collections.si.edu/search/detail/{entry}" if entry else None
+    landing = (
+        as_str(descriptive.get("record_link"))
+        or as_str(descriptive.get("guid"))
+        or (f"https://collections.si.edu/search/detail/{entry}" if entry else None)
     )
+    names = _entries(free.get("name"))
+    notes = [text for label, text in _entries(free.get("notes")) if label not in _SKIPPED_NOTES]
+    kinds = [text for label, text in _entries(free.get("objectType")) if label != "other terms"]
+    people = [text for label, text in names if not _is_creator(label)]
+    topics = [text for _, text in _entries(free.get("topic"))]
     return Record(
         source=NAME,
         id=identifier,
         title=as_str(row.get("title")) or as_str(descriptive.get("title")),
-        creators=_contents(free.get("name"))[:8],
-        date=(_contents(free.get("date")) or [None])[0],
-        description=truncate(" ".join(_contents(free.get("notes"))), 1200),
-        subjects=uniq(_contents(free.get("topic")) + strs(structured.get("topic")))[:15],
-        places=uniq(_contents(free.get("place")) + strs(structured.get("place")))[:10],
-        type=(_contents(free.get("objectType")) or [as_str(row.get("type"))])[0],
+        creators=uniq(text for label, text in names if _is_creator(label))[:8],
+        date=_date(_entries(free.get("date"))),
+        description=truncate(" ".join(notes), 1200),
+        subjects=uniq(topics + people + strs(structured.get("topic")))[:15],
+        places=uniq([text for _, text in _entries(free.get("place"))] + strs(structured.get("place")))[:10],
+        type=(kinds or [as_str(row.get("type"))])[0],
         holder=as_str(descriptive.get("data_source")) or as_str(row.get("unitCode")),
         landing_url=landing,
         rights=_rights(descriptive, media),
         media=media,
-        extra={"unit": as_str(row.get("unitCode")), "edan_type": as_str(row.get("type"))},
+        extra={"unit": as_str(row.get("unitCode")), "edan_type": as_str(row.get("type")), "url_id": entry},
     )
 
 
