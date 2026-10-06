@@ -23,7 +23,7 @@ from urllib.parse import parse_qs, unquote, urljoin, urlsplit
 import httpx
 
 from . import __version__, config
-from .errors import DownloadTooLarge, SourceHTTPError, UnsafeURL
+from .errors import DownloadTooLarge, HeritageError, SourceHTTPError, UnsafeURL
 from .http import http
 
 MAX_REDIRECTS = 5
@@ -136,7 +136,13 @@ async def download_file(
                     raise DownloadTooLarge(
                         f"{int(declared) // 1_000_000} MB is over the {limit // 1_000_000} MB limit"
                     )
-                folder.mkdir(parents=True, exist_ok=True)
+                try:
+                    folder.mkdir(parents=True, exist_ok=True)
+                except OSError as exc:
+                    raise HeritageError(
+                        f"cannot write to the cache folder {folder}: {exc.strerror or exc}. "
+                        "Set HERITAGE_MCP_CACHE_DIR to a writable folder, or HERITAGE_MCP_DISABLE_DOWNLOADS=1."
+                    ) from exc
                 part = dest.with_name(dest.name + ".part")
                 digest = hashlib.sha256()
                 total = 0

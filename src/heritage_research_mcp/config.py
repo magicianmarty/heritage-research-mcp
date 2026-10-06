@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import sys
+import tempfile
 from pathlib import Path
 
 from . import __version__
@@ -21,9 +22,17 @@ KEYED_SOURCES: dict[str, tuple[str, str]] = {
 _warned: set[str] = set()
 
 
+def _home() -> Path:
+    """The user's home, or the temp directory in a container that has none (no HOME and no passwd entry)."""
+    try:
+        return Path.home()
+    except RuntimeError:
+        return Path(tempfile.gettempdir())
+
+
 def _base(env: str, fallback: str) -> Path:
     value = os.environ.get(env)
-    return Path(value) if value else Path.home() / fallback
+    return Path(value) if value else _home() / fallback
 
 
 def config_dir() -> Path:

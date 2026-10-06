@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 
-from . import __version__
+from . import __version__, guard
 from .compat import FastMCP
 from .tools import commons, dpla, general, internet_archive, nara, smithsonian
 
@@ -27,6 +27,8 @@ mcp = FastMCP(
         "Do not loop over many pages to harvest a collection."
     ),
 )
+
+guard.install(mcp)
 
 general.register(mcp)
 internet_archive.register(mcp)
