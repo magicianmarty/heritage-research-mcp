@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "heritage-research-mcp"
-version = "0.1.2"
+version = "0.1.3"
 description = "MCP server for historical research: Internet Archive, Wikimedia Commons, DPLA, the National Archives Catalog and Smithsonian Open Access, with rights metadata on every record"
 readme = "README.md"
 license = "MIT"

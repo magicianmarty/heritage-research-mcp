@@ -92,7 +92,9 @@ def register(mcp: FastMCP) -> None:
 
         Args:
             identifier: The Internet Archive identifier.
-            pattern: Text to find (a regular expression only if `regex` is true).
+            pattern: Text to find. A plain phrase matches across the line breaks, repeated spaces and split
+                hyphens that OCR leaves in scanned books ("twenty-five prisoners" finds "twenty-five  prisoners" and
+                "twenty- five prisoners"). A regular expression only if `regex` is true.
             regex: Treat the pattern as a regular expression.
             ignore_case: Ignore capitalisation.
             context: Characters of context on each side (0 to 1000).

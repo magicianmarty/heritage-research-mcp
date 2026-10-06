@@ -289,6 +289,14 @@ async def read_text(identifier: str, *, start: int = 0, length: int = 4000) -> d
     }
 
 
+def _literal(pattern: str) -> str:
+    """A literal phrase that tolerates what OCR does to it: runs of spaces, line breaks, and "twenty- one"."""
+    words = pattern.split()
+    if not words:
+        raise HeritageError("pattern is empty")
+    return r"\s+".join(re.escape(word).replace(r"\-", r"-\s*") for word in words)
+
+
 _NESTED_QUANTIFIER = re.compile(r"\([^)]*[+*][^)]*\)[+*{]")
 
 
@@ -307,7 +315,7 @@ async def grep_text(
         raise HeritageError("that regular expression has a nested quantifier, which can hang; simplify it")
     flags = re.IGNORECASE if ignore_case else 0
     try:
-        compiled = re.compile(pattern if regex else re.escape(pattern), flags)
+        compiled = re.compile(pattern if regex else _literal(pattern), flags)
     except re.error as exc:
         raise HeritageError(f"invalid regular expression: {exc}") from exc
     text, name = await _load_text(identifier)
