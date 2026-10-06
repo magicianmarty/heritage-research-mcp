@@ -1,0 +1,726 @@
+{
+ "version": "1x7o",
+ "session_context": {},
+ "request": {
+  "client_request_parameters": {
+   "client": "page_production_service_endpoint",
+   "service_backend": "fts",
+   "user_query": "\"Herndon Station\" Mosby",
+   "hits_per_page": 2
+  },
+  "backend_requests": {
+   "search": {
+    "root": "(self)",
+    "children": [
+     "collection_title_fetch__200f5c7effc308ecfda9520a97f66352"
+    ],
+    "request_type": "search",
+    "finalized_parameters": {
+     "client": "page_production_service_endpoint",
+     "service_backend": "fts",
+     "user_query": "(redacted)",
+     "hits_per_page": 2,
+     "page_type": "search_results",
+     "page": 1,
+     "fields": [
+      "_tile_"
+     ],
+     "sort": [
+      "_relevance_:desc",
+      "identifier"
+     ],
+     "aggregations": [
+      "mediatype",
+      "year",
+      "subject",
+      "collection",
+      "creator",
+      "language"
+     ],
+     "aggregations_size": 10,
+     "scope": "standard",
+     "feature_flags": {
+      "complex_facets": true,
+      "collection_titles": true,
+      "redact_collections": true,
+      "redact_collections_by_privs": false,
+      "redact_empty_collections": true,
+      "redact_admin_collections": true,
+      "protect_flagging_collections": true
+     }
+    }
+   },
+   "collection_title_fetch__200f5c7effc308ecfda9520a97f66352": {
+    "root": "search",
+    "parent": "search",
+    "request_type": "collection_title_fetch",
+    "finalized_parameters": {
+     "page_type": "document_fetch",
+     "user_query": "(redacted)",
+     "aggregations": [],
+     "caching": null,
+     "fields": [
+      "identifier",
+      "title"
+     ],
+     "search_as_system": true,
+     "page": 1,
+     "hits_per_page": 250,
+     "sort": [
+      "_efficient_"
+     ],
+     "service_backend": "metadata",
+     "scope": "ill,printdisabled_and_music,scancenter",
+     "service": "service__metadata__load_balanced"
+    }
+   }
+  }
+ },
+ "caching": {
+  "search": {
+   "name": "PPS-1x7o-J:NZ-RT:s~std-T:sr-Q:d31f95d1-H:2-B:fts-RS:sta~CS::P:0+CS:some+BR:1",
+   "acceptable_names": [],
+   "configuration": {
+    "requested": {
+     "ttl_s": 1200
+    },
+    "finalized": {
+     "bypass": false,
+     "recompute": false,
+     "no_compute": false,
+     "ttl_s": 1200,
+     "max_age_s": 0,
+     "miss_policy": "none"
+    }
+   },
+   "utilization": {
+    "went_to_cache": true,
+    "alternates_allowed": true,
+    "hit_alternate": false,
+    "hit_canonical": false,
+    "hit": false,
+    "miss": true,
+    "recomputed": true,
+    "stored": true,
+    "elapsed_s": 8.517754077911377
+   },
+   "statsd_bucket": "search.pps.cache.fts.search_results"
+  },
+  "collection_title_fetch__200f5c7effc308ecfda9520a97f66352": {
+   "name": "PPS-1x7o-J:NZ-RT:ctf-T:df-Q:671a6b98-F:a8092e92-B:mds-RS:ill+pam+sca~CS::P:0+CS:some+BR:1",
+   "acceptable_names": [],
+   "configuration": {
+    "requested": {
+     "ttl_s": 1200
+    },
+    "finalized": {
+     "bypass": false,
+     "recompute": false,
+     "no_compute": false,
+     "ttl_s": 1200,
+     "max_age_s": 0,
+     "miss_policy": "none"
+    }
+   },
+   "utilization": {
+    "went_to_cache": true,
+    "alternates_allowed": true,
+    "hit_alternate": false,
+    "hit_canonical": false,
+    "hit": false,
+    "miss": true,
+    "recomputed": true,
+    "stored": true,
+    "elapsed_s": 0.10114693641662598
+   },
+   "statsd_bucket": "search.pps.cache.fts.search_results"
+  },
+  "summary": {
+   "fetched": [],
+   "computed": [
+    "PPS-1x7o-J:NZ-RT:s~std-T:sr-Q:d31f95d1-H:2-B:fts-RS:sta~CS::P:0+CS:some+BR:1",
+    "PPS-1x7o-J:NZ-RT:ctf-T:df-Q:671a6b98-F:a8092e92-B:mds-RS:ill+pam+sca~CS::P:0+CS:some+BR:1"
+   ],
+   "stored": [
+    "PPS-1x7o-J:NZ-RT:s~std-T:sr-Q:d31f95d1-H:2-B:fts-RS:sta~CS::P:0+CS:some+BR:1",
+    "PPS-1x7o-J:NZ-RT:ctf-T:df-Q:671a6b98-F:a8092e92-B:mds-RS:ill+pam+sca~CS::P:0+CS:some+BR:1"
+   ],
+   "missed": [
+    "PPS-1x7o-J:NZ-RT:s~std-T:sr-Q:d31f95d1-H:2-B:fts-RS:sta~CS::P:0+CS:some+BR:1",
+    "PPS-1x7o-J:NZ-RT:ctf-T:df-Q:671a6b98-F:a8092e92-B:mds-RS:ill+pam+sca~CS::P:0+CS:some+BR:1"
+   ],
+   "bypassed": []
+  }
+ },
+ "elapsed_secs": 8.636957883834839,
+ "response": {
+  "header": {
+   "succeeded": true,
+   "query_time": 1147,
+   "forensics": {
+    "commit": "master - a7592427",
+    "cached": false,
+    "query_type": "dsl",
+    "version": "v3.16.0",
+    "host": "search-text.us.archive.org",
+    "auth": {
+     "context_scope": "standard",
+     "email": "",
+     "type": "None"
+    },
+    "translation_elapsed_secs": 0.00018286705017089844,
+    "backend_request_elapsed_secs": {
+     "search": 8.517754077911377,
+     "collection_title_fetch__200f5c7effc308ecfda9520a97f66352": 0.10114693641662598
+    }
+   },
+   "elapsed_secs_for_backend_requests": 8.618901014328003
+  },
+  "body": {
+   "hits": {
+    "total": 339,
+    "returned": 2,
+    "hits": [
+     {
+      "index": "fts_main",
+      "service_backend": "fts",
+      "hit_type": "text",
+      "fields": {
+       "identifier": "DTIC_ADA172836",
+       "filename": "DTIC_ADA172836_hocr_searchtext.txt.gz",
+       "file_basename": "DTIC_ADA172836",
+       "page_num": 1,
+       "file_creation_mtime": 1706319751,
+       "updated_on": "2026-01-26T16:05:12Z",
+       "created_on": "2024-01-27T01:50:10Z",
+       "mediatype": "texts",
+       "title": "DTIC ADA172836: Low Intensity Conflict as Practiced by John Singleton Mosby in the American Civil War",
+       "creator": [
+        "Defense Technical Information Center"
+       ],
+       "date": "1986-06-06T00:00:00Z",
+       "publicdate": "2018-02-10T09:05:03Z",
+       "downloads": 160,
+       "collection": [
+        "dticarchive",
+        "usgovernmentmirrors",
+        "government-documents"
+       ],
+       "subject": [
+        "DTIC Archive",
+        "Gutwald, Rick",
+        "ARMY COMMAND AND GENERAL STAFF COLL FORT LEAVENWORTH KS",
+        "*CONFLICT",
+        "*INSURGENCY",
+        "*UNCONVENTIONAL WARFARE",
+        "ARMY PLANNING",
+        "COMMAND AND CONTROL SYSTEMS",
+        "COMMUNICATION AND RADIO SYSTEMS",
+        "COUNTERINSURGENCY",
+        "LOGISTICS",
+        "MILITARY EQUIPMENT",
+        "MILITARY ORGANIZATIONS",
+        "MISSIONS",
+        "PSYCHOLOGY",
+        "UNITED STATES"
+       ],
+       "year": 1986,
+       "addeddate": "2018-02-10T09:05:03Z",
+       "description": [
+        "This study is an historical analysis of three Civil War partisan (insurgent) operations conducted by the 43d Battalion, Viriginia Cavalry and its Confederate leader, John S. Mosby: the raid on Fairfax Court House, 8-9 March 1863; the attack on Loudon Heights, 9-10 January 1864; and the Berryville raid, 13 August 1864. Each operation is analyzed by using the following factors: situation and organization; mission and planning; execution of the operation; equipment and logistics; communications, command and control; results; the element of chance; and leadership. In addition, Mosby's backgroun and character are also discussed and analyzed. Among the many conclusions that could be drawn from this study are: intelligence is paramount to a partisan unit's survival; partisan activities are not always acceptable to its supporting government; Civil War partisan operations are characterized by simple mission orders, hit- and-run tactics, surprise, stealth, speed, deception, and audacity; and..."
+       ],
+       "result_in_subfile": false,
+       "__href__": "/details/DTIC_ADA172836?q=%22Herndon+Station%22+Mosby"
+      },
+      "highlight": {
+       "text": [
+        "about  {{{Mosby}}}.  Turpin  threatened  {{{Mosby}}}  with  a beating,  but  as  the  bully  advanced,  {{{Mosby}}}  fired",
+        "for  the  good  conduct  of  {{{Mosby}}}  and  his  msn  Where  any  of  {{{Mosby}}}? men  are  caught  hang  them",
+        "4lbid,  p.  23.\n*John  S.  {{{Mosby}}},  The  Memoirs  of  Colonel  John  S.  {{{Mosby}}}.  edited  by  Charles Wells",
+        "the  contrary  {{{Mosby}}} was  pro-Union  Irrespective  of  his  pro-Union  sentiments,  {{{Mosby}}}  later succumbed",
+        " The  two  soldiers  ran,  but  {{{Mosby}}}  s unit  overtook  them  {{{Mosby}}}  received  a  canteen  as  booty"
+       ]
+      },
+      "_score": 32.827293
+     },
+     {
+      "index": "fts_main",
+      "service_backend": "fts",
+      "hit_type": "text",
+      "fields": {
+       "identifier": "mosbyswarreimini00mosb",
+       "filename": "mosbyswarreimini00mosb_hocr_searchtext.txt.gz",
+       "file_basename": "mosbyswarreimini00mosb",
+       "page_num": 1,
+       "file_creation_mtime": 1674547363,
+       "updated_on": "2025-10-14T13:19:07Z",
+       "created_on": "2023-01-24T08:21:33Z",
+       "mediatype": "texts",
+       "title": "Mosby's war reiminiscences, and Stuart's cavalry campaigns",
+       "creator": [
+        "Mosby, John Singleton, 1833-1916"
+       ],
+       "date": "1887-01-01T00:00:00Z",
+       "publicdate": "2022-09-28T14:57:24Z",
+       "downloads": 79,
+       "collection": [
+        "university_of_illinois_urbana-champaign"
+       ],
+       "subject": [
+        "Stuart, Jeb, 1833-1864"
+       ],
+       "year": 1887,
+       "addeddate": "2023-01-24T08:17:12Z",
+       "description": [
+        "264 p. 19 cm"
+       ],
+       "result_in_subfile": false,
+       "__href__": "/details/mosbyswarreimini00mosb?q=%22Herndon+Station%22+Mosby"
+      },
+      "highlight": {
+       "text": [
+        "and joins {{{Mosby}}}. Old Dr. Drake\u2019s Saddle-Bags. Capture of a Fed- eral Picket at {{{Herndon Station}}}. \u2018The Dash",
+        "My name is {{{Mosby}}}.\u201d The man, who was an Irishman, under- stood me to say that he was \u201c {{{Mosby}}},\u201d and indig-",
+        "My name is {{{Mosby}}}.\u201d The man, who was an Irishman, under- stood me to say that he was \u201c {{{Mosby}}},\u201d and indig-",
+        "%\nSe hal i\u201d,\n=. MOSBY\u2019S\n? \u00e9\nBY ay leet JOHN S. {{{MOSBY}}},\nLATE CoLone. C. S. A.\n\u201cTis strange but true; for",
+        "\nIn Pursuit. Elaborate Plans made to capture \u201c {{{Mosby}}}.\u201d How a Union Major-General deceived himself. A"
+       ]
+      },
+      "_score": 32.037064
+     }
+    ]
+   },
+   "aggregations": {
+    "year": {
+     "buckets": [
+      {
+       "key": 1880,
+       "doc_count": 21
+      },
+      {
+       "key": 1889,
+       "doc_count": 12
+      },
+      {
+       "key": 1886,
+       "doc_count": 11
+      },
+      {
+       "key": 1887,
+       "doc_count": 10
+      },
+      {
+       "key": 1914,
+       "doc_count": 10
+      },
+      {
+       "key": 1904,
+       "doc_count": 8
+      },
+      {
+       "key": 1893,
+       "doc_count": 7
+      },
+      {
+       "key": 1899,
+       "doc_count": 7
+      },
+      {
+       "key": 1910,
+       "doc_count": 7
+      },
+      {
+       "key": 1959,
+       "doc_count": 7
+      }
+     ],
+     "sum_other_doc_count": 191,
+     "doc_count_error_upper_bound": 0
+    },
+    "language": {
+     "buckets": [
+      {
+       "key": "English",
+       "doc_count": 327
+      },
+      {
+       "key": "Chinese",
+       "doc_count": 1
+      },
+      {
+       "key": "Frank Moorer",
+       "doc_count": 1
+      }
+     ],
+     "sum_other_doc_count": 0,
+     "doc_count_error_upper_bound": 0
+    },
+    "creator": {
+     "buckets": [
+      {
+       "key": "pennsylvania. gettysburg battle-field commission",
+       "doc_count": 21
+      },
+      {
+       "key": "united states. war dept",
+       "doc_count": 21
+      },
+      {
+       "key": "mosby, john singleton, 1833-1916",
+       "doc_count": 14
+      },
+      {
+       "key": "united states. war record office",
+       "doc_count": 8
+      },
+      {
+       "key": "emerson, edward waldo, 1844-1930",
+       "doc_count": 6
+      },
+      {
+       "key": "moore, frank, 1828-1904",
+       "doc_count": 6
+      },
+      {
+       "key": "various",
+       "doc_count": 6
+      },
+      {
+       "key": "benedict, g. g. (george grenville), 1826-1907",
+       "doc_count": 5
+      },
+      {
+       "key": "ellis, edward sylvester, 1840-1916",
+       "doc_count": 5
+      },
+      {
+       "key": "hoke, jacob, 1825-1893",
+       "doc_count": 5
+      }
+     ],
+     "sum_other_doc_count": 213,
+     "doc_count_error_upper_bound": 0
+    },
+    "year_histogram": {
+     "buckets": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      16,
+      3,
+      3,
+      21,
+      1,
+      23,
+      17,
+      19,
+      11,
+      16,
+      12,
+      21,
+      10,
+      7,
+      1,
+      0,
+      0,
+      1,
+      0,
+      5,
+      0,
+      3,
+      0,
+      8,
+      7,
+      3,
+      6,
+      1,
+      3,
+      5,
+      7,
+      7,
+      8,
+      14,
+      4,
+      10,
+      3,
+      5,
+      1,
+      2,
+      3
+     ],
+     "first_bucket_key": 1817,
+     "last_bucket_key": 2026,
+     "number_buckets": 53,
+     "interval": 4
+    },
+    "mediatype": {
+     "buckets": [
+      {
+       "key": "texts",
+       "doc_count": 334
+      },
+      {
+       "key": "audio",
+       "doc_count": 3
+      },
+      {
+       "key": "data",
+       "doc_count": 2
+      }
+     ],
+     "sum_other_doc_count": 0,
+     "doc_count_error_upper_bound": 0
+    },
+    "collection": {
+     "buckets": [
+      {
+       "key": "internetarchivebooks",
+       "doc_count": 127
+      },
+      {
+       "key": "inlibrary",
+       "doc_count": 74
+      },
+      {
+       "key": "civilwardocuments",
+       "doc_count": 39
+      },
+      {
+       "key": "cdl",
+       "doc_count": 27
+      },
+      {
+       "key": "library_of_congress",
+       "doc_count": 24
+      },
+      {
+       "key": "cornell",
+       "doc_count": 23
+      }
+     ],
+     "sum_other_doc_count": 1142,
+     "doc_count_error_upper_bound": 15,
+     "redacted_buckets": [
+      {
+       "key": "americana",
+       "doc_count": 157
+      },
+      {
+       "key": "printdisabled",
+       "doc_count": 91
+      },
+      {
+       "key": "fav-greg_knapp",
+       "doc_count": 21
+      },
+      {
+       "key": "fav-robert_e_whitney",
+       "doc_count": 19
+      }
+     ]
+    },
+    "subject": {
+     "buckets": [
+      {
+       "key": "Gettysburg, Battle of, Gettysburg, Pa., 1863",
+       "doc_count": 33
+      },
+      {
+       "key": "United States -- History Civil War, 1861-1865 Regimental histories",
+       "doc_count": 27
+      },
+      {
+       "key": "United States -- History -- Civil War, 1861-1865 -- Regimental histories",
+       "doc_count": 21
+      },
+      {
+       "key": "Mosby, John Singleton, 1833-1916",
+       "doc_count": 16
+      },
+      {
+       "key": "Confederate States of America. Army. Virginia Cavalry Battalion, 43rd",
+       "doc_count": 15
+      },
+      {
+       "key": "Pennsylvania. Militia",
+       "doc_count": 15
+      },
+      {
+       "key": "Regimental histories",
+       "doc_count": 13
+      },
+      {
+       "key": "United States",
+       "doc_count": 12
+      },
+      {
+       "key": "United States -- History -- Civil War, 1861-1865 -- Campaigns",
+       "doc_count": 12
+      },
+      {
+       "key": "United States -- History -- Civil War, 1861-1865 -- Personal narratives",
+       "doc_count": 11
+      }
+     ],
+     "sum_other_doc_count": 641,
+     "doc_count_error_upper_bound": 4
+    }
+   },
+   "collection_titles": {
+    "university_of_illinois_urbana-champaign": "University of Illinois Urbana-Champaign",
+    "civilwardocuments": "Civil War Documents",
+    "usgovernmentmirrors": "US Government Mirrored Documents (Citizen Collection)",
+    "cdl": "California Digital Library",
+    "dticarchive": "Defense Technical Information Archive",
+    "library_of_congress": "The Library of Congress",
+    "internetarchivebooks": "Internet Archive Books",
+    "cornell": "Cornell University Library",
+    "government-documents": "Government Documents (Worldwide)"
+   }
+  },
+  "hit_schema": {
+   "text": {
+    "identifier": {
+     "multivalue": false,
+     "mapping": "string"
+    },
+    "filename": {
+     "multivalue": false,
+     "mapping": "string"
+    },
+    "file_basename": {
+     "multivalue": false,
+     "mapping": "string"
+    },
+    "page_num": {
+     "multivalue": false,
+     "mapping": "integer",
+     "optional": true
+    },
+    "file_creation_mtime": {
+     "multivalue": false,
+     "mapping": "integer"
+    },
+    "updated_on": {
+     "multivalue": false,
+     "mapping": "date"
+    },
+    "created_on": {
+     "multivalue": false,
+     "mapping": "date"
+    },
+    "mediatype": {
+     "multivalue": false,
+     "mapping": "string"
+    },
+    "title": {
+     "multivalue": false,
+     "mapping": "string",
+     "optional": true
+    },
+    "creator": {
+     "multivalue": true,
+     "mapping": "string",
+     "optional": true
+    },
+    "date": {
+     "multivalue": false,
+     "mapping": "date",
+     "optional": true
+    },
+    "publicdate": {
+     "multivalue": false,
+     "mapping": "date",
+     "optional": true
+    },
+    "downloads": {
+     "multivalue": false,
+     "mapping": "integer",
+     "comment": "total views over ITEM (not text) lifetime, updated by audit consultation with Views API",
+     "optional": true
+    },
+    "reviewdate": {
+     "multivalue": false,
+     "mapping": "date",
+     "optional": true
+    },
+    "collection": {
+     "multivalue": true,
+     "mapping": "string"
+    },
+    "subject": {
+     "multivalue": true,
+     "mapping": "string",
+     "dressing": {
+      "truncate": 1000
+     },
+     "optional": true
+    },
+    "year": {
+     "multivalue": false,
+     "mapping": "integer",
+     "comment": "computed from date",
+     "optional": true
+    },
+    "avg_rating": {
+     "multivalue": false,
+     "mapping": "integer",
+     "optional": true
+    },
+    "addeddate": {
+     "multivalue": false,
+     "mapping": "date",
+     "comment": "may be stale in FTS",
+     "optional": true
+    },
+    "issue": {
+     "multivalue": false,
+     "mapping": "string",
+     "comment": "format varies",
+     "optional": true
+    },
+    "source": {
+     "multivalue": false,
+     "mapping": "string",
+     "comment": "format varies",
+     "optional": true
+    },
+    "description": {
+     "multivalue": true,
+     "mapping": "string",
+     "dressing": {
+      "truncate": 1000
+     },
+     "comment": "legacy production overwrites metadata value with highlighted snippet",
+     "optional": true
+    },
+    "result_in_subfile": {
+     "multivalue": false,
+     "mapping": "boolean",
+     "comment": "computed in processing of FTS API hit"
+    },
+    "__href__": {
+     "multivalue": false,
+     "mapping": "string",
+     "comment": "synthesized in processing of FTS API hit; TBD",
+     "optional": true
+    },
+    "lending___status": {
+     "multivalue": false,
+     "mapping": "string",
+     "comment": "may be stale; sourced from MDS and appended to hits",
+     "optional": true
+    }
+   }
+  }
+ }
+}

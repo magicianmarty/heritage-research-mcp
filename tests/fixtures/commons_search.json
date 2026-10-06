@@ -1,0 +1,226 @@
+{
+ "batchcomplete": true,
+ "continue": {
+  "gsroffset": 2,
+  "continue": "gsroffset||"
+ },
+ "query": {
+  "pages": [
+   {
+    "pageid": 65845360,
+    "ns": 6,
+    "title": "File:Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion LCCN2013651628.jpg",
+    "index": 1,
+    "imagerepository": "local",
+    "imageinfo": [
+     {
+      "size": 3680164,
+      "width": 8153,
+      "height": 6438,
+      "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg/960px-Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "thumbwidth": 640,
+      "thumbheight": 505,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=65845360",
+      "extmetadata": {
+       "DateTime": {
+        "value": "2018-05-05 02:51:05",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+       },
+       "ObjectName": {
+        "value": "Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion LCCN2013651628",
+        "source": "mediawiki-metadata"
+       },
+       "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+       },
+       "Categories": {
+        "value": "Images from the Library of Congress|John S. Mosby|43rd Battalion, Virginia Cavalry|Images uploaded by F\u00e6|PD-old-100-expired|CC-PD-Mark|Civil War Glass Negatives|PD-old missing SDC copyright status",
+        "source": "commons-categories",
+        "hidden": ""
+       },
+       "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+       },
+       "ImageDescription": {
+        "value": "<i>Title:</i> Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion\n<p><i>Physical description:</i> 1 photographic print on card mount\u00a0: gelatin silver.\n</p>\n<i>Notes:</i> Published in \"Divided We Fought: A Pictorial History of the War 1861-1865\", Milhollen &amp; Kaplan, eds. New York: Macmillan Books, 1956, p. 354.; Title devised by library staff.; Photographer attributed based on information from the National Portrait Gallery, Washington, D.C.",
+        "source": "commons-desc-page"
+       },
+       "DateTimeOriginal": {
+        "value": "between 1861 and 1865<div style=\"display: none;\">date QS:P,+1861-00-00T00:00:00Z/8,P1319,+1861-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9</div>",
+        "source": "commons-desc-page"
+       },
+       "Credit": {
+        "value": "<p>Library of Congress\n</p>\n<ul><li><i>Catalog:</i> <a rel=\"nofollow\" class=\"external free\" href=\"http://lccn.loc.gov/2013651628\">http://lccn.loc.gov/2013651628</a></li>\n<li><i>Image download:</i> <a rel=\"nofollow\" class=\"external free\" href=\"https://cdn.loc.gov/service/pnp/ppmsca/35400/35436v.jpg\">https://cdn.loc.gov/service/pnp/ppmsca/35400/35436v.jpg</a></li>\n<li><i>Original url:</i> <a rel=\"nofollow\" class=\"external free\" href=\"http://hdl.loc.gov/loc.pnp/ppmsca.35436\">http://hdl.loc.gov/loc.pnp/ppmsca.35436</a></li></ul>",
+        "source": "commons-desc-page"
+       },
+       "Artist": {
+        "value": "Civil War Glass Negatives",
+        "source": "commons-desc-page"
+       },
+       "Permission": {
+        "value": "This image  is available from the United States <a href=\"//commons.wikimedia.org/wiki/Library_of_Congress\" title=\"Library of Congress\">Library of Congress</a>'s <a rel=\"nofollow\" class=\"external text\" href=\"//www.loc.gov/rr/print/\">Prints and Photographs division</a><br> under the digital ID <a rel=\"nofollow\" class=\"external text\" href=\"https://hdl.loc.gov/loc.pnp/ppmsca.35436\">ppmsca.35436</a>.<br><small>This tag does not indicate the copyright status of the attached work. <span style=\"white-space:nowrap\">A normal <a href=\"//commons.wikimedia.org/wiki/Special:MyLanguage/Commons:Copyright_tags\" title=\"Special:MyLanguage/Commons:Copyright tags\">copyright tag</a> is still required.</span> <span style=\"white-space:nowrap\">See <a href=\"//commons.wikimedia.org/wiki/Special:MyLanguage/Commons:Licensing\" title=\"Special:MyLanguage/Commons:Licensing\">Commons:Licensing</a>.</span></small>",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "LicenseShortName": {
+        "value": "Public domain",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "UsageTerms": {
+        "value": "Public domain",
+        "source": "commons-desc-page"
+       },
+       "AttributionRequired": {
+        "value": "false",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "Copyrighted": {
+        "value": "False",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "License": {
+        "value": "pd",
+        "source": "commons-templates",
+        "hidden": ""
+       }
+      },
+      "mime": "image/jpeg"
+     }
+    ],
+    "contentmodel": "wikitext",
+    "pagelanguage": "en",
+    "pagelanguagehtmlcode": "en",
+    "pagelanguagedir": "ltr",
+    "touched": "2026-07-03T18:56:04Z",
+    "lastrevid": 1129310973,
+    "length": 1305,
+    "fullurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg",
+    "editurl": "https://commons.wikimedia.org/w/index.php?title=File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg&action=edit",
+    "canonicalurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.jpg"
+   },
+   {
+    "pageid": 65845419,
+    "ns": 6,
+    "title": "File:Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion LCCN2013651628.tif",
+    "index": 2,
+    "imagerepository": "local",
+    "imageinfo": [
+     {
+      "size": 157495668,
+      "width": 8153,
+      "height": 6438,
+      "pagecount": 1,
+      "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif/lossy-page1-960px-Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "thumbwidth": 640,
+      "thumbheight": 505,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers%2C_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=65845419",
+      "extmetadata": {
+       "DateTime": {
+        "value": "2018-01-26 05:42:50",
+        "source": "mediawiki-metadata",
+        "hidden": ""
+       },
+       "ObjectName": {
+        "value": "Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion LCCN2013651628",
+        "source": "mediawiki-metadata"
+       },
+       "CommonsMetadataExtension": {
+        "value": 1.2,
+        "source": "extension",
+        "hidden": ""
+       },
+       "Categories": {
+        "value": "Images from the Library of Congress|Images uploaded by F\u00e6|PD-old-100-expired|CC-PD-Mark|LC TIF images with categorized JPGs",
+        "source": "commons-categories",
+        "hidden": ""
+       },
+       "Assessments": {
+        "value": "",
+        "source": "commons-categories",
+        "hidden": ""
+       },
+       "ImageDescription": {
+        "value": "<i>Title:</i> Col. John Singleton Mosby and some members of Mosby's Rangers, 43rd Virginia Cavalry Battalion\n<p><i>Physical description:</i> 1 photographic print on card mount\u00a0: gelatin silver.\n</p>\n<i>Notes:</i> Published in \"Divided We Fought: A Pictorial History of the War 1861-1865\", Milhollen &amp; Kaplan, eds. New York: Macmillan Books, 1956, p. 354.; Title devised by library staff.; Photographer attributed based on information from the National Portrait Gallery, Washington, D.C.",
+        "source": "commons-desc-page"
+       },
+       "DateTimeOriginal": {
+        "value": "between 1861 and 1865<div style=\"display: none;\">date QS:P,+1861-00-00T00:00:00Z/8,P1319,+1861-00-00T00:00:00Z/9,P1326,+1865-00-00T00:00:00Z/9</div>",
+        "source": "commons-desc-page"
+       },
+       "Credit": {
+        "value": "<p>Library of Congress\n</p>\n<ul><li><i>Catalog:</i> <a rel=\"nofollow\" class=\"external free\" href=\"http://lccn.loc.gov/2013651628\">http://lccn.loc.gov/2013651628</a></li>\n<li><i>Image download:</i> <a rel=\"nofollow\" class=\"external free\" href=\"https://cdn.loc.gov/master/pnp/ppmsca/35400/35436u.tif\">https://cdn.loc.gov/master/pnp/ppmsca/35400/35436u.tif</a></li>\n<li><i>Original url:</i> <a rel=\"nofollow\" class=\"external free\" href=\"https://hdl.loc.gov/loc.pnp/ppmsca.35436\">https://hdl.loc.gov/loc.pnp/ppmsca.35436</a></li></ul>",
+        "source": "commons-desc-page"
+       },
+       "Artist": {
+        "value": "Civil War Glass Negatives",
+        "source": "commons-desc-page"
+       },
+       "Permission": {
+        "value": "This image  is available from the United States <a href=\"//commons.wikimedia.org/wiki/Library_of_Congress\" title=\"Library of Congress\">Library of Congress</a>'s <a rel=\"nofollow\" class=\"external text\" href=\"//www.loc.gov/rr/print/\">Prints and Photographs division</a><br> under the digital ID <a rel=\"nofollow\" class=\"external text\" href=\"https://hdl.loc.gov/loc.pnp/ppmsca.35436\">ppmsca.35436</a>.<br><small>This tag does not indicate the copyright status of the attached work. <span style=\"white-space:nowrap\">A normal <a href=\"//commons.wikimedia.org/wiki/Special:MyLanguage/Commons:Copyright_tags\" title=\"Special:MyLanguage/Commons:Copyright tags\">copyright tag</a> is still required.</span> <span style=\"white-space:nowrap\">See <a href=\"//commons.wikimedia.org/wiki/Special:MyLanguage/Commons:Licensing\" title=\"Special:MyLanguage/Commons:Licensing\">Commons:Licensing</a>.</span></small>",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "LicenseShortName": {
+        "value": "Public domain",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "UsageTerms": {
+        "value": "Public domain",
+        "source": "commons-desc-page"
+       },
+       "AttributionRequired": {
+        "value": "false",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "Copyrighted": {
+        "value": "False",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "Restrictions": {
+        "value": "",
+        "source": "commons-desc-page",
+        "hidden": ""
+       },
+       "License": {
+        "value": "pd",
+        "source": "commons-templates",
+        "hidden": ""
+       }
+      },
+      "mime": "image/tiff"
+     }
+    ],
+    "contentmodel": "wikitext",
+    "pagelanguage": "en",
+    "pagelanguagehtmlcode": "en",
+    "pagelanguagedir": "ltr",
+    "touched": "2026-07-03T18:56:04Z",
+    "lastrevid": 1228802706,
+    "length": 1242,
+    "fullurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif",
+    "editurl": "https://commons.wikimedia.org/w/index.php?title=File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif&action=edit",
+    "canonicalurl": "https://commons.wikimedia.org/wiki/File:Col._John_Singleton_Mosby_and_some_members_of_Mosby%27s_Rangers,_43rd_Virginia_Cavalry_Battalion_LCCN2013651628.tif"
+   }
+  ]
+ }
+}

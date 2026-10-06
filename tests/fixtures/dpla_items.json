@@ -1,0 +1,78 @@
+{
+ "count": 2,
+ "start": 0,
+ "limit": 10,
+ "docs": [
+  {
+   "id": "abc123",
+   "@id": "http://dp.la/api/items/abc123",
+   "dataProvider": "Library of Virginia",
+   "provider": {
+    "@id": "http://dp.la/api/contributor/virginias",
+    "name": "Digital Virginias"
+   },
+   "isShownAt": "https://example.org/items/abc123",
+   "object": "https://example.org/thumbs/abc123.jpg",
+   "rights": "http://rightsstatements.org/vocab/NoC-US/1.0/",
+   "sourceResource": {
+    "title": [
+     "Letter from a Ranger, March 1863"
+    ],
+    "creator": [
+     "Smith, John"
+    ],
+    "date": {
+     "displayDate": "1863-03-20",
+     "begin": "1863-03-20",
+     "end": "1863-03-20"
+    },
+    "description": [
+     "A letter describing the raid on Herndon Station."
+    ],
+    "subject": [
+     {
+      "name": "Mosby's Rangers"
+     },
+     {
+      "name": "Virginia--History--Civil War, 1861-1865"
+     }
+    ],
+    "spatial": [
+     {
+      "name": "Herndon (Va.)",
+      "state": "Virginia",
+      "country": "United States"
+     }
+    ],
+    "type": "text",
+    "language": [
+     {
+      "name": "English",
+      "iso639_3": "eng"
+     }
+    ],
+    "rights": [
+     "No known copyright restrictions"
+    ]
+   }
+  },
+  {
+   "id": "def456",
+   "dataProvider": [
+    "Virginia Museum of History & Culture"
+   ],
+   "isShownAt": "https://example.org/items/def456",
+   "rights": "http://rightsstatements.org/vocab/InC/1.0/",
+   "sourceResource": {
+    "title": "Photograph of a cavalry camp",
+    "type": "image",
+    "date": [
+     {
+      "displayDate": "ca. 1864"
+     }
+    ],
+    "rights": "In copyright"
+   }
+  }
+ ]
+}

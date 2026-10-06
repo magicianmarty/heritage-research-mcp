@@ -1,0 +1,109 @@
+{
+ "created": 1791275373,
+ "d1": "ia601501.us.archive.org",
+ "dir": "/4/items/mosbyswarreimini00mosb",
+ "files": [
+  {
+   "name": "__ia_thumb.jpg",
+   "source": "original",
+   "mtime": "1674548213",
+   "size": "12725",
+   "md5": "0ac9e605f4691739e45036777a8ff082",
+   "crc32": "5910006f",
+   "sha1": "70f7f7b04fa41a1355c2e59f65b10c29c8a0a03e",
+   "format": "Item Tile",
+   "rotation": "0"
+  },
+  {
+   "name": "mosbyswarreimini00mosb.pdf",
+   "source": "derivative",
+   "format": "Text PDF",
+   "original": "mosbyswarreimini00mosb_page_numbers.json",
+   "mtime": "1716505315",
+   "size": "16845243",
+   "md5": "a1628b5e48bb5a90288ccaf6f81b316e",
+   "crc32": "d6f4126c",
+   "sha1": "185ac90a259d3e179466633ab3991f72f0609f85"
+  },
+  {
+   "name": "mosbyswarreimini00mosb_djvu.txt",
+   "source": "derivative",
+   "format": "DjVuTXT",
+   "original": "mosbyswarreimini00mosb_djvu.xml",
+   "mtime": "1674547370",
+   "size": "377817",
+   "md5": "a5a0e7d77ceccd1975779d8027f6e1f9",
+   "crc32": "0391d2a0",
+   "sha1": "241a7d950394ea625193b20c21f5c07c43071225"
+  },
+  {
+   "name": "mosbyswarreimini00mosb_files.xml",
+   "source": "original",
+   "format": "Metadata",
+   "summation": "md5",
+   "md5": "27add916d588bdf5946f739c4b460caf"
+  },
+  {
+   "name": "mosbyswarreimini00mosb_hocr_searchtext.txt.gz",
+   "source": "derivative",
+   "hocr_fts_text_module_version": "1.1.0",
+   "hocr_fts_text_hocr_version": "1.1.15",
+   "word_conf_0_10": "407",
+   "word_conf_11_20": "150",
+   "word_conf_21_30": "180",
+   "word_conf_31_40": "223",
+   "word_conf_41_50": "220",
+   "word_conf_51_60": "221",
+   "word_conf_61_70": "300",
+   "word_conf_71_80": "573",
+   "word_conf_81_90": "1983",
+   "word_conf_91_100": "62499",
+   "format": "OCR Search Text",
+   "original": "mosbyswarreimini00mosb_hocr.html",
+   "mtime": "1674547363",
+   "size": "132975",
+   "md5": "48c344a9e3035f0801f32c7269d3ed9c",
+   "crc32": "d8951493",
+   "sha1": "9011d2457a8c50c47cdd67584e52b81bd311522f"
+  },
+  {
+   "name": "mosbyswarreimini00mosb_jp2.zip",
+   "source": "derivative",
+   "format": "Single Page Processed JP2 ZIP",
+   "original": "mosbyswarreimini00mosb_orig_jp2.tar",
+   "mtime": "1674546000",
+   "size": "138666554",
+   "md5": "4e4047635c7a39ba824ba4d74d12bf2b",
+   "crc32": "dfc4220d",
+   "sha1": "c2732e1e36fd53bb7105b2e6bcdd1c17a732b75c",
+   "filecount": "306"
+  },
+  {
+   "name": "mosbyswarreimini00mosb_meta.xml",
+   "source": "original",
+   "mtime": "1760447561",
+   "size": "2895",
+   "md5": "fd11334fc95b1c5070d4f77f006601df",
+   "crc32": "30cf157e",
+   "sha1": "989cbf0f0795323c164886b784b22c3c68b6694f",
+   "format": "Metadata"
+  }
+ ],
+ "files_count": 7,
+ "metadata": {
+  "language": "eng",
+  "date": "1887",
+  "subject": "Stuart, Jeb, 1833-1864",
+  "title": "Mosby's war reiminiscences, and Stuart's cavalry campaigns",
+  "creator": "Mosby, John Singleton, 1833-1916",
+  "collection": [
+   "university_of_illinois_urbana-champaign",
+   "americana"
+  ],
+  "publisher": "New York, Dodd, Mead & company",
+  "description": "264 p. 19 cm",
+  "mediatype": "texts",
+  "identifier": "mosbyswarreimini00mosb",
+  "scanner": "scribe2.il.archive.org"
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "count": 2757,
+ "docs": [
+  {
+   "@context": "http://dp.la/api/items/context",
+   "@id": "http://dp.la/api/items/5d5469efbe41fca7ab6cb6fac2f38fb2",
+   "@type": "ore:Aggregation",
+   "aggregatedCHO": "#sourceResource",
+   "dataProvider": {
+    "@id": "http://dp.la/api/contributor/nashville-public-library",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q69491146"
+    ],
+    "name": "Nashville Public Library"
+   },
+   "id": "5d5469efbe41fca7ab6cb6fac2f38fb2",
+   "ingestDate": "2026-08-19T03:04:29.912Z",
+   "ingestType": "item",
+   "isShownAt": "http://nashville.contentdm.oclc.org/cdm/ref/collection/nr/id/3650",
+   "object": "http://nashville.contentdm.oclc.org/utils/getthumbnail/collection/nr/id/3650",
+   "originalRecord": {
+    "stringValue": "<record>\n  <header \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <identifier>\n      urn:dpla.lib.utk.edu.nr_2026:oai:nashville.contentdm.oclc.org:nr/3650\n    </identifier>\n    <datestamp>2025-12-22</datestamp>\n    <setSpec>nr_2026</setSpec>\n</header>\n  <metadata \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <mods \n    version=\"3.5\" xsi:schemaLocation=\"http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd\" xmlns=\"http://www.loc.gov/mods/v3\" xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n      <titleInfo>\n        <title>Mosby</title>\n      </titleInfo>\n      <originInfo/>\n      <physicalDescription>\n        <internetMediaType>Image/jpeg</internetMediaType>\n        <form>document</form>\n        <note>The Nashville City Cemetery Association, Inc.</note>\n        <note>\n          Historical Commission of the Metropolitan Government of Nashville and Davidson County, Tennessee\n        </note>\n      </physicalDescription>\n      <location>\n        <physicalLocation>\n          Metropolitan Nashville/Davidson County Archives, Nashville Public Library\n        </physicalLocation>\n        <url usage=\"primary\" access=\"object in context\">\n          http://nashville.contentdm.oclc.org/cdm/ref/collection/nr/id/3650\n        </url>\n        <url access=\"preview\">\n          http://nashville.contentdm.oclc.org/utils/getthumbnail/collection/nr/id/3650\n        </url>\n      </location>\n      <abstract>\n        28; Northeast; 24; 10.0x30.0; *Can't find the deed, but according to the Plat book this lot is owned by a Mosby.; Collier, J. McD 1832-1854; Hanks, William B. 1813-1833; Mosby, E. A. 1812-1833; Tilford, Mary 1787-1853\n      </abstract>\n      <accessCondition type=\"local rights statement\">\n        U.S. and international copyright laws protect this digital content, which is provided for educational purposes only and may not be downloaded, reproduced, or distributed for any other purpose without written permission. Please contact: Metro Nashville Archives, 615 Church Street, Nashville, Tennessee, 37219. Telephone (615) 862-5880.\n      </accessCondition>\n      <subject>\n        <topic>Nashville City Cemetery (Nashville, Tenn.)</topic>\n      </subject>\n      <subject>\n        <topic>Nashville, Tenn.--Cemeteries</topic>\n      </subject>\n      <subject>\n        <topic>Davidson County (Tenn.)--Genealogy--Sources</topic>\n      </subject>\n      <genre authority=\"aat\" valueURI=\"http://vocab.getty.edu/aat/300026030\">\n        documents\n      </genre>\n      <relatedItem type=\"host\" displayLabel=\"Project\">\n        <titleInfo>\n          <title>Nashville Public Library Digital Collection</title>\n        </titleInfo>\n        <location>\n          <url>http://nashville.contentdm.oclc.org/cdm/landingpage/collection/nr</url>\n        </location>\n      </relatedItem>\n      <recordInfo>\n        <recordContentSource>Nashville Public Library</recordContentSource>\n        <recordChangeDate>2026-06-22-04:00</recordChangeDate>\n        <languageOfCataloging>\n          <languageTerm type=\"code\" authority=\"iso639-2b\">eng</languageTerm>\n        </languageOfCataloging>\n        <recordOrigin>\n          Record has been transformed into MODS 3.5 from a qualified Dublin Core record by the Digital Library of Tennessee, a service hub of the Digital Public Library of America, using a stylesheet available at https://github.com/utkdigitalinitiatives/DLTN. Metadata originally created in a locally modified version of qualified Dublin Core using ContentDM (data dictionary available: https://wiki.lib.utk.edu/display/DPLA.)\n        </recordOrigin>\n      </recordInfo>\n</mods>\n</metadata>\n  <about>\n    <request verb=\"ListRecords\" metadataPrefix=\"MODS\" set=\"nr_2026\"/>\n    <resumptionToken>1782152905208:nr_2026:MODS:3000:12394::</resumptionToken>\n    <responseDate>2026-06-22T18:28:25.544Z</responseDate>\n  </about>\n</record>"
+   },
+   "provider": {
+    "@id": "http://dp.la/api/contributor/tennessee",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q83878449"
+    ],
+    "name": "Digital Library of Tennessee"
+   },
+   "rightsCategory": "Unspecified Rights Status",
+   "sourceResource": {
+    "@id": "http://dp.la/api/items/5d5469efbe41fca7ab6cb6fac2f38fb2#SourceResource",
+    "collection": [
+     {
+      "title": "Nashville Public Library Digital Collection"
+     }
+    ],
+    "description": [
+     "28; Northeast; 24; 10.0x30.0; *Can't find the deed, but according to the Plat book this lot is owned by a Mosby.; Collier, J. McD 1832-1854; Hanks, William B. 1813-1833; Mosby, E. A. 1812-1833; Tilford, Mary 1787-1853"
+    ],
+    "format": [
+     "Document"
+    ],
+    "rights": [
+     "U.S. and international copyright laws protect this digital content, which is provided for educational purposes only and may not be downloaded, reproduced, or distributed for any other purpose without written permission. Please contact: Metro Nashville Archives, 615 Church Street, Nashville, Tennessee, 37219. Telephone (615) 862-5880."
+    ],
+    "subject": [
+     {
+      "name": "Nashville City Cemetery (Nashville, Tenn.)"
+     },
+     {
+      "name": "Nashville, Tenn.--Cemeteries"
+     },
+     {
+      "name": "Davidson County (Tenn.)--Genealogy--Sources"
+     }
+    ],
+    "title": [
+     "Mosby"
+    ],
+    "type": [
+     "text"
+    ]
+   }
+  },
+  {
+   "@context": "http://dp.la/api/items/context",
+   "@id": "http://dp.la/api/items/ae0646fb7c6590ac3927867537f7cdef",
+   "@type": "ore:Aggregation",
+   "aggregatedCHO": "#sourceResource",
+   "dataProvider": {
+    "@id": "http://dp.la/api/contributor/oregon-state-archives",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q7101346"
+    ],
+    "name": "Oregon State Archives"
+   },
+   "id": "ae0646fb7c6590ac3927867537f7cdef",
+   "ingestDate": "2025-10-29T00:05:09.607Z",
+   "ingestType": "item",
+   "isShownAt": "https://www.northwestdigitalheritage.org/s/oregon-state-archives/item/39369",
+   "mediaMaster": [
+    "https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/b8c5e4023e2a6103d9cd1ae834e184810befa345.jpg"
+   ],
+   "object": "https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/b8c5e4023e2a6103d9cd1ae834e184810befa345.jpg",
+   "originalRecord": {
+    "stringValue": "<record>\n  <header \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <identifier>\n      oai:northwestdigitalheritage.org:osa:oai:northwestdigitalheritage.org:84354\n    </identifier>\n    <datestamp>2025-10-28T03:00:42Z</datestamp>\n</header>\n  <metadata \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <mods:mods xmlns:mods=\"http://www.loc.gov/mods/v3\">\n      <mods:titleInfo>\n        <mods:title>Mosby Creek Covered Bridge, Mosby Creek</mods:title>\n      </mods:titleInfo>\n      <mods:name>\n        <mods:namePart>Gary Halvorson, Oregon State Archives</mods:namePart>\n        <mods:role>\n          <mods:roleTerm>creator</mods:roleTerm>\n        </mods:role>\n      </mods:name>\n      <mods:typeOfResource>Image</mods:typeOfResource>\n      <mods:originInfo>\n        <mods:dateCreated>2018-07-17</mods:dateCreated>\n      </mods:originInfo>\n      <mods:abstract>Mosby Creek Covered Bridge over Mosby Creek.</mods:abstract>\n      <mods:subject>\n        <mods:topic>bridges-covered</mods:topic>\n        <mods:topic>roads and streets</mods:topic>\n        <mods:topic>trees</mods:topic>\n      </mods:subject>\n      <mods:note type=\"ownership\">Oregon State Archives</mods:note>\n      <mods:relatedItem type=\"host\">\n        <mods:titleInfo>\n          <mods:title>Oregon Scenic Images</mods:title>\n        </mods:titleInfo>\n      </mods:relatedItem>\n      <mods:accessCondition type=\"use and reproduction\">\n        https://creativecommons.org/licenses/by/4.0/\n      </mods:accessCondition>\n      <mods:location>\n        <mods:url usage=\"primary\" access=\"object in context\">\n          https://www.northwestdigitalheritage.org/s/oregon-state-archives/item/39369\n        </mods:url>\n      </mods:location>\n      <mods:location>\n        <mods:url access=\"preview\">\n          https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/b8c5e4023e2a6103d9cd1ae834e184810befa345.jpg\n        </mods:url>\n      </mods:location>\n      <mods:location>\n        <mods:url note=\"mediaMaster\">\n          https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/b8c5e4023e2a6103d9cd1ae834e184810befa345.jpg\n        </mods:url>\n      </mods:location>\n    </mods:mods>\n</metadata>\n  <about>\n    <request verb=\"ListRecords\"/>\n    <resumptionToken>ec2f34bd-fd97-4839-8eb2-ad113357f79a</resumptionToken>\n    <responseDate>2025-10-28T03:00:42.302Z</responseDate>\n  </about>\n</record>"
+   },
+   "provider": {
+    "@id": "http://dp.la/api/contributor/northwest-digital-heritage",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q112194444"
+    ],
+    "name": "Northwest Digital Heritage"
+   },
+   "rights": "http://creativecommons.org/licenses/by/4.0/",
+   "rightsCategory": "Unlimited Re-Use",
+   "sourceResource": {
+    "@id": "http://dp.la/api/items/ae0646fb7c6590ac3927867537f7cdef#SourceResource",
+    "collection": [
+     {
+      "title": "Oregon Scenic Images"
+     }
+    ],
+    "creator": [
+     "Gary Halvorson, Oregon State Archives"
+    ],
+    "date": [
+     {
+      "displayDate": "2018-07-17"
+     }
+    ],
+    "description": [
+     "Mosby Creek Covered Bridge over Mosby Creek."
+    ],
+    "subject": [
+     {
+      "name": "Bridges-covered"
+     },
+     {
+      "name": "Roads and streets"
+     },
+     {
+      "name": "Trees"
+     }
+    ],
+    "title": [
+     "Mosby Creek Covered Bridge, Mosby Creek"
+    ],
+    "type": [
+     "image"
+    ]
+   },
+   "tags": [
+    "nwdh",
+    "mediaMaster"
+   ]
+  },
+  {
+   "@context": "http://dp.la/api/items/context",
+   "@id": "http://dp.la/api/items/6cdd36661c6dcd0925eb9329d313b55c",
+   "@type": "ore:Aggregation",
+   "aggregatedCHO": "#sourceResource",
+   "dataProvider": {
+    "@id": "http://dp.la/api/contributor/oregon-state-archives",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q7101346"
+    ],
+    "name": "Oregon State Archives"
+   },
+   "id": "6cdd36661c6dcd0925eb9329d313b55c",
+   "ingestDate": "2025-10-29T00:05:09.607Z",
+   "ingestType": "item",
+   "isShownAt": "https://www.northwestdigitalheritage.org/s/oregon-state-archives/item/39367",
+   "mediaMaster": [
+    "https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/d2896cabdcae434b91ba52cff2d56c45c29ada6d.jpg"
+   ],
+   "object": "https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/d2896cabdcae434b91ba52cff2d56c45c29ada6d.jpg",
+   "originalRecord": {
+    "stringValue": "<record>\n  <header \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <identifier>\n      oai:northwestdigitalheritage.org:osa:oai:northwestdigitalheritage.org:84352\n    </identifier>\n    <datestamp>2025-10-28T02:36:12Z</datestamp>\n</header>\n  <metadata \n  xmlns=\"http://www.openarchives.org/OAI/2.0/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n    <mods:mods xmlns:mods=\"http://www.loc.gov/mods/v3\">\n      <mods:titleInfo>\n        <mods:title>Mosby Creek Covered Bridge, Mosby Creek</mods:title>\n      </mods:titleInfo>\n      <mods:name>\n        <mods:namePart>Gary Halvorson, Oregon State Archives</mods:namePart>\n        <mods:role>\n          <mods:roleTerm>creator</mods:roleTerm>\n        </mods:role>\n      </mods:name>\n      <mods:typeOfResource>Image</mods:typeOfResource>\n      <mods:originInfo>\n        <mods:dateCreated>2018-07-17</mods:dateCreated>\n      </mods:originInfo>\n      <mods:abstract>Mosby Creek Covered Bridge over Mosby Creek.</mods:abstract>\n      <mods:subject>\n        <mods:topic>bridges-covered</mods:topic>\n        <mods:topic>roads and streets</mods:topic>\n        <mods:topic>trees</mods:topic>\n      </mods:subject>\n      <mods:note type=\"ownership\">Oregon State Archives</mods:note>\n      <mods:relatedItem type=\"host\">\n        <mods:titleInfo>\n          <mods:title>Oregon Scenic Images</mods:title>\n        </mods:titleInfo>\n      </mods:relatedItem>\n      <mods:accessCondition type=\"use and reproduction\">\n        https://creativecommons.org/licenses/by/4.0/\n      </mods:accessCondition>\n      <mods:location>\n        <mods:url usage=\"primary\" access=\"object in context\">\n          https://www.northwestdigitalheritage.org/s/oregon-state-archives/item/39367\n        </mods:url>\n      </mods:location>\n      <mods:location>\n        <mods:url access=\"preview\">\n          https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/d2896cabdcae434b91ba52cff2d56c45c29ada6d.jpg\n        </mods:url>\n      </mods:location>\n      <mods:location>\n        <mods:url note=\"mediaMaster\">\n          https://nwdh-omeka.s3.us-west-2.amazonaws.com/original/d2896cabdcae434b91ba52cff2d56c45c29ada6d.jpg\n        </mods:url>\n      </mods:location>\n    </mods:mods>\n</metadata>\n  <about>\n    <request verb=\"ListRecords\"/>\n    <resumptionToken>536bdcc5-2d11-489c-8de5-93f6e11ee28c</resumptionToken>\n    <responseDate>2025-10-28T02:36:12.213Z</responseDate>\n  </about>\n</record>"
+   },
+   "provider": {
+    "@id": "http://dp.la/api/contributor/northwest-digital-heritage",
+    "exactMatch": [
+     "http://www.wikidata.org/entity/Q112194444"
+    ],
+    "name": "Northwest Digital Heritage"
+   },
+   "rights": "http://creativecommons.org/licenses/by/4.0/",
+   "rightsCategory": "Unlimited Re-Use",
+   "sourceResource": {
+    "@id": "http://dp.la/api/items/6cdd36661c6dcd0925eb9329d313b55c#SourceResource",
+    "collection": [
+     {
+      "title": "Oregon Scenic Images"
+     }
+    ],
+    "creator": [
+     "Gary Halvorson, Oregon State Archives"
+    ],
+    "date": [
+     {
+      "displayDate": "2018-07-17"
+     }
+    ],
+    "description": [
+     "Mosby Creek Covered Bridge over Mosby Creek."
+    ],
+    "subject": [
+     {
+      "name": "Bridges-covered"
+     },
+     {
+      "name": "Roads and streets"
+     },
+     {
+      "name": "Trees"
+     }
+    ],
+    "title": [
+     "Mosby Creek Covered Bridge, Mosby Creek"
+    ],
+    "type": [
+     "image"
+    ]
+   },
+   "tags": [
+    "nwdh",
+    "mediaMaster"
+   ]
+  }
+ ],
+ "facets": [],
+ "limit": 3,
+ "start": 1
+}

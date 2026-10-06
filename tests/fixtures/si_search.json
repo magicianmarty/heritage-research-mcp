@@ -1,0 +1,116 @@
+{
+ "status": 200,
+ "responseCode": 1,
+ "response": {
+  "rows": [
+   {
+    "id": "edanmdm-nmah_1",
+    "title": "Cavalry Saber",
+    "unitCode": "NMAH",
+    "type": "edanmdm",
+    "url": "edanmdm:nmah_1",
+    "content": {
+     "descriptiveNonRepeating": {
+      "title": {
+       "label": "Title",
+       "content": "Cavalry Saber"
+      },
+      "unit_code": "NMAH",
+      "data_source": "National Museum of American History",
+      "record_link": "https://americanhistory.si.edu/collections/nmah_1",
+      "metadata_usage": {
+       "access": "CC0"
+      },
+      "online_media": {
+       "mediaCount": 1,
+       "media": [
+        {
+         "content": "https://ids.si.edu/ids/deliveryService?id=NMAH-1",
+         "type": "Images",
+         "thumbnail": "https://ids.si.edu/ids/deliveryService?id=NMAH-1&max=150",
+         "usage": {
+          "access": "CC0"
+         }
+        }
+       ]
+      }
+     },
+     "freetext": {
+      "name": [
+       {
+        "label": "Maker",
+        "content": "Ames Manufacturing Company"
+       }
+      ],
+      "date": [
+       {
+        "label": "Date",
+        "content": "1860"
+       }
+      ],
+      "notes": [
+       {
+        "label": "Summary",
+        "content": "A light cavalry saber."
+       }
+      ],
+      "topic": [
+       {
+        "label": "Topic",
+        "content": "Cavalry"
+       }
+      ],
+      "place": [
+       {
+        "label": "Place",
+        "content": "Chicopee, Massachusetts"
+       }
+      ],
+      "objectType": [
+       {
+        "label": "Type",
+        "content": "Sabers"
+       }
+      ]
+     },
+     "indexedStructured": {
+      "topic": [
+       "Cavalry",
+       "Weapons"
+      ]
+     }
+    }
+   },
+   {
+    "id": "edanmdm-saam_2",
+    "title": "Portrait of an Officer",
+    "unitCode": "SAAM",
+    "type": "edanmdm",
+    "url": "edanmdm:saam_2",
+    "content": {
+     "descriptiveNonRepeating": {
+      "unit_code": "SAAM",
+      "metadata_usage": {
+       "access": "CC0"
+      },
+      "online_media": {
+       "mediaCount": 1,
+       "media": [
+        {
+         "content": "https://ids.si.edu/ids/deliveryService?id=SAAM-2",
+         "type": "Images",
+         "usage": {
+          "access": "Usage conditions apply"
+         }
+        }
+       ]
+      }
+     },
+     "freetext": {}
+    }
+   }
+  ],
+  "rowCount": 2,
+  "message": "content found"
+ }
+}
