@@ -61,10 +61,32 @@ class Resp:
         return self.content.decode("utf-8", errors="replace")
 
 
-_HTML_NOISE = re.compile(r"(?is)<(style|script)[^>]*>.*?</\1>|<[^>]+>")
+_HTML_NOISE = re.compile(r"(?is)<(style|script)[^>]*>.*?</\1>|<[^>]*>|<[^>]*$|data:[^\s\"')]+")
+_DETAIL_FIELDS = ("title", "message", "description", "action")
+
+
+def _json_detail(content: bytes) -> str | None:
+    """The human-readable fields of a JSON error body. NARA's validation errors list the accepted values."""
+    try:
+        data = json.loads(content)
+    except ValueError:
+        return None
+    if isinstance(data, dict) and isinstance(data.get("error"), dict):
+        data = data["error"]
+    if not isinstance(data, dict):
+        return None
+    parts: list[str] = []
+    for field in _DETAIL_FIELDS:
+        value = data.get(field)
+        if isinstance(value, str) and value.strip() and value.strip() not in parts:
+            parts.append(value.strip())
+    return " ".join(parts) or None
 
 
 def _snippet(content: bytes) -> str:
+    detail = _json_detail(content)
+    if detail:
+        return redact(detail[:600])
     text = _HTML_NOISE.sub(" ", content[:4000].decode("utf-8", errors="replace"))
     text = " ".join(text.split())
     if "request rejected" in text.lower():

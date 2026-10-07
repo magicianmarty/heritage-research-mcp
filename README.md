@@ -45,17 +45,25 @@ And `ia_fulltext_search` finds a name inside a scanned book, with the page and a
 
 | kind | Internet Archive | Commons | DPLA | Smithsonian | NARA |
 |---|---|---|---|---|---|
-| `text` | `mediatype:texts` | `filetype:office` (PDF, DjVu) | `type=text` | scanned books, full-text documents, books, manuscripts | Textual Records ¹ |
-| `image` | `mediatype:image` | `filetype:bitmap` | `type=image` | `online_media_type:"Images"` | Photographs and other Graphic Materials ¹ |
-| `map` | the "maps" subject and the map collections | `map` in the file title | images with the subject "Maps" | `object_type:"Maps"` | Maps and Charts ¹ |
-| `audio` | `mediatype:audio` | `filetype:audio` | `type=sound` | `online_media_type:"Sound recordings"` | Sound Recordings ¹ |
-| `video` | `mediatype:movies` | `filetype:video` | `type=moving image` | `online_media_type:"Video recordings"` | Moving Images ¹ |
+| `text` | `mediatype:texts` | `filetype:office` (PDF, DjVu) | `type=text` | scanned books, full-text documents, books, manuscripts | Textual Records |
+| `image` | `mediatype:image` | `filetype:bitmap` | `type=image` | `online_media_type:"Images"` | Photographs and other Graphic Materials |
+| `map` | the "maps" subject and the map collections | `map` in the file title | images with the subject "Maps" | `object_type:"Maps"` | Maps and Charts |
+| `audio` | `mediatype:audio` | `filetype:audio` | `type=sound` | `online_media_type:"Sound recordings"` | Sound Recordings |
+| `video` | `mediatype:movies` | `filetype:video` | `type=moving image` | `online_media_type:"Video recordings"` | Moving Images |
 
-¹ NARA's vocabulary comes from its documentation and has not yet been run against a live key.
-
-**Do maps work?** Yes, with honest limits. Commons, DPLA and the Smithsonian have solid map cataloguing and return real maps (the example above came from this filter). The Internet Archive has no map type at all, so `map` there is a subject-and-collection match and is noisy. Because archives catalogue differently, treat `kind` as a strong hint rather than a guarantee, and run a query both with and without it when something seems missing. Multi-word queries need every word to match at the four archives tested (NARA is not yet verified), so fewer words find more.
+**Do maps work?** Yes, with honest limits. Commons, DPLA and the Smithsonian have solid map cataloguing and return real maps (the example above came from this filter). The Internet Archive has no map type at all, so `map` there is a subject-and-collection match and is noisy. Because archives catalogue differently, treat `kind` as a strong hint rather than a guarantee, and run a query both with and without it when something seems missing. Multi-word queries need every word to match at all five archives, so fewer words find more.
 
 **Text versus images.** `kind` selects whole records. To search *inside* documents, use `ia_fulltext_search` (the OCR text of Internet Archive books), and `nara_search` with `include_extracted_text` or `nara_extracted_text` for NARA scans.
+
+## The National Archives
+
+NARA holds the federal paper trail: Official Records, Adjutant General and Quartermaster files, Brady's photographs, War Department maps, pension files. Beyond a plain `nara_search`:
+
+- The first page of results carries **`facets`**: how many hits fall in each record group and type of material, so a broad query ("Fairfax") can be narrowed with `record_group=77` or `type_of_materials=map` instead of paging.
+- Each record names its **record group and series**, keeps photographer or mapmaker credits, keeps "ca." on estimated dates, and puts places apart from subjects. `nara_get_record` adds a ready-made archival **`citation`**, the use and access restrictions in NARA's own words, related links (Fold3, microfilm publication numbers) and the creating office.
+- `nara_extracted_text` returns each scan's machine **OCR** and any **partner or volunteer transcriptions** (FamilySearch's, on pension files), labelled, with AI-generated ones flagged. Use them to find names, then read the scan.
+- Restrictions are reported honestly: "Unrestricted" is `free`; "Restricted - Fully/Partly" is `restricted`; "Restricted - Possibly" and "Undetermined" are `unknown`, because NARA is flagging a *possible* copyright or donor issue, not stating one.
+- Date filters need both bounds at NARA's end; this server fills the open end, so `start_date` alone works. Undated records never match a date filter, and much of the catalogue is undated.
 
 ## Tools
 
@@ -162,7 +170,7 @@ Archives state rights in many vocabularies: Creative Commons URLs, rightsstateme
 
 ## Status
 
-Verified against the live services on 6 October 2026: the Internet Archive, Wikimedia Commons, DPLA and Smithsonian Open Access. The NARA adapter follows that provider's published API specification and is tested against fixtures of the documented response shapes; it has not yet been exercised with a real key. If you find a response shape that differs, please open an issue. The `Live smoke` workflow re-checks every configured source weekly.
+Verified against the live services on 6 and 7 October 2026: the Internet Archive, Wikimedia Commons, DPLA, Smithsonian Open Access and the National Archives Catalog. The NARA adapter was first written from the published specification and then rebuilt against real responses, which showed that its creators, dates, restrictions and file sizes all needed different handling; its test fixtures are trimmed live captures. If you find a response shape that differs, please open an issue. The `Live smoke` workflow re-checks every configured source weekly.
 
 ## Development
 

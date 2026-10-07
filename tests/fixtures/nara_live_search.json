@@ -1,0 +1,811 @@
+{
+ "body": {
+  "hits": {
+   "total": {
+    "value": 16088,
+    "relation": "eq"
+   },
+   "max_score": null,
+   "hits": [
+    {
+     "_index": "nac-records4",
+     "_id": "221160784",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "Sheet No. 4A, Fairfax",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Cartographic"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Maps and Charts"
+       ],
+       "localIdentifier": "G211-4A",
+       "productionDates": [
+        {
+         "year": 1864,
+         "logicalDate": "1864-01-01"
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "305566_g_211_04A_01.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/cartographic/rg-077/305566/7491454/Batch0002/305566_g_211_04A_01.jpg",
+         "objectFileSize": 1234,
+         "objectId": "221160785",
+         "objectType": "Image (JPG)"
+        },
+        {
+         "objectFilename": "305566_g_211_04A_02.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/cartographic/rg-077/305566/7491454/Batch0002/305566_g_211_04A_02.jpg",
+         "objectFileSize": 1234,
+         "objectId": "221160786",
+         "objectType": "Image (JPG)"
+        },
+        {
+         "objectFilename": "305566_g_211_04A_03.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/cartographic/rg-077/305566/7491454/Batch0002/305566_g_211_04A_03.jpg",
+         "objectFileSize": 1234,
+         "objectId": "221160787",
+         "objectType": "Image (JPG)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 77,
+         "title": "Records of the Office of the Chief of Engineers",
+         "naId": 406
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of the Chief of Engineers. (1818 - 09/18/1947)"
+          }
+         ],
+         "title": "Civil Works Map File",
+         "naId": 305566
+        },
+        {
+         "levelOfDescription": "fileUnit",
+         "title": "Virginia and the Chesapeake Bay",
+         "naId": 7491454
+        }
+       ],
+       "scopeAndContentNote": "Index map filed under G211.",
+       "naId": 221160784
+      }
+     }
+    },
+    {
+     "_index": "nac-records2",
+     "_id": "524925",
+     "_source": {
+      "record": {
+       "onlineResources": [
+        {
+         "note": "The Teaching with Documents online lesson plan, \"The Civil War as Photographed by Mathew Brady,\" features this item.",
+         "description": "Teaching with Documents",
+         "url": "http://www.archives.gov/education/lessons/brady-photos/"
+        }
+       ],
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "American Civil War, 1861-1865",
+         "authorityType": "topicalSubject",
+         "naId": 10638535
+        }
+       ],
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "Pontoon across Rappahannock River, Va. (alson cavalry column.)",
+       "coverageEndDate": {
+        "dateQualifier": "ca.",
+        "year": 1865,
+        "logicalDate": "1865-12-31"
+       },
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Still Pictures"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "coverageStartDate": {
+        "dateQualifier": "ca.",
+        "year": 1860,
+        "logicalDate": "1860-01-01"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "111-B-508",
+       "variantControlNumbers": [
+        {
+         "number": "NWDNS-111-B-508",
+         "type": "NAIL Control Number"
+        }
+       ],
+       "contributors": [
+        {
+         "heading": "Brady National Photographic Art Gallery (Washington, D.C.) (1858 - ?)",
+         "contributorType": "Photographer",
+         "authorityType": "organization",
+         "establishDate": {
+          "year": 1858,
+          "logicalDate": "1858-01-01"
+         },
+         "naId": 10450019
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "05-0573a.gif",
+         "objectUrl": "https://catalog.archives.gov/medialive/25/5249/524925/content/arcmedia/media/images/5/6/05-0573a.gif",
+         "objectFileSize": 98455,
+         "objectId": "15040398",
+         "objectType": "Image (GIF)"
+        },
+        {
+         "objectFilename": "524925a.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialive/25/5249/524925/content/arcmedia/stillpix/111-b/524925a.jpg",
+         "objectFileSize": 1774980,
+         "objectId": "15040399",
+         "objectDescription": "High Resolution",
+         "objectType": "Image (JPG)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 111,
+         "title": "Records of the Office of the Chief Signal Officer",
+         "naId": 440
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of the Chief Signal Officer. (08/01/1866 - 09/18/1947)"
+          }
+         ],
+         "title": "Mathew Brady Photographs of Civil War-Era Personalities and Scenes",
+         "naId": 524418
+        }
+       ],
+       "naId": 524925
+      }
+     }
+    },
+    {
+     "_index": "nac-records2",
+     "_id": "290020335",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "Kansas",
+         "authorityType": "geographicPlaceName",
+         "naId": 10045312
+        },
+        {
+         "heading": "Navajo Nation",
+         "authorityType": "organization",
+         "naId": 10446076
+        }
+       ],
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "Civil War Uniforms, Fort Leavenworth, Kansas",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Still Pictures"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "75-NG-NF-7-57",
+       "productionDates": [
+        {
+         "month": 6,
+         "year": 1940,
+         "day": 11,
+         "logicalDate": "1940-06-11"
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "75-NG-NF-7-57_001.tif",
+         "objectUrl": "https://catalog.archives.gov/medialz/stillpix/075-ng/Historical_Subjects/75-NG-NF-7-57_001.tif",
+         "objectFileSize": 1234,
+         "objectId": "290020336",
+         "objectType": "Image (TIFF)"
+        },
+        {
+         "objectFilename": "75-NG-NF-7-57_002.tif",
+         "objectUrl": "https://catalog.archives.gov/medialz/stillpix/075-ng/Historical_Subjects/75-NG-NF-7-57_002.tif",
+         "objectFileSize": 1234,
+         "objectId": "290020337",
+         "objectType": "Image (TIFF)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 75,
+         "title": "Records of the Bureau of Indian Affairs",
+         "naId": 404
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of Indian Affairs. (1824 - 1849)"
+          }
+         ],
+         "title": "Photographs of Navajo Life in the Southwestern Region of the United States",
+         "naId": 519176
+        },
+        {
+         "levelOfDescription": "fileUnit",
+         "title": "Historical Subjects",
+         "naId": 286185266
+        }
+       ],
+       "scopeAndContentNote": "This is a copy of an illustration. Original caption: Civil War Uniforms. Fort Leavenworth, Kansas. War Department at Fort Leavenworth, Kansas. Compliments of Command and General Staff. Library (credit must be given to above). L. to R: 1. Corporal. Cavalry, U.S. Army. Full dress. 2. Private Light Artillery, U.S. Army. Full dress. 3. Great Coat, For all mounted men.",
+       "naId": 290020335
+      }
+     }
+    },
+    {
+     "_index": "nac-records2",
+     "_id": "196288881",
+     "_source": {
+      "record": {
+       "onlineResources": [
+        {
+         "note": "This file was scanned as part of a collaboration effort between Fold3 and the National Archives.",
+         "description": "Fold3",
+         "url": "https://www.fold3.com/image/27255856"
+        }
+       ],
+       "levelOfDescription": "fileUnit",
+       "recordType": "description",
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "title": "Revolutionary War Pension and Bounty Land Warrant Application File S. 13959, for Hezekiah Mosby, Virginia",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at Washington, DC - Textual Reference"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Textual Records"
+       ],
+       "microformPublications": [
+        {
+         "identifier": "M804",
+         "note": "The start of this file can be found on Roll 1779.",
+         "title": "M804 - Revolutionary War Pension and Bounty-Land Warrant Application Files"
+        }
+       ],
+       "variantControlNumbers": [
+        {
+         "number": "Fold3 2021",
+         "type": "Search Identifier"
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "4161071_00117.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/microfilm-publications/M804-RevolutionaryWarPensionAppFiles/0003/export_M804-RevolutionaryWarPensionAppFiles_1779_9204/images/4161071_00117.jpg",
+         "extractedText": "\nVa.\nmerly bigekiah\nS. 6.13959\nmostly\ncarded",
+         "objectFileSize": 645204,
+         "objectDesignator": "Fold3 File #27255856",
+         "objectId": "196288882",
+         "objectDescription": "Names found on this page include: Hezekiah Mosley. Image provided by Fold3.",
+         "objectType": "Image (JPG)"
+        },
+        {
+         "objectFilename": "4161071_00118.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/microfilm-publications/M804-RevolutionaryWarPensionAppFiles/0003/export_M804-RevolutionaryWarPensionAppFiles_1779_9204/images/4161071_00118.jpg",
+         "extractedText": "\nMosty, John & Littleberry Senior\nsee claim of Wade mosby W. 3856",
+         "objectFileSize": 645915,
+         "objectDesignator": "Fold3 File #27255858",
+         "objectId": "196288883",
+         "objectDescription": "Names found on this page include: John Mosby; Wade Mosby; Littleberry Mosby. Image provided by Fold3.",
+         "objectType": "Image (JPG)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 15,
+         "title": "Records of the Department of Veterans Affairs",
+         "naId": 344
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Predecessor",
+           "heading": "War Department. Military Bounty Lands and Pension Branch. ca. 1810-1815"
+          },
+          {
+           "creatorType": "Predecessor",
+           "heading": "War Department. Office of the Secretary. 1789-9/18/1947"
+          },
+          {
+           "creatorType": "Most Recent",
+           "heading": "Department of the Interior. Bureau of Pensions. 1849-1930"
+          }
+         ],
+         "title": "Case Files of Pension and Bounty-Land Warrant Applications Based on Revolutionary War Service",
+         "naId": 300022
+        }
+       ],
+       "scopeAndContentNote": "Veteran's Service: Va.",
+       "naId": 196288881
+      }
+     }
+    },
+    {
+     "_index": "nac-records0",
+     "_id": "41681539",
+     "_source": {
+      "record": {
+       "accessionNumbers": [
+        "TR-0079-2016-0198"
+       ],
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "useRestriction": {
+        "note": "Some of the materials in this file may be subject to copyright or other intellectual property restrictions.",
+        "specificUseRestrictions": [
+         "Copyright"
+        ],
+        "status": "Restricted - Possibly"
+       },
+       "audiovisual": "False",
+       "title": "Virginia SP Green Garden",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Electronic Records"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Textual Records"
+       ],
+       "variantControlNumbers": [
+        {
+         "number": "1.1-4.3-201610.32983",
+         "type": "Ref ID"
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "07000769.pdf",
+         "objectUrl": "https://catalog.archives.gov/medialive/39/6815/41681539/content/electronic-records/rg-079/NPS_VA/07000769.pdf",
+         "objectFileSize": 56823508,
+         "objectId": "41681540",
+         "objectType": "Portable Document File (PDF)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 79,
+         "title": "Records of the National Park Service",
+         "naId": 408
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "Department of the Interior. National Park Service. (03/02/1934 - )"
+          }
+         ],
+         "title": "National Register of Historic Places and National Historic Landmarks Program Records",
+         "naId": 20812721
+        },
+        {
+         "levelOfDescription": "fileUnit",
+         "title": "National Register of Historic Places and National Historic Landmarks Program Records: Virginia",
+         "naId": 40571316
+        }
+       ],
+       "scopeAndContentNote": "This resource is located in Loudoun County, Virginia. Areas of significance include: Agriculture; Military; Architecture. Architectural classifications include: Early Republic; Vernacular; Mid 19th Century; Greek Revival. The National Historic Places Register Reference Number is 07000769.",
+       "naId": 41681539
+      }
+     }
+    },
+    {
+     "_index": "nac-records1",
+     "_id": "348264011",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "Gifts",
+         "authorityType": "topicalSubject",
+         "naId": 10637831
+        },
+        {
+         "heading": "Government paperwork",
+         "authorityType": "topicalSubject",
+         "naId": 10640575
+        }
+       ],
+       "useRestriction": {
+        "note": "The copyright status of this photograph is unknown.",
+        "status": "Undetermined"
+       },
+       "audiovisual": "False",
+       "title": "Instrument of Gift Papers",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "Harry S. Truman Library"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "59-834-1",
+       "digitalObjects": [
+        {
+         "objectFilename": "59-834-1.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialz/presidential-libraries/truman/photographs/59/59-834-1.jpg",
+         "objectFileSize": 430783,
+         "objectId": "348264012",
+         "objectType": "Image (JPG)"
+        }
+       ],
+       "ancestors": [
+        {
+         "collectionIdentifier": "HST-PHC",
+         "levelOfDescription": "collection",
+         "title": "Photograph Collection",
+         "naId": 1207
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "National Archives and Records Administration. Office of Presidential Libraries. Harry S. Truman Library. (4/1/1985 - 7/31/2011)"
+          }
+         ],
+         "title": "Photographs Relating to the Administration, Family, and Personal Life of Harry S. Truman",
+         "naId": 198606
+        }
+       ],
+       "scopeAndContentNote": "A copy of the Instrument of Gift Papers from the Library of Congress.  This is the first page of two.",
+       "naId": 348264011
+      }
+     }
+    },
+    {
+     "_index": "nac-records0",
+     "_id": "24326142",
+     "_source": {
+      "record": {
+       "levelOfDescription": "fileUnit",
+       "recordType": "description",
+       "useRestriction": {
+        "specificUseRestrictions": [
+         "Donor Restrictions"
+        ],
+        "status": "Restricted - Fully"
+       },
+       "audiovisual": "false",
+       "title": "V29543, January 3, 2001",
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "Archival Operations Division"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "specificAccessRestrictions": [
+         {
+          "securityClassification": "PRM - Personal Record Misfile",
+          "restriction": "PRM - Personal Record Misfile"
+         }
+        ],
+        "status": "Restricted - Fully"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "variantControlNumbers": [
+        {
+         "note": "This is the roll number assigned by the White House Photo Office.",
+         "number": "V29543",
+         "type": "Agency-Assigned Identifier"
+        },
+        {
+         "number": "2007-0002-F",
+         "type": "FOIA Tracking Number"
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "ag-av-7349218-20070002f-v29543-2015_001.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialive/42/3261/24326142/content/presidential-libraries/foia/2007-0002-F/ag-av-7349218-20070002f-v29543-2015_001.jpg",
+         "objectFileSize": 669397,
+         "objectId": "24330276",
+         "objectType": "Image (JPG)"
+        },
+        {
+         "objectFilename": "ag-av-7349218-20070002f-v29543-2015_002.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialive/42/3261/24326142/content/presidential-libraries/foia/2007-0002-F/ag-av-7349218-20070002f-v29543-2015_002.jpg",
+         "objectFileSize": 663355,
+         "objectId": "24330277",
+         "objectType": "Image (JPG)"
+        },
+        {
+         "objectFilename": "ag-av-7349218-20070002f-v29543-2015_003.jpg",
+         "objectUrl": "https://catalog.archives.gov/medialive/42/3261/24326142/content/presidential-libraries/foia/2007-0002-F/ag-av-7349218-20070002f-v29543-2015_003.jpg",
+         "objectFileSize": 674074,
+         "objectId": "24330278",
+         "objectType": "Image (JPG)"
+        }
+       ],
+       "ancestors": [
+        {
+         "collectionIdentifier": "WJC-AG-PO",
+         "levelOfDescription": "collection",
+         "title": "Vice Presidential Records of the White House Photograph Office (Clinton Administration)",
+         "naId": 7349214
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "President (1993-2001 : Clinton). White House Photograph Office. ( 01/20/1993 - 01/20/2001)"
+          }
+         ],
+         "title": "Vice Presidential Photographs",
+         "naId": 7349218
+        }
+       ],
+       "scopeAndContentNote": "This contact sheet contains photographs of President Clinton and Vice President Gore attending a gathering at a private residence.",
+       "naId": 24326142
+      }
+     }
+    },
+    {
+     "_index": "nac-records4",
+     "_id": "176210497",
+     "_source": {
+      "record": {
+       "accessionNumbers": [
+        "TR-0029-2018-0012"
+       ],
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "2010 Census Tract Reference Map for Fairfax city, Virginia",
+       "physicalOccurrences": [
+        {
+         "extent": "1 map file and 1 electronic documentation file",
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Electronic Records"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "generalRecordsTypes": [
+        "Maps and Charts"
+       ],
+       "generalNotes": [
+        "The agency provided each map file and electronic documentation as individual files. NARA packaged the files into a single container for access purposes."
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "dc10ct_c51600_fairfax_city.zip",
+         "objectUrl": "https://catalog.archives.gov/medialz/electronic-records/rg-029/DC10RefMap/CT/dc10ct_c51600_fairfax_city.zip",
+         "objectFileSize": 432737,
+         "objectId": "176210498",
+         "objectType": "ZIP"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 29,
+         "title": "Records of the Bureau of the Census",
+         "naId": 358
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "Department of Commerce. Bureau of the Census. Office of the Associate Director for Decennial Census. Geography Division. (01/1987 - 07/15/2011)"
+          }
+         ],
+         "title": "Census Tract Reference Maps from the 23rd Census of Population and Housing",
+         "naId": 159010386
+        },
+        {
+         "levelOfDescription": "fileUnit",
+         "title": "[Decennial] Census of Population and Housing, 2010: Census Tract Reference Maps for Virginia",
+         "naId": 166883482
+        }
+       ],
+       "naId": 176210497
+      }
+     }
+    }
+   ]
+  },
+  "aggregations": {
+   "typeOfMaterials": {
+    "doc_count_error_upper_bound": 0,
+    "sum_other_doc_count": 0,
+    "buckets": [
+     {
+      "key": "Textual Records",
+      "doc_count": 15944
+     },
+     {
+      "key": "Photographs and other Graphic Materials",
+      "doc_count": 100
+     },
+     {
+      "key": "Data Files",
+      "doc_count": 88
+     },
+     {
+      "key": "Maps and Charts",
+      "doc_count": 48
+     }
+    ]
+   },
+   "recordGroupNumber": {
+    "doc_count": 34509,
+    "filter_recordGroups": {
+     "doc_count": 15629,
+     "recordGroups": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 255,
+      "buckets": [
+       {
+        "key": "64: Records of the National Archives and Records Administration",
+        "doc_count": 4311
+       },
+       {
+        "key": "29: Records of the Bureau of the Census",
+        "doc_count": 2082
+       },
+       {
+        "key": "24: Records of the Bureau of Naval Personnel",
+        "doc_count": 1219
+       },
+       {
+        "key": "109: War Department Collection of Confederate Records",
+        "doc_count": 1082
+       }
+      ]
+     }
+    }
+   },
+   "levelOfDescription": {
+    "doc_count_error_upper_bound": 0,
+    "sum_other_doc_count": 0,
+    "buckets": [
+     {
+      "key": "fileUnit",
+      "doc_count": 13688
+     },
+     {
+      "key": "item",
+      "doc_count": 2400
+     }
+    ]
+   },
+   "availableOnline": {
+    "doc_count": 16088
+   },
+   "objectType": {
+    "doc_count_error_upper_bound": 0,
+    "sum_other_doc_count": 0,
+    "buckets": [
+     {
+      "key": "Image (TIFF)",
+      "doc_count": 7853
+     },
+     {
+      "key": "Image (JPG)",
+      "doc_count": 7046
+     },
+     {
+      "key": "Portable Document File (PDF)",
+      "doc_count": 6389
+     },
+     {
+      "key": "ASCII Text",
+      "doc_count": 81
+     }
+    ]
+   }
+  }
+ },
+ "statusCode": 200
+}

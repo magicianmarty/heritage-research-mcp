@@ -39,7 +39,9 @@ Keys are issued on request by email. NARA does not state a turnaround, so ask ea
    > Catalog username: YOUR_USERNAME
    > Use: personal historical research through an MCP server that makes targeted, low-volume queries (it counts requests and stops at the monthly limit).
 
-3. Store it as above. It is sent in the `x-api-key` header.
+3. Store it as above. It is sent in the `x-api-key` header. The reply email gives a key, the header to use and a 10,000-calls-a-month limit.
+
+If the key is wrong or missing, NARA does not answer with an error: it returns its website's HTML page with HTTP 200. The server recognises that and says so; `heritage-research-mcp doctor --live` is the quickest check. The same page comes back for a query with parentheses next to AND, OR or NOT.
 
 Terms worth knowing, all enforced by this server:
 

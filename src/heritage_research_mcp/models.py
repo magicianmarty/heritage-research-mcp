@@ -40,6 +40,8 @@ class Media(BaseModel):
     label: str | None = None
     thumbnail_url: str | None = None
     license: str | None = None
+    id: str | None = None
+    text_excerpt: str | None = None
 
 
 class Record(BaseModel):
@@ -80,7 +82,7 @@ class Record(BaseModel):
 BRIEF_DESCRIPTION = 300
 BRIEF_SUBJECTS = 6
 BRIEF_MEDIA = 2
-BRIEF_EXTRA = {"url_id", "has_extracted_text"}
+BRIEF_EXTRA = {"url_id", "has_extracted_text", "record_group", "series", "access"}
 
 
 def _clip(text: str | None, limit: int) -> str | None:

@@ -39,7 +39,7 @@ async def _search_one(
     raise HeritageError(f"unknown source {name!r}; valid sources are {sorted(SOURCES)}")
 
 
-async def get_record_dict(source: str, record_id: str) -> dict[str, Any]:
+async def get_record_dict(source: str, record_id: str, *, all_media: bool = False) -> dict[str, Any]:
     if source == "internet_archive":
         return (await ia_src.get_item(record_id))["record"]
     if source == "commons":
@@ -49,7 +49,8 @@ async def get_record_dict(source: str, record_id: str) -> dict[str, Any]:
     if source == "nara":
         if not record_id.strip().isdigit():
             raise HeritageError("a NARA id is the numeric naId")
-        return (await nara_src.get_record(int(record_id)))["record"]
+        limit = None if all_media else nara_src.MEDIA_LIMIT
+        return (await nara_src.get_record(int(record_id), media_limit=limit))["record"]
     if source == "smithsonian":
         return (await si_src.get_content(record_id))["record"]
     raise HeritageError(f"unknown source {source!r}; valid sources are {sorted(SOURCES)}")
@@ -63,7 +64,7 @@ async def download_from_record(
     overwrite: bool = False,
     max_mb: int | None = None,
 ) -> dict[str, Any]:
-    record = await get_record_dict(source, record_id)
+    record = await get_record_dict(source, record_id, all_media=True)
     media = record.get("media") or []
     if not media:
         raise HeritageError("this record has no downloadable media")

@@ -138,3 +138,33 @@ async def test_a_firewall_page_is_reported_in_words_not_html(api) -> None:
     with pytest.raises(SourceHTTPError) as caught:
         await http.get_json("smithsonian", URL)
     assert "web firewall" in str(caught.value) and "<" not in str(caught.value)
+
+
+async def test_error_pages_are_cleaned_even_when_cut_off_inside_a_tag(api) -> None:
+    page = b'<html><body>Temporarily Offline <img src="data:image/jpeg;base64,' + b"A" * 6000
+    api.get(URL).mock(return_value=httpx.Response(503, content=page))
+    with pytest.raises(SourceHTTPError) as caught:
+        await http.request("commons", URL, retries=0)
+    text = str(caught.value)
+    assert "Temporarily Offline" in text and "base64" not in text and "AAAA" not in text
+
+
+async def test_json_error_bodies_show_their_description(api) -> None:
+    body = {
+        "title": "invalid filter",
+        "description": "only these are permitted: 'A', 'B'",
+        "action": "Fix it.",
+    }
+    api.get(URL).mock(return_value=httpx.Response(422, json=body))
+    with pytest.raises(SourceHTTPError) as caught:
+        await http.request("nara", URL, retries=0)
+    assert "only these are permitted: 'A', 'B'" in str(caught.value) and "Fix it." in str(caught.value)
+
+
+async def test_nested_json_error_bodies_are_read_too(api) -> None:
+    api.get(URL).mock(
+        return_value=httpx.Response(422, json={"error": {"message": "", "description": "bad date format"}})
+    )
+    with pytest.raises(SourceHTTPError) as caught:
+        await http.request("nara", URL, retries=0)
+    assert "bad date format" in str(caught.value)

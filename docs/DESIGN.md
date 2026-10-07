@@ -38,7 +38,7 @@ Adapters are plain async functions returning dicts, so they are testable without
 
 ## Testing
 
-Everything runs offline against `respx` mocks. The `ia_*`, `commons_*`, `dpla_live` and `si_live_*` fixtures are trimmed real responses, and they have caught real mismatches (Smithsonian mixes authors and subjects in one list; DPLA carries its own rights category). `dpla_items.json`, `nara_search.json`, `si_search.json` and `si_terms.json` are hand-written from the providers' documented shapes; `nara_search.json` should be replaced by a real capture once a NARA key is available. `heritage-research-mcp doctor --live` and the `Live smoke` workflow check the real services.
+Everything runs offline against `respx` mocks. The `ia_*`, `commons_*`, `dpla_live` and `si_live_*` fixtures are trimmed real responses, and they have caught real mismatches (Smithsonian mixes authors and subjects in one list; DPLA carries its own rights category). `nara_live_*.json` are trimmed captures from 7 October 2026; the hand-written NARA fixture they replaced had invented fields (`creators`, a record-level `recordGroupNumber`) the real API does not send, and missed `contributors`, `otherExtractedText`, the `1234` file-size placeholder and the HTML-with-200 failure for a bad key. `dpla_items.json`, `si_search.json` and `si_terms.json` are still hand-written from the providers' documented shapes. `heritage-research-mcp doctor --live` and the `Live smoke` workflow check the real services.
 
 ## Ideas not built
 

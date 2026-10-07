@@ -32,23 +32,31 @@ def register(mcp: FastMCP) -> None:
         One page per call, at most 100 records: the API's terms forbid scraping or bulk download. The remaining
         monthly budget is visible in usage_report. Results include the attribution NARA requires.
 
+        The first page also returns `facets`: how many hits sit in each type of material and record group, so
+        a broad query can be narrowed with `record_group` or `type_of_materials`. Each record shows its record
+        group and series; `nara_get_record` adds a ready-made citation.
+
         Args:
-            q: Search words; supports AND, OR, NOT, wildcards (*) and "exact phrases".
+            q: Search words. AND, OR, NOT, wildcards (mosb*) and "exact phrases" work. Do not put parentheses
+                next to AND, OR or NOT: NARA answers with its website instead of data.
             title: Words in the title.
-            start_date: Earliest date (YYYY, YYYY-MM or YYYY-MM-DD).
-            end_date: Latest date.
+            start_date: Earliest date (YYYY, YYYY-MM or YYYY-MM-DD). Records without a date never match a date
+                filter, and much of the catalogue is undated.
+            end_date: Latest date, same formats. Either bound alone is fine.
             available_online: Only records with digitised objects.
-            type_of_materials: e.g. Photographs and other Graphic Materials, Textual Records, Maps.
-            level: series, fileUnit, item, recordGroup, etc.
-            record_group: Record group number, e.g. 109 (Confederate records).
-            ancestor_na_id: Only records beneath this naId.
-            geographic: Geographic subject heading.
-            creators: Creator heading.
-            include_extracted_text: Include OCR text in the results where NARA has it.
+            type_of_materials: One of Textual Records, Photographs and other Graphic Materials, Maps and Charts,
+                Moving Images, Sound Recordings, Architectural and Engineering Drawings, Data Files, Artifacts or
+                Web Pages. Short forms such as map, photo or text are accepted.
+            level: recordGroup, collection, series, fileUnit or item.
+            record_group: Record group number, e.g. 109 (Confederate records) or 94 (Adjutant General's Office).
+            ancestor_na_id: Only records beneath this naId (a series or file unit).
+            geographic: Geographic subject heading, e.g. Virginia.
+            creators: Creator heading, e.g. Brady.
+            include_extracted_text: Add a 300-character OCR excerpt to each file that has OCR text. Full text:
+                nara_extracted_text.
             limit: Results per page (1 to 100).
             page: Page number from 1.
-            kind: text, image, map, audio or video, mapped to NARA's type of materials (unverified until a key
-                has been used against the live service).
+            kind: text, image, map, audio or video, mapped to NARA's type of materials.
         """
         return await nara.search(
             q=q, title=title, start_date=start_date, end_date=end_date, available_online=available_online,
@@ -59,7 +67,12 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     async def nara_get_record(na_id: int) -> dict[str, Any]:
-        """Get one Catalog record by its numeric naId, with digital objects and ancestry. Needs NARA_API_KEY."""
+        """Get one Catalog record by its numeric naId. Needs NARA_API_KEY.
+
+        Returns the digital files (each with an `id` for nara_extracted_text, first 25 only on long files), the
+        use and access restrictions in NARA's own words, the series and record group, related links such as
+        Fold3 or microfilm publications, and a `citation` string in archival form.
+        """
         return await nara.get_record(na_id)
 
     @mcp.tool()
@@ -69,10 +82,21 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     async def nara_extracted_text(
-        na_id: int, object_id: int | None = None, limit: int = 5, page: int = 1
+        na_id: int, object_id: int | None = None, limit: int = 5, page: int = 1, max_chars: int = 4000
     ) -> dict[str, Any]:
-        """Get OCR text extracted from a record's digital objects. Needs NARA_API_KEY.
+        """Get the text NARA holds for a record's scans, one entry per file. Needs NARA_API_KEY.
 
-        The response is passed through from NARA with long strings shortened to 4,000 characters.
+        Each file can have machine `ocr` and `transcriptions` contributed by NARA partners or volunteers (for
+        example FamilySearch on pension files); some are AI-generated and flagged so. Treat both as a finding
+        aid for names and places, not as a transcript to quote.
+
+        Args:
+            na_id: The record's naId.
+            object_id: One file's `id` from the record's media list, to read just that scan.
+            limit: Files per page (1 to 50).
+            page: Page number from 1, for records with many scans.
+            max_chars: Longest text returned per item (200 to 50,000); `ocr_chars` and `chars` give full lengths.
         """
-        return await nara.extracted_text(na_id, object_id=object_id, limit=limit, page=page)
+        return await nara.extracted_text(
+            na_id, object_id=object_id, limit=limit, page=page, max_chars=max_chars
+        )

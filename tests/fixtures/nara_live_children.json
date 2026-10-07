@@ -1,0 +1,310 @@
+{
+ "body": {
+  "hits": {
+   "total": {
+    "value": 6074,
+    "relation": "eq"
+   },
+   "max_score": null,
+   "hits": [
+    {
+     "_index": "nac-records2",
+     "_id": "530483",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "American Civil War, 1861-1865",
+         "authorityType": "topicalSubject",
+         "naId": 10638535
+        }
+       ],
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "US Military Operators, in front of Petersburg, VA. Aug. 1864",
+       "coverageEndDate": {
+        "dateQualifier": "ca.",
+        "year": 1865,
+        "logicalDate": "1865-12-31"
+       },
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Still Pictures"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "coverageStartDate": {
+        "dateQualifier": "ca.",
+        "year": 1860,
+        "logicalDate": "1860-01-01"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "111-B-7211",
+       "variantControlNumbers": [
+        {
+         "number": "NWDNS-111-B-7211",
+         "type": "NAIL Control Number"
+        }
+       ],
+       "contributors": [
+        {
+         "heading": "Brady National Photographic Art Gallery (Washington, D.C.) (1858 - ?)",
+         "contributorType": "Photographer",
+         "authorityType": "organization",
+         "establishDate": {
+          "year": 1858,
+          "logicalDate": "1858-01-01"
+         },
+         "naId": 10450019
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "08-0117a.gif",
+         "objectUrl": "https://catalog.archives.gov/medialive/83/5304/530483/content/arcmedia/media/images/8/2/08-0117a.gif",
+         "objectFileSize": 106397,
+         "objectId": "15054832",
+         "objectType": "Image (GIF)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 111,
+         "title": "Records of the Office of the Chief Signal Officer",
+         "naId": 440
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of the Chief Signal Officer. (08/01/1866 - 09/18/1947)"
+          }
+         ],
+         "title": "Mathew Brady Photographs of Civil War-Era Personalities and Scenes",
+         "naId": 524418
+        }
+       ],
+       "naId": 530483
+      }
+     }
+    },
+    {
+     "_index": "nac-records2",
+     "_id": "530481",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "American Civil War, 1861-1865",
+         "authorityType": "topicalSubject",
+         "naId": 10638535
+        }
+       ],
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "Battlefield of Antietam (MD), Signal Section on Elk Mountain.",
+       "coverageEndDate": {
+        "dateQualifier": "ca.",
+        "year": 1865,
+        "logicalDate": "1865-12-31"
+       },
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Still Pictures"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "coverageStartDate": {
+        "dateQualifier": "ca.",
+        "year": 1860,
+        "logicalDate": "1860-01-01"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "111-B-7209",
+       "variantControlNumbers": [
+        {
+         "number": "NWDNS-111-B-7209",
+         "type": "NAIL Control Number"
+        }
+       ],
+       "contributors": [
+        {
+         "heading": "Brady National Photographic Art Gallery (Washington, D.C.) (1858 - ?)",
+         "contributorType": "Photographer",
+         "authorityType": "organization",
+         "establishDate": {
+          "year": 1858,
+          "logicalDate": "1858-01-01"
+         },
+         "naId": 10450019
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "08-0115a.gif",
+         "objectUrl": "https://catalog.archives.gov/medialive/81/5304/530481/content/arcmedia/media/images/8/2/08-0115a.gif",
+         "objectFileSize": 106099,
+         "objectId": "15054828",
+         "objectType": "Image (GIF)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 111,
+         "title": "Records of the Office of the Chief Signal Officer",
+         "naId": 440
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of the Chief Signal Officer. (08/01/1866 - 09/18/1947)"
+          }
+         ],
+         "title": "Mathew Brady Photographs of Civil War-Era Personalities and Scenes",
+         "naId": 524418
+        }
+       ],
+       "naId": 530481
+      }
+     }
+    },
+    {
+     "_index": "nac-records2",
+     "_id": "530478",
+     "_source": {
+      "record": {
+       "levelOfDescription": "item",
+       "recordType": "description",
+       "subjects": [
+        {
+         "heading": "American Civil War, 1861-1865",
+         "authorityType": "topicalSubject",
+         "naId": 10638535
+        }
+       ],
+       "useRestriction": {
+        "status": "Unrestricted"
+       },
+       "audiovisual": "False",
+       "title": "Phil. H. Sheridan",
+       "coverageEndDate": {
+        "dateQualifier": "ca.",
+        "year": 1865,
+        "logicalDate": "1865-12-31"
+       },
+       "physicalOccurrences": [
+        {
+         "referenceUnits": [
+          {
+           "name": "National Archives at College Park - Still Pictures"
+          }
+         ]
+        }
+       ],
+       "accessRestriction": {
+        "status": "Unrestricted"
+       },
+       "coverageStartDate": {
+        "dateQualifier": "ca.",
+        "year": 1860,
+        "logicalDate": "1860-01-01"
+       },
+       "generalRecordsTypes": [
+        "Photographs and other Graphic Materials"
+       ],
+       "localIdentifier": "111-B-7205",
+       "variantControlNumbers": [
+        {
+         "number": "NWDNS-111-B-7205",
+         "type": "NAIL Control Number"
+        },
+        {
+         "number": "siDiscovering the Civil War",
+         "type": "Search Identifier"
+        }
+       ],
+       "contributors": [
+        {
+         "heading": "Brady National Photographic Art Gallery (Washington, D.C.) (1858 - ?)",
+         "contributorType": "Photographer",
+         "authorityType": "organization",
+         "establishDate": {
+          "year": 1858,
+          "logicalDate": "1858-01-01"
+         },
+         "naId": 10450019
+        }
+       ],
+       "digitalObjects": [
+        {
+         "objectFilename": "08-0112a.gif",
+         "objectUrl": "https://catalog.archives.gov/medialive/78/5304/530478/content/arcmedia/media/images/8/2/08-0112a.gif",
+         "objectFileSize": 79420,
+         "objectId": "15054725",
+         "objectType": "Image (GIF)"
+        }
+       ],
+       "ancestors": [
+        {
+         "levelOfDescription": "recordGroup",
+         "recordGroupNumber": 111,
+         "title": "Records of the Office of the Chief Signal Officer",
+         "naId": 440
+        },
+        {
+         "levelOfDescription": "series",
+         "creators": [
+          {
+           "creatorType": "Most Recent",
+           "heading": "War Department. Office of the Chief Signal Officer. (08/01/1866 - 09/18/1947)"
+          }
+         ],
+         "title": "Mathew Brady Photographs of Civil War-Era Personalities and Scenes",
+         "naId": 524418
+        }
+       ],
+       "naId": 530478
+      }
+     }
+    }
+   ]
+  }
+ },
+ "statusCode": 200,
+ "headers": {
+  "date": "Wed, 07 Oct 2026 03:18:14 GMT",
+  "content-type": "application/json; charset=UTF-8",
+  "content-length": "11195",
+  "connection": "keep-alive",
+  "access-control-allow-origin": "*"
+ }
+}

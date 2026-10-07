@@ -1,0 +1,44 @@
+{
+ "naId": "196288881",
+ "page": 1,
+ "limit": 20,
+ "total": 2,
+ "digitalObjects": [
+  {
+   "objectId": "196288882",
+   "otherExtractedText": {
+    "contributionId": "b04223e7-eb9b-4836-bce4-bb0fe80a2ead",
+    "createdAt": "2024-11-21 17:30:32",
+    "contribution": "Va\nMosby, Hezekiah\nW\nMosley\nS. 13959\ncarded",
+    "contributor": {
+     "naraStaff": true,
+     "partnerFullName": "FamilySearch"
+    },
+    "recordType": "contribution",
+    "source": "naraPartner",
+    "aiMachineGenerated": "1",
+    "target": {
+     "naId": 196288881
+    }
+   }
+  },
+  {
+   "objectId": "196288883",
+   "otherExtractedText": {
+    "contributionId": "fd3aad9b-aba7-4dab-822f-fe39b29f147f",
+    "createdAt": "2024-11-21 17:30:32",
+    "contribution": "Mosby, June\nJohn\n& Littleberry Senior\nSee claim of Wade Mosby W. 3856",
+    "contributor": {
+     "naraStaff": true,
+     "partnerFullName": "FamilySearch"
+    },
+    "recordType": "contribution",
+    "source": "naraPartner",
+    "aiMachineGenerated": "1",
+    "target": {
+     "naId": 196288881
+    }
+   }
+  }
+ ]
+}

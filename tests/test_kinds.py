@@ -121,14 +121,14 @@ async def test_explicit_dpla_filters_win_over_kind(api, set_key) -> None:
     assert params["sourceResource.type"] == "text" and params["sourceResource.subject.name"] == "Railroads"
 
 
-async def test_nara_translates_kind_and_says_it_is_unverified(api, set_key) -> None:
+async def test_nara_translates_kind_and_lets_an_explicit_material_win(api, set_key) -> None:
     set_key("nara")
-    route = api.get(NARA).mock(return_value=httpx.Response(200, json=load("nara_search.json")))
+    route = api.get(NARA).mock(return_value=httpx.Response(200, json=load("nara_live_search.json")))
     out = await nara.search(q="herndon", kind="map")
     assert route.calls[0].request.url.params["typeOfMaterials"] == "Maps and Charts"
-    assert "not yet verified" in out["kind_applied"]
-    await nara.search(q="herndon", kind="map", type_of_materials="Architectural Drawings")
-    assert route.calls[1].request.url.params["typeOfMaterials"] == "Architectural Drawings"
+    assert out["kind_applied"] == "typeOfMaterials='Maps and Charts'"
+    await nara.search(q="herndon", kind="map", type_of_materials="Architectural and Engineering Drawings")
+    assert route.calls[1].request.url.params["typeOfMaterials"] == "Architectural and Engineering Drawings"
 
 
 async def test_smithsonian_adds_the_kind_to_the_query(api, set_key) -> None:
