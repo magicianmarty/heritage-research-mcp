@@ -271,18 +271,53 @@ async def test_version_three_is_opt_in(api, set_key, monkeypatch: pytest.MonkeyP
     assert route.call_count == 1
 
 
-async def test_a_bad_key_or_parentheses_get_a_useful_message_not_a_parse_error(api, set_key) -> None:
-    set_key("nara")
-    api.get(SEARCH).mock(
-        return_value=httpx.Response(
-            200, headers={"content-type": "text/html"}, text="<!doctype html><html><head></head></html>"
-        )
+def website_instead_of_data() -> httpx.Response:
+    return httpx.Response(
+        200, headers={"content-type": "text/html"}, text="<!doctype html><html><head></head></html>"
     )
-    with pytest.raises(SourceHTTPError) as caught:
+
+
+async def test_parentheses_that_trip_the_firewall_are_named_as_the_likely_cause(api, set_key) -> None:
+    set_key("nara")
+    api.get(SEARCH).mock(return_value=website_instead_of_data())
+    with pytest.raises(HeritageError) as caught:
         await nara.search(q="mosby AND (rangers)")
     message = str(caught.value)
-    assert "website instead of data" in message and "NARA_API_KEY" in message and "parentheses" in message
-    assert "not JSON" not in message
+    assert "website instead of data" in message and "parentheses" in message and "key is fine" in message
+    assert "HTTP" not in message and "not JSON" not in message and "monthly quota" in message
+
+
+async def test_without_parentheses_a_website_reply_points_at_the_key(api, set_key) -> None:
+    set_key("nara")
+    api.get(SEARCH).mock(return_value=website_instead_of_data())
+    with pytest.raises(HeritageError) as caught:
+        await nara.search(q="mosby")
+    assert "NARA_API_KEY" in str(caught.value) and "parentheses" not in str(caught.value)
+
+
+@pytest.mark.parametrize("size", [1234, 123456, 5242880])
+async def test_placeholder_file_sizes_are_left_out(served, size) -> None:
+    data = load("nara_live_search.json")
+    record = data["body"]["hits"]["hits"][0]["_source"]["record"]
+    record["digitalObjects"][0]["objectFileSize"] = size
+    served.mock(return_value=httpx.Response(200, json=data))
+    assert "bytes" not in (await nara.search(q="x"))["records"][0]["media"][0]
+
+
+async def test_a_date_filter_comes_with_a_warning_that_nara_matches_loosely(served) -> None:
+    assert "date_note" not in await nara.search(q="x")
+    out = await nara.search(q="x", start_date="1861")
+    assert "parent series" in out["date_note"] and "own `date`" in out["date_note"]
+
+
+async def test_an_empty_result_names_the_filters_that_may_have_excluded_everything(api, set_key) -> None:
+    set_key("nara")
+    empty = {"body": {"hits": {"total": {"value": 0}, "hits": []}}}
+    api.get(SEARCH).mock(return_value=httpx.Response(200, json=empty))
+    out = await nara.search(q="Fairfax County", geographic="Virginia", start_date="1861")
+    assert out["records"] == [] and "(geographic, dates)" in out["hint"] and "dates" in out["hint"]
+    assert "q instead" in out["hint"]
+    assert "hint" not in await nara.search(q="Fairfax County")
 
 
 async def test_validation_errors_show_what_nara_will_accept(api, set_key) -> None:

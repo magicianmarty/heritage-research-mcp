@@ -63,7 +63,9 @@ NARA holds the federal paper trail: Official Records, Adjutant General and Quart
 - Each record names its **record group and series**, keeps photographer or mapmaker credits, keeps "ca." on estimated dates, and puts places apart from subjects. `nara_get_record` adds a ready-made archival **`citation`**, the use and access restrictions in NARA's own words, related links (Fold3, microfilm publication numbers) and the creating office.
 - `nara_extracted_text` returns each scan's machine **OCR** and any **partner or volunteer transcriptions** (FamilySearch's, on pension files), labelled, with AI-generated ones flagged. Use them to find names, then read the scan.
 - Restrictions are reported honestly: "Unrestricted" is `free`; "Restricted - Fully/Partly" is `restricted`; "Restricted - Possibly" and "Undetermined" are `unknown`, because NARA is flagging a *possible* copyright or donor issue, not stating one.
-- Date filters need both bounds at NARA's end; this server fills the open end, so `start_date` alone works. Undated records never match a date filter, and much of the catalogue is undated.
+- Date filters need both bounds at NARA's end; this server fills the open end, so `start_date` alone works. NARA also matches records whose parent series or file spans the range, so results include undated records and some outside it: the response says so, and each record's own `date` is the one to read.
+- NARA's file sizes are sometimes placeholders (1234, 123456, 5242880 on files that were really 5 to 8 MB); those are left out rather than repeated.
+- Several search words must all match, so quote a phrase (`"Fairfax County"`). Parentheses next to AND or OR often make NARA's firewall answer with its website; the error says so.
 
 ## Tools
 

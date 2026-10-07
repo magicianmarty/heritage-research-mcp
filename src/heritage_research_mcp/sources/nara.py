@@ -19,7 +19,7 @@ from urllib.parse import urlsplit
 from .. import config
 from .. import kinds as K
 from .. import rights as R
-from ..errors import HeritageError, NotFound, SourceHTTPError
+from ..errors import HeritageError, NotFound
 from ..http import Resp, http
 from ..models import Kind, Media, MediaKind, Record, Rights
 from ..util import as_int, as_str, clamp, listify, strs, truncate, uniq
@@ -30,6 +30,7 @@ ATTRIBUTION = "This product uses the National Archives Catalog API but is not en
 MEDIA_LIMIT = 25
 _DATE = re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
 _OPEN_START, _OPEN_END = "1000-01-01", "2100-12-31"
+_SIZE_PLACEHOLDERS = {1234, 12345, 123456, 1234567, 5242880}  # seen on files whose real size was 5 to 8 MB
 _NOTE = (
     "US federal records are often public domain, but donated or third-party material can carry restrictions. "
     "Read the record's own use restriction."
@@ -108,12 +109,19 @@ def _total(data: Any) -> int | None:
 async def _get(url: str, params: dict[str, Any]) -> Any:
     resp: Resp = await http.request(NAME, url, params=params, headers=_headers())
     if "json" not in resp.headers.get("content-type", "").lower():
-        raise SourceHTTPError(
-            NAME,
-            resp.status,
-            "NARA answered with its website instead of data. It does that when the API key is missing or wrong "
-            "(check NARA_API_KEY, or run `heritage-research-mcp doctor --live`) and when a query has "
-            "parentheses next to AND, OR or NOT (rewrite it without them).",
+        query = str(params.get("q") or "")
+        if "(" in query or ")" in query:
+            cause = (
+                "Its firewall refuses many queries that put parentheses next to AND or OR (the key is fine): "
+                "rewrite without parentheses, for example `mosby AND rangers`, or run two searches."
+            )
+        else:
+            cause = (
+                "That is what it does for a missing or wrong API key: check NARA_API_KEY, or run "
+                "`heritage-research-mcp doctor --live`."
+            )
+        raise HeritageError(
+            f"nara answered with its website instead of data. {cause} The request still counted against the monthly quota."
         )
     return resp.json()
 
@@ -264,7 +272,7 @@ def _media(obj: Any, *, excerpts: bool) -> Media | None:
         kind=_media_kind(filename, label),
         url=url,
         mime=mimetypes.guess_type(filename)[0],
-        bytes=None if size == 1234 else size,  # NARA stores 1234 where it has no real size
+        bytes=None if size in _SIZE_PLACEHOLDERS else size,
         label=truncate(as_str(obj.get("objectDescription")), 160) or label or filename,
         id=as_str(obj.get("objectId")),
         text_excerpt=truncate(as_str(obj.get("extractedText")), 300) if excerpts else None,
@@ -414,6 +422,14 @@ def _facets(data: Any) -> dict[str, Any]:
     return {k: v for k, v in out.items() if v}
 
 
+def _hint(used: list[str]) -> str:
+    return (
+        f"No record matched every filter ({', '.join(used)}). geographic and creators match NARA's subject and "
+        "creator headings, which many records (maps and military files especially) lack: put the place or "
+        "name in q instead. Dropping one filter at a time finds the one that excludes everything."
+    )
+
+
 async def search(
     *,
     q: str | None = None,
@@ -467,6 +483,22 @@ async def search(
     }
     if params["page"] == 1:
         out["facets"] = _facets(data)
+    if "startDate" in params:
+        out["date_note"] = (
+            "NARA's date filter also matches records whose parent series or file spans the range, so some hits "
+            "are undated or fall outside it: check each record's own `date`."
+        )
+    tool_names = {
+        "title": "title", "levelOfDescription": "level", "recordGroupNumber": "record_group",
+        "geographicReference": "geographic", "creators": "creators", "ancestorNaId": "ancestor_na_id",
+    }  # fmt: skip
+    used = [
+        tool_names[name] for name, value in given.items() if name in tool_names and value not in (None, "")
+    ]
+    if "startDate" in params:
+        used.append("dates")
+    if not records and used:
+        out["hint"] = _hint(used)
     if wanted:
         out["kind_applied"] = applied or "(the explicit type_of_materials decides)"
     return out

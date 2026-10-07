@@ -32,26 +32,29 @@ def register(mcp: FastMCP) -> None:
         One page per call, at most 100 records: the API's terms forbid scraping or bulk download. The remaining
         monthly budget is visible in usage_report. Results include the attribution NARA requires.
 
-        The first page also returns `facets`: how many hits sit in each type of material and record group, so
-        a broad query can be narrowed with `record_group` or `type_of_materials`. Each record shows its record
-        group and series; `nara_get_record` adds a ready-made citation.
+        The first page also returns `facets`: the types of material and the six largest record groups among the
+        hits (not every group), so a broad query can be narrowed with `record_group` or `type_of_materials`.
+        Each record shows its record group and series; `nara_get_record` adds a ready-made citation.
 
         Args:
-            q: Search words. AND, OR, NOT, wildcards (mosb*) and "exact phrases" work. Do not put parentheses
-                next to AND, OR or NOT: NARA answers with its website instead of data.
+            q: Search words. Several words must all match, so use "double quotes" for an exact phrase
+                ("Fairfax County" rather than Fairfax County, which also finds Fairfax, Oklahoma). OR, NOT and
+                wildcards (mosb*) work. Avoid parentheses next to AND or OR: NARA's firewall often refuses them.
             title: Words in the title.
-            start_date: Earliest date (YYYY, YYYY-MM or YYYY-MM-DD). Records without a date never match a date
-                filter, and much of the catalogue is undated.
+            start_date: Earliest date (YYYY, YYYY-MM or YYYY-MM-DD). NARA also matches records whose parent
+                series or file spans the range, so results include undated records and some outside the range:
+                read each record's own `date`.
             end_date: Latest date, same formats. Either bound alone is fine.
-            available_online: Only records with digitised objects.
+            available_online: Only records with a digital copy. A record without `media` has none online.
             type_of_materials: One of Textual Records, Photographs and other Graphic Materials, Maps and Charts,
                 Moving Images, Sound Recordings, Architectural and Engineering Drawings, Data Files, Artifacts or
                 Web Pages. Short forms such as map, photo or text are accepted.
             level: recordGroup, collection, series, fileUnit or item.
             record_group: Record group number, e.g. 109 (Confederate records) or 94 (Adjutant General's Office).
             ancestor_na_id: Only records beneath this naId (a series or file unit).
-            geographic: Geographic subject heading, e.g. Virginia.
-            creators: Creator heading, e.g. Brady.
+            geographic: Geographic subject heading, e.g. Virginia. Many records have none (maps and military
+                files especially), so this can return nothing; a place name in `q` is more reliable.
+            creators: Creator heading, e.g. Brady. Same caution: only records with that heading match.
             include_extracted_text: Add a 300-character OCR excerpt to each file that has OCR text. Full text:
                 nara_extracted_text.
             limit: Results per page (1 to 100).
@@ -69,7 +72,9 @@ def register(mcp: FastMCP) -> None:
     async def nara_get_record(na_id: int) -> dict[str, Any]:
         """Get one Catalog record by its numeric naId. Needs NARA_API_KEY.
 
-        Returns the digital files (each with an `id` for nara_extracted_text, first 25 only on long files), the
+        Returns the digital files (each with an `id` for nara_extracted_text, first 25 only on long files; a
+        missing `bytes` means NARA's size was absent or a placeholder, not zero; no `media` means no digital
+        copy is online), the
         use and access restrictions in NARA's own words, the series and record group, related links such as
         Fold3 or microfilm publications, and a `citation` string in archival form.
         """
