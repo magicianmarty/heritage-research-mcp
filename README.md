@@ -10,11 +10,33 @@
 |---|---|---|
 | [Internet Archive](https://archive.org) | Scanned books, memoirs, regimental histories, official reports, and the **full text inside them** | none |
 | [Wikimedia Commons](https://commons.wikimedia.org) | Freely licensed photographs, maps and prints, with the licence read from each file | none |
-| [DPLA](https://dp.la) | Finding items held by US libraries, archives and museums | free |
-| [US National Archives Catalog](https://catalog.archives.gov) | Federal records, military and census material, with OCR text for many scans | free |
-| [Smithsonian Open Access](https://www.si.edu/openaccess) | Objects, photographs, archives and library items; CC0 images with direct high-resolution files | free |
+| [DPLA](https://dp.la) | Finding items held by US libraries, archives and museums | free, [emailed to you](docs/KEYS.md#dpla) |
+| [US National Archives Catalog](https://catalog.archives.gov) | Federal records, military and census material, with OCR text for many scans | free, [by email request](docs/KEYS.md#national-archives-catalog-nara) |
+| [Smithsonian Open Access](https://www.si.edu/openaccess) | Objects, photographs, archives and library items; CC0 images with direct high-resolution files | free, [self-service](docs/KEYS.md#smithsonian-open-access) |
 
 It was built for sourcing reference material where *"where did this come from, and may I reuse it?"* matters as much as finding it.
+
+## Quick start
+
+1. **Install** with the one command under [Install](#install). The Internet Archive and Commons work straight away, with no key.
+2. **Add the free keys you want** (DPLA, NARA, Smithsonian). [docs/KEYS.md](docs/KEYS.md) has the steps for each, and a source with no key is simply skipped.
+3. **Check it:** `heritage-research-mcp doctor --live` lists each source and makes one small real request to it.
+4. **Ask your assistant** something like:
+   - *"Find 1860s maps of Fairfax County, Virginia, and tell me which I may reuse."*
+   - *"Find the passage in Mosby's memoirs about the capture at Herndon Station, and quote it with the page."*
+   - *"Find Brady photographs of Union cavalry in the National Archives and give me archival citations."*
+   - *"Download the highest-resolution scan of that map, with its provenance."*
+
+## Which source for what
+
+| You want | Start with |
+|---|---|
+| A name, place or phrase **inside** a book, memoir or official report | `ia_fulltext_search`, then `ia_grep_text` and `ia_read_text` (Internet Archive) |
+| A photograph, map or print you may **reuse** | `search` with `kind` image or map: Commons and the Smithsonian state a licence per file |
+| **Federal records**: military files, War Department maps, Brady's photographs, pension files, census | `nara_search` (National Archives), with record-group counts to narrow |
+| Something held by a **library, archive or museum** near the place you care about | `dpla_search` (it finds items; the holder keeps the rights) |
+| **Objects and photographs** from the Smithsonian museums | `si_search` |
+| Not sure | `search`, which asks every ready source at once and labels each record's rights |
 
 ## What it looks like
 
@@ -108,7 +130,7 @@ claude mcp add heritage-research -- uvx --from git+https://github.com/magicianma
 }
 ```
 
-Pin a release for reproducible installs: `git+https://github.com/magicianmarty/heritage-research-mcp@v0.1.0`.
+Pin a release for reproducible installs: `git+https://github.com/magicianmarty/heritage-research-mcp@v0.2.0` (see the [releases](https://github.com/magicianmarty/heritage-research-mcp/releases)).
 
 **Hosted agent platforms.** Any platform that runs stdio MCP servers can run it. Use the same `uvx` command, pass the keys as environment variables from the platform's secret store, and set `HERITAGE_MCP_DISABLE_DOWNLOADS=1` (a hosted agent cannot read files the server downloads, so `download_media` is switched off and the text-returning tools do the work). To get files onto a machine you control, run the command-line downloader there (below) and let the agent call it through whatever shell access the platform gives it.
 
@@ -126,7 +148,7 @@ Works with both the 1.x and 2.x generations of the MCP Python SDK.
 
 ## Keys
 
-Three sources need a free key. [docs/KEYS.md](docs/KEYS.md) walks through each. Put a key in an environment variable or on one line in `~/.config/heritage-research-mcp/keys/<dpla|nara|smithsonian>` (mode 600). Files are the better choice: they stay out of client configs and shell history.
+Three sources need a free key: [DPLA](docs/KEYS.md#dpla), [NARA](docs/KEYS.md#national-archives-catalog-nara) and [Smithsonian](docs/KEYS.md#smithsonian-open-access). [docs/KEYS.md](docs/KEYS.md) walks through each, with what the key gives you and its limits. Put a key in an environment variable or on one line in `~/.config/heritage-research-mcp/keys/<dpla|nara|smithsonian>` (mode 600). Files are the better choice: they stay out of client configs and shell history.
 
 ```bash
 heritage-research-mcp doctor --live     # shows what is configured, then makes one small real request to each source
