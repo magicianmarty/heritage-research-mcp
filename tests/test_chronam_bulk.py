@@ -570,3 +570,14 @@ def test_a_multi_paper_archive_waits_for_every_wanted_paper_to_pass_the_range() 
     kept = bulk.index_stream(con, batch, chunks(blob), "1863-01-01", "1863-12-31", None)
     assert kept == 3 and con.execute("SELECT verified FROM done").fetchone()[0] == 1
     con.close()
+
+
+async def test_a_block_on_the_batch_list_does_not_stop_start_date_probes(api) -> None:
+    import time as _time
+
+    from heritage_research_mcp.http import http
+
+    serve_starts(api)
+    http._blocked["chronam_bulk"] = _time.monotonic() + 600
+    batch = {"batch": "vi_barbaro_ver01", "sha256": "ee" * 32, "lccns": [ABINGDON]}
+    assert await bulk.probe_start(batch) == (ABINGDON, "1862-10-03")

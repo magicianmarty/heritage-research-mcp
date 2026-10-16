@@ -25,6 +25,7 @@ MIN_INTERVAL = {
     "dispatch": 0.5,
     "chronam": 3.0,
     "chronam_bulk": 3.0,
+    "chronam_archive": 2.0,
 }
 RETRY_STATUS = {429, 500, 502, 503, 504}
 MAX_BACKOFF = 20.0

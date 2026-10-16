@@ -46,6 +46,7 @@ MAX_PAGE_BYTES = 4 * 1024 * 1024
 MANIFEST_MAX_AGE = 7 * 86400
 SUPPLEMENT_PER_RUN = 40
 LISTING_SOURCE = "chronam_bulk"
+ARCHIVE_SOURCE = "chronam_archive"
 
 _BATCH = re.compile(r"[A-Za-z0-9_]+")
 _LCCN = re.compile(r"[A-Za-z0-9]+")
@@ -277,7 +278,7 @@ async def probe_start(batch: dict[str, Any]) -> tuple[str, str] | None:
     for size in PROBE_BYTES:
         try:
             resp = await http.request(
-                LISTING_SOURCE,
+                ARCHIVE_SOURCE,
                 url,
                 headers={"Range": f"bytes=0-{size - 1}", "Accept": "*/*"},
                 max_bytes=size + 4096,
