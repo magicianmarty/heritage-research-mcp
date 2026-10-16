@@ -1,0 +1,45 @@
+- archive_created: '2019-07-30T13:56:34+00:00'
+  archive_name: ak_albatross_ver01.tar.bz2
+  batch: ak_albatross_ver01
+  batch_file: ak_albatross_ver01/data/batch_1.xml
+  identifier: service:ndnp:ak:batch_ak_albatross_ver01
+  ingested: '2017-08-11T18:26:37-04:00'
+  issue_count: 1701
+  lccns:
+  - sn84020657
+  - sn84021930
+  - sn94050023
+  page_count: 9001
+  sha1: 77aad2f8bbd1957bb6a46574342e7bd08647a7f8
+  sha256: 58c0fbc0a2470d9558427e236040e3b56435100842769b016e097d082a8a95a6
+  size: 768843638
+  url: https://chroniclingamerica.loc.gov/data/ocr/ak_albatross_ver01.tar.bz2
+- archive_created: '2019-06-27T04:25:24+00:00'
+  archive_name: vi_barbaro_ver01.tar.bz2
+  batch: vi_barbaro_ver01
+  batch_file: vi_barbaro_ver01/data/BATCH_1.xml
+  identifier: service:ndnp:vi:batch_vi_barbaro_ver01
+  ingested: '2014-11-21T16:32:30-05:00'
+  issue_count: 86
+  lccns:
+  - sn84025980
+  page_count: 336
+  sha1: 2949260274356acfb437b4b7eab0b716fed13638
+  sha256: ee6366bb9328736f2562d4530a44f6f836b69bccda7a406b51dfc9bd83c79eff
+  size: 38240760
+  url: https://chroniclingamerica.loc.gov/data/ocr/vi_barbaro_ver01.tar.bz2
+- archive_created: '2019-06-27T10:52:56+00:00'
+  archive_name: vi_hansel_ver01.tar.bz2
+  batch: vi_hansel_ver01
+  batch_file: vi_hansel_ver01/data/batch_1.xml
+  identifier: service:ndnp:vi:batch_vi_hansel_ver01
+  ingested: '2014-11-21T16:07:55-05:00'
+  issue_count: 466
+  lccns:
+  - sn84024720
+  - sn84024718
+  page_count: 1871
+  sha1: 25f69a3d806b8df0843fc6e3f66b50ba6e6d0bf1
+  sha256: 5bcadb6a62b71bd37d43311e7b0b5d4566b0dc0d9a7c931eca7a1869755b05fa
+  size: 283067993
+  url: https://chroniclingamerica.loc.gov/data/ocr/vi_hansel_ver01.tar.bz2

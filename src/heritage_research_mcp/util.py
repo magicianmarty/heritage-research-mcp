@@ -8,6 +8,8 @@ from collections.abc import Iterable
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+from .errors import HeritageError
+
 _TAG = re.compile(r"<[^>]+>")
 _SPACE = re.compile(r"\s+")
 
@@ -93,6 +95,36 @@ def truncate(text: str | None, limit: int) -> str | None:
         return None
     text = _SPACE.sub(" ", text).strip()
     return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
+
+
+_DATE_ARG = re.compile(r"\d{4}(-\d{2}(-\d{2})?)?")
+
+
+def date_range(date_from: str | None, date_to: str | None) -> tuple[str, str]:
+    """ISO bounds from partial dates: ('1863', '1863-06') -> ('1863-01-01', '1863-06-31'). Open ends are wide."""
+    for value in (date_from, date_to):
+        if value is not None and not _DATE_ARG.fullmatch(value):
+            raise HeritageError("dates are YYYY, YYYY-MM or YYYY-MM-DD")
+    first, last = date_from or "0000", date_to or "9999"
+    return first + "-01-01"[len(first) - 4 :], last + "-12-31"[len(last) - 4 :]
+
+
+def match_query(query: str) -> str:
+    """Words are ANDed, "quoted phrases" stay together and an uppercase OR joins alternatives (Mosby OR Moseby)."""
+    parts: list[str] = []
+    for phrase, word in re.findall(r'"([^"]+)"|(\S+)', query):
+        token = phrase or word
+        if not phrase and token == "OR":
+            if parts and parts[-1] != "OR":
+                parts.append("OR")
+            continue
+        if re.search(r"\w", token):
+            parts.append('"' + token.replace('"', " ") + '"')
+    while parts and parts[-1] == "OR":
+        parts.pop()
+    if not parts:
+        raise HeritageError("give at least one word to search for")
+    return " ".join(parts)
 
 
 def clamp(value: int, low: int, high: int) -> int:

@@ -38,9 +38,12 @@ def test_doctor_live_checks_each_ready_source(api, capsys: pytest.CaptureFixture
     api.get("https://commons.wikimedia.org/w/api.php").mock(
         return_value=httpx.Response(200, json=load("commons_search.json"))
     )
+    api.get("https://www.loc.gov/collections/chronicling-america/").mock(
+        return_value=httpx.Response(200, json=load("chronam_search.json"))
+    )
     assert doctor.run(live=True) == 0
     out = capsys.readouterr().out
-    assert out.count("ok ") == 2 and out.count("skipped (no key)") == 3
+    assert out.count("ok ") == 3 and out.count("skipped (no key)") == 3
 
 
 def test_doctor_live_exits_non_zero_when_a_source_fails(api, capsys: pytest.CaptureFixture[str]) -> None:
@@ -48,8 +51,29 @@ def test_doctor_live_exits_non_zero_when_a_source_fails(api, capsys: pytest.Capt
     api.get("https://commons.wikimedia.org/w/api.php").mock(
         return_value=httpx.Response(200, json=load("commons_search.json"))
     )
+    api.get("https://www.loc.gov/collections/chronicling-america/").mock(
+        return_value=httpx.Response(200, json=load("chronam_search.json"))
+    )
     assert doctor.run(live=True) == 1
     assert "FAIL" in capsys.readouterr().out
+
+
+def test_doctor_reports_a_bot_challenge_as_blocked_without_failing(
+    api, capsys: pytest.CaptureFixture[str]
+) -> None:
+    api.get("https://archive.org/advancedsearch.php").mock(
+        return_value=httpx.Response(200, json=load("ia_advancedsearch.json"))
+    )
+    api.get("https://commons.wikimedia.org/w/api.php").mock(
+        return_value=httpx.Response(200, json=load("commons_search.json"))
+    )
+    api.get("https://www.loc.gov/collections/chronicling-america/").mock(
+        return_value=httpx.Response(
+            403, text="<title>Just a moment...</title>", headers={"cf-mitigated": "challenge"}
+        )
+    )
+    assert doctor.run(live=True) == 0
+    assert "BLOCKED" in capsys.readouterr().out
 
 
 def test_version_flag(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:

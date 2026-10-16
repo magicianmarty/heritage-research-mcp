@@ -13,13 +13,23 @@ from typing import Any
 import httpx
 
 from . import config
-from .errors import DownloadTooLarge, QuotaExceeded, SourceHTTPError
+from .errors import Blocked, DownloadTooLarge, QuotaExceeded, SourceHTTPError
 from .usage import usage
 
-MIN_INTERVAL = {"internet_archive": 0.2, "commons": 0.2, "dpla": 0.1, "nara": 0.5, "smithsonian": 0.3}
+MIN_INTERVAL = {
+    "internet_archive": 0.2,
+    "commons": 0.2,
+    "dpla": 0.1,
+    "nara": 0.5,
+    "smithsonian": 0.3,
+    "dispatch": 0.5,
+    "chronam": 3.0,
+    "chronam_bulk": 3.0,
+}
 RETRY_STATUS = {429, 500, 502, 503, 504}
 MAX_BACKOFF = 20.0
 MAX_JSON_BYTES = 30 * 1024 * 1024
+BLOCK_COOLDOWN = 600.0
 
 sleep = asyncio.sleep  # tests replace this
 
@@ -106,6 +116,7 @@ class Http:
         self._client: httpx.AsyncClient | None = None
         self._loop: asyncio.AbstractEventLoop | None = None
         self._last: dict[str, float] = {}
+        self._blocked: dict[str, float] = {}
 
     def _get_client(self) -> httpx.AsyncClient:
         loop = asyncio.get_running_loop()
@@ -136,6 +147,14 @@ class Http:
         retries: int = 3,
     ) -> Resp:
         client = self._get_client()
+        remaining = self._blocked.get(source, 0.0) - time.monotonic()
+        if remaining > 0:
+            raise Blocked(
+                source,
+                None,
+                f"the provider recently blocked or challenged this client; not retrying for another "
+                f"{int(remaining // 60) + 1} min",
+            )
         hdrs = {"User-Agent": config.user_agent(), "Accept": "application/json", **(headers or {})}
         for attempt in range(retries + 1):
             if source == "nara":
@@ -160,14 +179,24 @@ class Http:
                 await sleep(min(MAX_BACKOFF, 1.0 * 2**attempt))
                 continue
             usage.note_rate_headers(source, resp.headers)
+            if resp.headers.get("cf-mitigated", "").lower() == "challenge":
+                self._blocked[source] = time.monotonic() + BLOCK_COOLDOWN
+                raise Blocked(
+                    source,
+                    resp.status,
+                    "the provider answered with a bot challenge instead of data. Its limits page says blocks "
+                    "last about an hour and can appear under the stated rate; wait, then try again",
+                )
             if resp.status in RETRY_STATUS and attempt < retries:
                 wait = _retry_after(resp.headers)
                 if wait is not None and wait > MAX_BACKOFF:
-                    raise SourceHTTPError(
-                        source, resp.status, f"rate limited; the provider asks for {int(wait)} s"
-                    )
+                    self._blocked[source] = time.monotonic() + BLOCK_COOLDOWN
+                    raise Blocked(source, resp.status, f"rate limited; the provider asks for {int(wait)} s")
                 await sleep(wait if wait is not None else min(MAX_BACKOFF, 1.0 * 2**attempt))
                 continue
+            if resp.status == 429:
+                self._blocked[source] = time.monotonic() + BLOCK_COOLDOWN
+                raise Blocked(source, resp.status, "rate limited; wait before trying again")
             if resp.status >= 400:
                 raise SourceHTTPError(source, resp.status, _snippet(resp.content))
             return resp

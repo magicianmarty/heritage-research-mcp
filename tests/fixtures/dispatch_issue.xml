@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?> <!DOCTYPE TEI.2 PUBLIC "-//TEI P4//DTD Main DTD Driver File//EN" "http://www.tei-c.org/Guidelines/DTD/tei2.dtd" [ <!ENTITY % TEI.XML "INCLUDE"> <!ENTITY % PersProse PUBLIC "-//Perseus P4//DTD Perseus Prose//EN" "http://www.perseus.tufts.edu/DTD/1.0/PersProse.dtd" > %PersProse; <!NOTATION jpg SYSTEM "JPEG"> <!ENTITY NW_RichTimesD_025_053_001 SYSTEM "NW_RichTimesD_025_053_001.jpg" NDATA jpg> <!ENTITY NW_RichTimesD_025_053_002 SYSTEM "NW_RichTimesD_025_053_002.jpg" NDATA jpg> ]> <TEI.2 id="NW_RichTimesD_025_053"> <teiHeader type="aacr2"> <fileDesc> <titleStmt> <title type="245">The Daily Dispatch: September 1, 1863. </title> <title type="gmd">[Electronic resource] </title> <funder> Institute of Museum and Library Services National Leadership Grant </funder> <respStmt> <resp>Creation of machine-readable version: </resp> <name>digital Divide Data </name> <resp>Creation of digital images: </resp> <name>digital Divide Data </name> <resp>Conversion to Tei.2-conformant markup: </resp> <name>digital Divide Data </name> </respStmt> </titleStmt> <extent>ca. <num value="30">XXX</num> kilobytes </extent> <publicationStmt> <publisher>University of <orgName n="Richmond Library" type="library">Richmond Library</orgName> </publisher> <pubPlace>Richmond, Virginia </pubPlace> <idno type="Url">Nw_richtimesd_025_053</idno> <availability> 
+<p>&#x00A9; 2004 by the University of Richmond. </p> 
+<p>Url: http://oncampus.Richmond.edu/academics/Library/digital/ </p> </availability> <date> </date> </publicationStmt> <seriesStmt> 
+<p>Institute of Museum and Library Services Civil war Newspaper Project </p> </seriesStmt> <notesStmt> <note>Page images have been included from the microfilm version. </note> <note>images were scanned with a Sunrise 2000 scanner from microfilm, at 14x reduction ratio at 400 dpi Optical resolution. Creation Software: Pixel Translations. Pixtiff version 1.135. </note> <note>Ddd note: shipped: 2005_04_01_ddd_url. </note> </notesStmt> <sourceDesc> <biblFull> <titleStmt> <title type="245">The Daily Dispatch: September 1, 1863. </title> <title type="246"><orgName n="Richmond Dispatch" type="newspaper">Richmond Dispatch</orgName> </title> <respStmt> <resp> </resp> <name> </name> </respStmt> </titleStmt> <editionStmt> 
+<p> </p> </editionStmt> <extent>2 pages. </extent> <publicationStmt> <publisher>by Cowardin &#x0026; Hammersley. </publisher> <pubPlace>Richmond </pubPlace> <date value="1863-09-01">September 1, 1863</date><idno type="vol">25.53</idno> </publicationStmt> <seriesStmt> <title> </title> </seriesStmt> <notesStmt> <note>microfilm. Ann Arbor, Mi : Proquest. 1 microfilm reel ; 35 mm. </note> </notesStmt> </biblFull> </sourceDesc> </fileDesc> <encodingDesc> <projectDesc> 
+<p>Imls Civil war Newspaper Project. </p> </projectDesc> <editorialDecl> 
+<p>the images exist as archival Tiff images, with Jpeg versions for internet access. </p> </editorialDecl> <refsDecl> <state unit="article" /> </refsDecl> <classDecl> <taxonomy id="lcsh"> <bibl> <title>Library of Congress subject Headings, </title> <edition>21st edition, 1998</edition> </bibl> </taxonomy> </classDecl> </encodingDesc> <profileDesc> <creation> <date value="1863">1863 </date> </creation> <langUsage> <language id="eng">English </language> </langUsage> 
+<textClass> <keywords scheme="lcsh"> 
+<list type="simple"> 
+<item>Newspapers -- Virginia -- Richmond</item> </list> </keywords> </textClass> </profileDesc> <revisionDesc> <change> <date>September, 2005 </date> <respStmt> <resp>Checker </resp> <name>Grant Dickie, of the University of <orgName n="Richmond Library" type="library">Richmond Library</orgName> </name> </respStmt> 
+<item>File checked, not corrected: DO NOT return to vendor. Ur Corrector Note: Did not key "Wanted: Recruits" ad. page 2, column 4, 1 article. </item> </change> </revisionDesc> </teiHeader> 
+<text id="NW_RichTimesD_025_053T"> <body>
+<milestone unit="page" n="1"/>
+<div3 type="article" n="1"> 
+<head type="nobreak" rend="smallcaps">From the <orgName n="Army of Northern Virginia" type="army">army of Northern Virginia</orgName>.</head> 
+<p rend="nobreak">
+
+<milestone unit="sentence" n="9"/> --Passengers by the <rs>Central</rs> train last evening brought nothing of interest from <orgName n="army"><persName n="Lee,General,,,," id="n-0001.0000.00000.00005" reg="mostcommon:Lee,nomatch:0"><roleName n="General">Gen.</roleName> <surname>Lee</surname></persName>'s army</orgName>.
+
+<milestone unit="sentence" n="10"/>Observations taken by the <orgName n="Signal Corps" type="corps">Signal Corps</orgName> on <dateStruct value="---"><day type="name">Monday</day></dateStruct> <time>morning</time> discovered in the direction of <placeName reg="Warrenton Springs">Warrenton Springs</placeName> a large fire, but it was not known from what cause it proceeded. </p> </div3>
+<div3 type="article" n="2"> 
+<head type="nobreak" rend="smallcaps">From <placeName reg="Tennessee, United States, North and Central America" key="tgn,7007825">Tennessee</placeName>.</head> 
+<p rend="nobreak">
+
+<milestone unit="sentence" n="11"/> --The only reliable information received from this quarter yesterday was a dispatch stating that the enemy was concentrating at some point in the neighborhood of <placeName reg="Knoxville, Knox, Tennessee" key="tgn,7013841">Knoxville</placeName>, and that the grand battle could not be much longer deferred.
+
+<milestone unit="sentence" n="12"/>Ample preparations have been made on our side to meet any emergency, and we only await the beginning of the conflict to look for success to our arms. </p> </div3>
+<div3 type="article" n="8"> 
+<head type="nobreak" rend="smallcaps"><persName n="Mosby,,,,," id="n-0001.0000.00000.00117" reg="mostcommon:Mosby,A.,D.,,:1"><surname>Mosby</surname></persName> wounded.</head> 
+<p rend="nobreak">
+
+<milestone unit="sentence" n="152"/> --<persName n="Mosby,Colonel,,,," id="n-0001.0000.00000.00118" reg="mostcommon:Mosby,A.,D.,,:1"><roleName n="Colonel">Col.</roleName> <surname>Mosby</surname></persName>, the daring and brilliant cavalry chieftain, was severely, though not dangerously, wounded in a skirmish with the enemy near <placeName reg="Fredericksburg, Fredericksburg, Virginia" key="tgn,7013943">Fredericksburg</placeName>.
+
+<milestone unit="sentence" n="153"/>He was shot in <num value="2">two</num> places, the leg and groin.
+
+<milestone unit="sentence" n="154"/>He is now at the residence of his fat her, <persName n="Mosby,,A.,D.,," id="n-0001.0000.00000.00119" reg="default:Mosby,A.,D.,,"><foreName>A.</foreName> <foreName>D.</foreName> <surname>Mosby</surname></persName>, in <placeName reg="Amherst, Hampshire, Massachusetts" key="tgn,7013296">Amherst</placeName>. </p> </div3>
+<div3 type="ad-blank" n="1"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="308"/> <!-- &advertid; --> </p> </div3>
+<milestone unit="page" n="2"/>
+<div3 type="death" n="1"> 
+<head>Died.</head> 
+<div4 type="obit" n="1"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="353"/> <dateStruct value="-08-31"><month reg="08">Aug.</month> <day reg="31">31st</day></dateStruct>, in the <num value="29" type="ordinal">29th</num> year of her age, <persName n="Steel,Mrs.,Mary,Ann,," id="n-0001.0000.00000.00190" reg="default:Steel,Mary,Ann,,"><roleName n="Mrs.">Mrs.</roleName> <foreName>Mary</foreName> <foreName>Ann</foreName> <surname>Steel</surname></persName>, wife of <persName n="Steel,Doctor,George,B.,," id="n-0001.0000.00000.00191" reg="default:Steel,George,B.,,"><roleName n="Doctor">Dr.</roleName> <foreName>George</foreName> <foreName>B.</foreName> <surname>Steel</surname></persName>, and only <persName n="Hartman,IsFather,John,,," id="n-0001.0000.00000.00192" reg="default:Hartman,John,,,"><roleName n="IsFather">daughter of</roleName> <foreName>John</foreName> <surname>Hartman</surname></persName>, <rs type="role">Esq.</rs> </p> 
+<p>
+
+<milestone unit="sentence" n="354"/> The funeral will take place from the <orgName n="Baptist Church 2" type="church">Second Baptist Church</orgName>, <dateStruct value="---"><day type="name">Wednesday</day></dateStruct> <time>afternoon</time>, at <time value="4oclock">4 o'clock</time>. The friends of the family are invited to attend without further notice. * </p> </div4> 
+<div4 type="obit" n="2"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="355"/> On <dateStruct value="-08-30"><day type="name">Sunday</day>, <day reg="30">30th</day> <month reg="08">August</month></dateStruct>, <persName><foreName>Caroline</foreName></persName>.
+
+<milestone unit="sentence" n="356"/>W, wife of <persName n="Enroughty,,James,,," id="n-0001.0000.00000.00193" reg="default:Enroughty,James,,,"><foreName>James</foreName> <surname>Enroughty</surname></persName>, in the <num value="34" type="ordinal">34th</num> year of her age. </p> 
+<p>
+
+<milestone unit="sentence" n="357"/> Her funeral will take place from her mother's residence, (<rs type="role">Mrs.</rs> D Hardens,) in the county of <placeName reg="Henrico, Virginia" key="tgn,1002467">Henrico</placeName>, to-day at <time value="11oclock">11 o'clock</time>. The friends and acquaintances are requested to attend. * </p> </div4> 
+<div4 type="obit" n="3"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="358"/> Of consumption, on <dateStruct value="---"><day type="name">Sunday</day></dateStruct> <time>evening</time>, <dateStruct value="-08-30"><month reg="08">August</month> <day reg="30">30th</day></dateStruct>, <persName><foreName>Samuel</foreName></persName> F <persName n="Pilcher,,,,," id="n-0001.0000.00000.00194" reg="mostcommon:Pilcher,nomatch:0"><surname>Pilcher</surname></persName>, in the <num value="26" type="ordinal">26th</num> year of his age, leaving a devoted wife and <num value="1">one</num> child. </p> 
+<p>
+
+<milestone unit="sentence" n="359"/> The funeral will take place from <address><street n="Grace Street">Grace Street</street></address> <orgName n="Baptist Church" type="church">Baptist Church</orgName> (<persName n="Jeter,Doctor,,,," id="n-0001.0000.00000.00195" reg="mostcommon:Jeter,nomatch:0"><roleName n="Doctor">Dr.</roleName> <surname>Jeter</surname></persName>'s) this (<dateStruct><day type="name">Tuesday</day></dateStruct>) afternoon, at <time value="4oclock">4 o'clock</time>. The friends of the family, those of <persName n="John,Mrs.,,,," id="n-0001.0000.00000.00196" reg="mostcommon:John,nomatch:0"><roleName n="Mrs.">Mrs.</roleName> <surname>John</surname></persName> A Plicher, and of <rs type="role">Dr.</rs> B J <persName n="Duval,,,,," id="n-0001.0000.00000.00197" reg="mostcommon:Duval,nomatch:0"><surname>Duval</surname></persName>, are invited to attend without further notice. </p> 
+<p>
+
+<milestone unit="sentence" n="360"/> <placeName reg="Louisville, Jefferson, Kentucky" key="tgn,7013915">Louisville, Ky</placeName>, papers please copy. </p> </div4> 
+<div4 type="obit" n="4"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="361"/> On <dateStruct value="-08-31"><day type="name">Monday</day>, <month reg="08">August</month> <day reg="31">31st</day></dateStruct>, at <time value="2oclock">2 o'clock</time> P M, <persName n="Conway,,Rosa,,," id="n-0001.0000.00000.00198" reg="default:Conway,Rosa,,,"><foreName>Rosa</foreName> <surname>Conway</surname></persName>, youngest child of D <persName n="McG,,,,," id="n-0001.0000.00000.00199" reg="mostcommon:McG,nomatch:0"><surname>McG</surname></persName> and <persName><foreName>Mary</foreName></persName> J <persName n="Thornton,,,,," id="n-0001.0000.00000.00200" reg="mostcommon:Thornton,nomatch:0"><surname>Thornton</surname></persName>, aged <measure n="2years" type="date">2 years</measure> and <measure n="9months" type="date">9 months</measure>. </p> 
+<p>
+
+<milestone unit="sentence" n="362"/> Her funeral will take place from the residence of her father, this afternoon, at <time value="4.5oclock">4&#x00BD; o'clock</time>. The friends of the family are invited to attend. </p> </div4> 
+<div4 type="obit" n="5"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="363"/> On the <dateStruct value="1863-08-28"><day reg="28">28th</day> of <month reg="08">August</month>, <year>1863</year>,</dateStruct> of diphtheria, at <placeName reg="Cary's Brook">Cary's Brook</placeName>, <placeName reg="Fluvanna, Virginia, United States" key="tgn,2002159">Fluvanna county</placeName>, Va, the residence of his grandfather, J R <persName n="Bryan,,,,," id="n-0001.0000.00000.00201" reg="mostcommon:Bryan,nomatch:0"><surname>Bryan</surname></persName>, <rs type="role" reg="Esquire">Esq</rs>, Randolph Bryan Page, eldest son of J R and <persName n="Delia,,,,," id="n-0001.0000.00000.00202" reg="mostcommon:Delia,nomatch:0"><surname>Delia</surname></persName> B Page, aged <measure n="6years" type="date">six years</measure>. </p> </div4> </div3>
+<div3 type="ad-blank" n="1"> 
+<head></head> 
+<p>
+
+<milestone unit="sentence" n="364"/> <!-- &advertid; --> </p> </div3>
+</body> </text> </TEI.2>
