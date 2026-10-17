@@ -143,3 +143,14 @@ def from_text(text: str | None) -> Rights | None:
     if "public domain" in lowered or lowered.startswith("pd-") or lowered.startswith("pd "):
         return make("free", "Public domain", statement=text)
     return None
+
+
+def newspaper_page(year: int | None, restricted: bool, title: str | None, landing: str | None) -> Rights:
+    if restricted:
+        found = make("restricted", "Access restricted by the Library of Congress")
+    else:
+        found = from_year(year) or unknown(
+            "The Library does not state rights per page. Pages after 1930 may still be in copyright."
+        )
+    cite = f"{title}, Chronicling America, Library of Congress ({landing})" if title and landing else None
+    return found.model_copy(update={"attribution": cite})

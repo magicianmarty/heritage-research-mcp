@@ -180,7 +180,7 @@ async def test_unified_search_passes_the_kind_to_every_source(api, set_key) -> N
     assert "subject:(maps)" in ia_route.calls[0].request.url.params["q"]
     assert "intitle:map" in commons_route.calls[0].request.url.params["gsrsearch"]
     assert dpla_route.calls[0].request.url.params["sourceResource.subject.name"] == "Maps"
-    assert set(out["results"]) == {"internet_archive", "commons", "dpla"}
+    assert set(out["results"]) == {"internet_archive", "commons", "dpla", "chronam"}
     assert all("kind_applied" in block for block in out["results"].values())
     assert any("kind=map" in note for note in out["notes"])
 

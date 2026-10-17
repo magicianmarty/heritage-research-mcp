@@ -9,6 +9,8 @@ from typing import Any
 import pytest
 import respx
 
+from heritage_research_mcp.http import http
+from heritage_research_mcp.sources import chronam_bulk
 from heritage_research_mcp.sources import internet_archive as ia_src
 from heritage_research_mcp.usage import usage
 
@@ -43,6 +45,9 @@ def isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
 
     monkeypatch.setattr("heritage_research_mcp.http.sleep", no_sleep)
     ia_src._text_cache.clear()
+    http._blocked.clear()
+    chronam_bulk._job.clear()
+    chronam_bulk._job.update(state="idle")
     usage._session.clear()
     usage._rate.clear()
 

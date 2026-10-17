@@ -11,7 +11,10 @@ from ..compat import FastMCP
 from ..download import download_file
 from ..errors import HeritageError
 from ..sources import SOURCES, is_configured
+from ..sources import chronam_bulk as bulk_src
+from ..sources import chronicling_america as chronam_src
 from ..sources import commons as commons_src
+from ..sources import dispatch as dispatch_src
 from ..sources import dpla as dpla_src
 from ..sources import internet_archive as ia_src
 from ..sources import nara as nara_src
@@ -36,6 +39,12 @@ async def _search_one(
         return await nara_src.search(q=query, start_date=after, end_date=before, limit=limit, kind=kind)
     if name == "smithsonian":
         return await si_src.search(query, rows=limit, kind=kind)
+    if name == "chronam":
+        return await chronam_src.search(query, date_from=after, date_to=before, rows=limit, kind=kind)
+    if name == "chronam_local":
+        return await bulk_src.search(query, date_from=after, date_to=before, rows=limit, kind=kind)
+    if name == "dispatch":
+        return await dispatch_src.search(query, date_from=after, date_to=before, rows=limit, kind=kind)
     raise HeritageError(f"unknown source {name!r}; valid sources are {sorted(SOURCES)}")
 
 
@@ -53,6 +62,10 @@ async def get_record_dict(source: str, record_id: str, *, all_media: bool = Fals
         return (await nara_src.get_record(int(record_id), media_limit=limit))["record"]
     if source == "smithsonian":
         return (await si_src.get_content(record_id))["record"]
+    if source == "chronam":
+        return (await chronam_src.get_page(record_id))["record"]
+    if source == "dispatch":
+        return (await dispatch_src.get_article(record_id))["record"]
     raise HeritageError(f"unknown source {source!r}; valid sources are {sorted(SOURCES)}")
 
 
@@ -115,6 +128,8 @@ def register(mcp: FastMCP) -> None:
                 "limits": info.limits,
                 "terms": info.terms,
             }
+            if name in {"dispatch", "chronam_local"}:
+                entry.update({"needs_index": True, "setup": info.setup})
             if info.keyed:
                 env_var, signup = config.KEYED_SOURCES[name]
                 entry.update(
@@ -151,10 +166,10 @@ def register(mcp: FastMCP) -> None:
 
         Args:
             query: What to look for. Plain words work everywhere.
-            sources: Limit to some of internet_archive, commons, dpla, nara, smithsonian. Default: every source
-                that is ready to use (see list_sources).
+            sources: Limit to some of internet_archive, commons, dpla, nara, smithsonian, dispatch, chronam,
+                chronam_local. Default: every source that is ready to use (see list_sources).
             limit: Records per source (1 to 25).
-            date_from: Earliest year. Applied by the Internet Archive, DPLA and NARA; ignored by the others.
+            date_from: Earliest year. Applied by the Internet Archive, DPLA, NARA, the Dispatch, Chronicling America and its local index; ignored by the others.
             date_to: Latest year, applied the same way.
             fulltext: Also search the text inside Internet Archive books (an experimental endpoint). Returned
                 under `fulltext`; this is the way to find a name or place inside a memoir or official report.
@@ -170,7 +185,11 @@ def register(mcp: FastMCP) -> None:
         unknown = [name for name in wanted if name not in SOURCES]
         if unknown:
             raise HeritageError(f"unknown source(s) {unknown}; valid sources are {sorted(SOURCES)}")
-        skipped = {name: "no API key; see list_sources" for name in wanted if not is_configured(name)}
+        skipped = {
+            name: SOURCES[name].setup or "no API key; see list_sources"
+            for name in wanted
+            if not is_configured(name)
+        }
         runnable = [name for name in wanted if name not in skipped]
         jobs: list[Any] = [
             _search_one(name, query, limit, date_from, date_to, wanted_kind) for name in runnable
@@ -196,7 +215,9 @@ def register(mcp: FastMCP) -> None:
                 extra["fulltext"] = outcome
         notes: list[str] = []
         if date_from is not None or date_to is not None:
-            notes.append("Date filters apply to internet_archive, dpla and nara only.")
+            notes.append(
+                "Date filters apply to internet_archive, dpla, nara, dispatch, chronam and chronam_local only."
+            )
         if wanted_kind:
             notes.append(f"kind={wanted_kind}: see kind_applied under each source for how it was asked.")
         return {
@@ -213,9 +234,10 @@ def register(mcp: FastMCP) -> None:
         """Fetch one record in the normalised shape, including its media files and rights.
 
         Args:
-            source: internet_archive, commons, dpla, nara or smithsonian.
+            source: internet_archive, commons, dpla, nara, smithsonian, dispatch or chronam.
             record_id: The id from a search result (an Internet Archive identifier, a Commons "File:" title,
-                a DPLA id, a NARA naId, or a Smithsonian id).
+                a DPLA id, a NARA naId, a Smithsonian id, a Dispatch id like D_021_040/2/17, or a Chronicling America id like
+                sn83030214/1863-06-11/ed-1/2).
         """
         return {"record": await get_record_dict(source, record_id)}
 
@@ -234,7 +256,7 @@ def register(mcp: FastMCP) -> None:
         If `rights.reuse` is not `free` the result carries a `rights_warning`: treat the file as reference only.
 
         Args:
-            source: internet_archive, commons, dpla, nara or smithsonian.
+            source: internet_archive, commons, dpla, nara, smithsonian, dispatch or chronam.
             record_id: The record's id, as returned by search.
             media_index: Which entry of the record's `media` list to fetch (default the first).
             media_kind: Pick the first media of this kind instead (pdf, text, image, audio, video, archive).

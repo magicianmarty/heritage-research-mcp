@@ -17,12 +17,16 @@ EXPECTED_TOOLS = {
     "dpla_search", "dpla_get_item",
     "nara_search", "nara_get_record", "nara_children", "nara_extracted_text",
     "si_search", "si_get_content", "si_terms", "si_stats",
+    "dispatch_prepare", "dispatch_search", "dispatch_get_article", "dispatch_issue",
+    "chronam_search", "chronam_get_page", "chronam_page_text",
+    "chronam_bulk_plan", "chronam_bulk_start", "chronam_bulk_status", "chronam_local_search",
 }  # fmt: skip
 
 IA_SEARCH = "https://archive.org/advancedsearch.php"
 IA_FTS = "https://archive.org/services/search/beta/page_production/"
 COMMONS = "https://commons.wikimedia.org/w/api.php"
 DPLA = "https://api.dp.la/v2/items"
+CHRONAM = "https://www.loc.gov/collections/chronicling-america/"
 
 
 @pytest.fixture(autouse=True)
@@ -54,8 +58,9 @@ async def test_list_sources_reflects_which_keys_exist(set_key) -> None:
 async def test_search_queries_every_ready_source_and_skips_the_rest(api) -> None:
     api.get(IA_SEARCH).mock(return_value=httpx.Response(200, json=load("ia_advancedsearch.json")))
     api.get(COMMONS).mock(return_value=httpx.Response(200, json=load("commons_search.json")))
+    api.get(CHRONAM).mock(return_value=httpx.Response(200, json=load("chronam_search.json")))
     out = await call(mcp, "search", {"query": "mosby", "limit": 3})
-    assert set(out["results"]) == {"internet_archive", "commons"}
+    assert set(out["results"]) == {"internet_archive", "commons", "chronam"}
     assert len(out["results"]["internet_archive"]["records"]) == 3
     assert out["errors"] == {} and out["skipped"] == {}
 

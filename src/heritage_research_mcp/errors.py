@@ -18,6 +18,16 @@ class NotConfigured(HeritageError):
         )
 
 
+class NotPrepared(HeritageError):
+    def __init__(self, source: str) -> None:
+        self.source = source
+        super().__init__(
+            f"{source} is searched from a local index that has not been built yet. Run the dispatch_prepare tool "
+            "(it downloads about 92 MB and indexes it in about a minute), or `heritage-research-mcp dispatch-index` "
+            "in a terminal."
+        )
+
+
 class QuotaExceeded(HeritageError):
     pass
 
@@ -28,6 +38,10 @@ class SourceHTTPError(HeritageError):
         self.status = status
         where = f" (HTTP {status})" if status else ""
         super().__init__(f"{source} request failed{where}: {detail}")
+
+
+class Blocked(SourceHTTPError):
+    """The provider is throttling or challenging this client. Retrying immediately only prolongs a block."""
 
 
 class NotFound(HeritageError):
